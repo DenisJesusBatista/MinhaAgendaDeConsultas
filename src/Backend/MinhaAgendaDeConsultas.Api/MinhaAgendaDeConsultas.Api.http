@@ -1,0 +1,6 @@
+@MinhaAgendaDeConsultas.Api_HostAddress = http://localhost:5155
+
+GET {{MinhaAgendaDeConsultas.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
