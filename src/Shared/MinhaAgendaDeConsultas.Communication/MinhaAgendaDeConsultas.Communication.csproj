@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Backend\MinhaAgendaDeConsultas.Domain\MinhaAgendaDeConsultas.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

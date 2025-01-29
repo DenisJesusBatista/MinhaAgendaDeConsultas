@@ -120,8 +120,11 @@
   <data name="EMAIL_INVALIDO" xml:space="preserve">
     <value>Email inválido</value>
   </data>
-  <data name="EMAIL_VAZIO" xml:space="preserve">
-    <value>O e-mail não pode estar vazio</value>
+  <data name="EMAIL_JA_REGISTRADO" xml:space="preserve">
+    <value>O e-mail informado já está registrado na base de dados.</value>
+  </data>
+  <data name="EMAIL_USUARIO_INVALIDO" xml:space="preserve">
+    <value>O e-mail do usuario é inválido.</value>
   </data>
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Erro desconhecido.</value>

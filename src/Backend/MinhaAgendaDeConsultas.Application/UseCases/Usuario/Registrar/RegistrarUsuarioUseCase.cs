@@ -1,53 +1,69 @@
-﻿using MinhaAgendaDeConsultas.Application.Services.Criptografia;
+﻿using AutoMapper;
+using MinhaAgendaDeConsultas.Application.Services.Criptografia;
 using MinhaAgendaDeConsultas.Communication.Request;
 using MinhaAgendaDeConsultas.Communication.Responses;
+using MinhaAgendaDeConsultas.Domain.Repositorios;
+using MinhaAgendaDeConsultas.Exceptions;
+using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 {
-    public class RegistrarUsuarioUseCase
+    public class RegistrarUsuarioUseCase : IRegistrarUsuarioUseCase
     {
-        public ResponseRegistrarUsuarioJson Execute(RequestRegistrarUsuarioJson request)
+        //Variavel readonly só pode ser atribuido valor nela, apenas no construtor da classe ( public RegistrarContatoUseCase(IContatoWriteOnlyRepositorio repositorio) )
+        private readonly IUsuarioReadOnlyRepositorio _usuarioReadOnlyRepositorio;
+        private readonly IUsuarioWriteOnlyRepositorio _usuarioWriteOnlyRepositorio;
+        private readonly IMapper _mapper;
+        private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
+
+        //Configurar a injeção de dependência atalho CTOR - Criar 
+        //Construtor
+        public RegistrarUsuarioUseCase(IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio, IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
+              IUsuarioWriteOnlyRepositorio usuarioWriteOnlyRepositorio)
         {
-            //Criptografar a senha  
-            var criptografiaDeSenha = new PasswordEncripter();
-
-
-            var autoMapper = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<RequestRegistrarUsuarioJson, Domain.Entidades.Usuario>();
-            }).CreateMapper();
-
-
-            //Validar a request
-            Validar(request); //Validar a request  
-
-            //mapear a request em uma entidade
-            var usuario = autoMapper.Map<Domain.Entidades.Usuario>(request); //mapear a request em uma entidade 
-
-
-            usuario.Senha = criptografiaDeSenha.Encrypt(request.Senha); //Criptografar a senha    
-       
-
-            //Salvar no banco de dados   
-            return new ResponseRegistrarUsuarioJson
-            {
-                Nome = request.Nome
-            };
+            _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
+            _mapper = mapper;
+            _unidadeDeTrabalho = unidadeDeTrabalho;
+            _usuarioWriteOnlyRepositorio = usuarioWriteOnlyRepositorio;
         }
 
-        private void Validar(RequestRegistrarUsuarioJson request)
+
+        public async Task Executar(RequisicaoRegistrarUsuarioJson requisicao)
         {
-           var validator = new RegistrarUsuarioValidator(); 
+            await Validar(requisicao);
 
-            var result = validator.Validate(request);
+            //Conversão requisicao para entidade AutoMap
+            //-Pluggin: AutoMapper na Application
+            //-Pluggin: AutoMapper.Extensions.Microsoft.DependencyInjection na API para configurar para funcionar como injecao de dependencia
 
-            if (!result.IsValid)
-            {
-                var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
-                throw new System.Exception("Erro de validação");
-            }   
+            var entidade = _mapper.Map<Domain.Entidades.Usuario>(requisicao);
 
+            //entidade.DataCriacao = DateTime.UtcNow;
+
+            //Salvar no banco de dados.
+
+            await _usuarioWriteOnlyRepositorio.Adicionar(entidade);
+
+            await _unidadeDeTrabalho.Commit();
         }
 
+        private async Task Validar(RequisicaoRegistrarUsuarioJson requisicao)
+        {
+            var validator = new RegistrarUsuarioValidator();
+            var resultado = validator.Validate(requisicao);
+
+            var existeContatoComEmail = await _usuarioReadOnlyRepositorio.ExisteUsuarioComEmail(requisicao.Email);
+
+            if (existeContatoComEmail)
+            {
+                resultado.Errors.Add(new FluentValidation.Results.ValidationFailure("email", ResourceMessagesExceptions.EMAIL_JA_REGISTRADO));
+            }
+
+            if (!resultado.IsValid)
+            {
+                var mensagensDeErro = resultado.Errors.Select(error => error.ErrorMessage).ToList();
+                throw new ErrosDeValidacaoException(mensagensDeErro);
+            }
+        }
     }
 }

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Scripts\**" />
+    <EmbeddedResource Remove="Scripts\**" />
+    <None Remove="Scripts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="FluentMigrator" Version="6.2.0" />
     <PackageReference Include="FluentMigrator.Runner.Postgres" Version="6.2.0" />
@@ -21,10 +27,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MinhaAgendaDeConsultas.Application\MinhaAgendaDeConsultas.Application.csproj" />
     <ProjectReference Include="..\MinhaAgendaDeConsultas.Domain\MinhaAgendaDeConsultas.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Scripts\" />
   </ItemGroup>
 
 </Project>

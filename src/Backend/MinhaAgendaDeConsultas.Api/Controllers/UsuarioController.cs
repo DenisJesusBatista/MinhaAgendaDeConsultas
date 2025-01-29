@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MinhaAgendaDeConsultas.Api.Response;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar;
 using MinhaAgendaDeConsultas.Communication.Request;
 using MinhaAgendaDeConsultas.Communication.Responses;
@@ -10,14 +11,13 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
     public class UsuarioController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseRegistrarUsuarioJson), StatusCodes.Status201Created)]
-        public IActionResult Registrar(RequestRegistrarUsuarioJson request)
+        public async Task<IActionResult> RegistrarContato(
+                [FromServices] IRegistrarUsuarioUseCase useCase,
+                [FromBody] RequisicaoRegistrarUsuarioJson request)
         {
-            var useCase = new RegistrarUsuarioUseCase(); 
-            
-            var result = useCase.Execute(request);
+            await useCase.Executar(request);
 
-            return Created(string.Empty,result);   
-        }
+            return Ok(ResponseMessages.UsuarioCriado);
+        }        
     }
 }

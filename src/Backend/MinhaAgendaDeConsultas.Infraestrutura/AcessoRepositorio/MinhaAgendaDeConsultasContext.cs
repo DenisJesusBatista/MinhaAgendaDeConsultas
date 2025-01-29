@@ -18,11 +18,23 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*Responsavel em fazer a configuraçoes necessaria para fazer a 
-             * conexão da variavel com a tabela usuario*/
-            modelBuilder.Entity<Usuario>()
-                .HasOne(r => r.Nome);          
+            base.OnModelCreating(modelBuilder);
+
+            // Certifique-se de que as entidades sejam mapeadas corretamente.
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Nome).IsRequired();
+                entity.Property(e => e.Email).IsRequired();
+
+                // Aqui você pode definir o nome da tabela, garantindo que seja 'Usuarios' no banco de dados
+                entity.ToTable("Usuario"); // Especifica o nome da tabela no banco de dados
+
+            });
+
+            // Adicione outras entidades conforme necessário
         }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

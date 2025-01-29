@@ -9,6 +9,6 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 {
     public interface IRegistrarUsuarioUseCase
     {
-        Task Executar(RequestRegistrarUsuarioJson requisicao);
+        Task Executar(RequisicaoRegistrarUsuarioJson requisicao);
     }
 }

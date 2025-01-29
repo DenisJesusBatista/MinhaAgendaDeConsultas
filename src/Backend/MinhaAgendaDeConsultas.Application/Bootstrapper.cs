@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,7 @@ namespace MinhaAgendaDeConsultas.Application
         /*Registrar nas configurações de dependência.*/
         private static void AdicionarUseCases(IServiceCollection services)
         {
-            //services.AddScoped<IRegistrarContatoUseCase, RegistrarContatoUseCase>()
-            //    .AddScoped<IRecuperarPorPrefixoUseCase, RecuperarPorPrefixoUseCase>()
-            //    .AddScoped<IRecuperarDDDRegiaoPorPrefixoUseCase, RecuperarDDDRegiaoPorPrefixoUseCase>()
-            //    .AddScoped<IRecuperarPorIdUseCase, RecuperarPorIdUseCase>()
-            //    .AddScoped<IRecuperarTodosContatosUseCase, RecuperarTodosContatosUseCase>()
-            //    .AddScoped<IUpdateContatoUseCase, UpdateContatoUseCase>()
-            //    .AddScoped<IDeletarContatoUseCase, DeletarContatoUseCase>();
+            services.AddScoped<IRegistrarUsuarioUseCase, RegistrarUsuarioUseCase>();                                              
 
         }
     }

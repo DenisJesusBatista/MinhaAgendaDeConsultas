@@ -70,11 +70,20 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a O e-mail não pode estar vazio.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O e-mail informado já está registrado na base de dados..
         /// </summary>
-        public static string EMAIL_VAZIO {
+        public static string EMAIL_JA_REGISTRADO {
             get {
-                return ResourceManager.GetString("EMAIL_VAZIO", resourceCulture);
+                return ResourceManager.GetString("EMAIL_JA_REGISTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O e-mail do usuario é inválido..
+        /// </summary>
+        public static string EMAIL_USUARIO_INVALIDO {
+            get {
+                return ResourceManager.GetString("EMAIL_USUARIO_INVALIDO", resourceCulture);
             }
         }
         
