@@ -7,5 +7,7 @@ namespace MinhaAgendaDeConsultas.Domain.Repositorios
         Task<bool> ExisteUsuarioComEmail(string email);
         Task<IEnumerable<Usuario>> RecuperarPorId(int id);
         Task<Entidades.Usuario> RecuperarPorEmail(string email);
+        Task<Entidades.Usuario?> RecuperarUsuarioPorEmaileSenha(string email, string senha);
+
     }
 }

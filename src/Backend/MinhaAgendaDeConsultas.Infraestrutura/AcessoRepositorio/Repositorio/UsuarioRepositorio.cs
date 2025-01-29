@@ -42,14 +42,23 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio
             return await _contexto.Usuarios.AnyAsync(c => c.Email.Equals(email));
         }
 
-        public void Update(Usuario usuario)
+        public async Task Update(Usuario usuario)
         {
             _contexto.Usuarios.Update(usuario);
+            await _contexto.SaveChangesAsync();  // Persistindo as alterações no banco
         }
 
         async Task IUsuarioWriteOnlyRepositorio.Update(Usuario usuario)
         {
             _contexto.Usuarios.Update(usuario);
+        }
+
+        public async Task<Usuario?> RecuperarUsuarioPorEmaileSenha(string email, string senha)
+        {
+            return await _contexto.Usuarios
+                .AsNoTracking()
+                .Include(user => user.Email)
+                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));  
         }
     }
 }

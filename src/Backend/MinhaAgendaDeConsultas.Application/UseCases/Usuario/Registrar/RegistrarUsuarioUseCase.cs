@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MinhaAgendaDeConsultas.Application.Services.Criptografia;
 using MinhaAgendaDeConsultas.Communication.Request;
-using MinhaAgendaDeConsultas.Communication.Responses;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
@@ -15,16 +14,18 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
         private readonly IUsuarioWriteOnlyRepositorio _usuarioWriteOnlyRepositorio;
         private readonly IMapper _mapper;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
+        private readonly PasswordEncripter _passwordEncripter;
 
         //Configurar a injeção de dependência atalho CTOR - Criar 
         //Construtor
         public RegistrarUsuarioUseCase(IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio, IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
-              IUsuarioWriteOnlyRepositorio usuarioWriteOnlyRepositorio)
+              IUsuarioWriteOnlyRepositorio usuarioWriteOnlyRepositorio, PasswordEncripter passwordEncripter)
         {
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
             _mapper = mapper;
             _unidadeDeTrabalho = unidadeDeTrabalho;
             _usuarioWriteOnlyRepositorio = usuarioWriteOnlyRepositorio;
+            _passwordEncripter = passwordEncripter;
         }
 
 
@@ -38,12 +39,14 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 
             var entidade = _mapper.Map<Domain.Entidades.Usuario>(requisicao);
 
-            //entidade.DataCriacao = DateTime.UtcNow;
+            // Criptografa a senha antes de salvar
+            entidade.Senha = _passwordEncripter.Encrypt(requisicao.Senha);
 
-            //Salvar no banco de dados.
+            
 
             await _usuarioWriteOnlyRepositorio.Adicionar(entidade);
 
+            //Salvar no banco de dados.
             await _unidadeDeTrabalho.Commit();
         }
 

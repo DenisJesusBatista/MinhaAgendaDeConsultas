@@ -6,6 +6,7 @@ using MinhaAgendaDeConsultas.Application.Services.AutoMapper;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Migrations;
 using System.Reflection;
+using MinhaAgendaDeConsultas.Application.Services.Criptografia;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
 
 builder.Services.AddControllers();
+
+builder.Services.AddSingleton<PasswordEncripter>();
+
 
 // Swagger configuration
 builder.Services.AddEndpointsApiExplorer();

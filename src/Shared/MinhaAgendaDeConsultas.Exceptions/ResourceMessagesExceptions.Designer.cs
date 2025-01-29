@@ -61,6 +61,15 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail e/ou senha inválida.
+        /// </summary>
+        public static string EMAIL_E_OU_SENHA_INVALIDA {
+            get {
+                return ResourceManager.GetString("EMAIL_E_OU_SENHA_INVALIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Email inválido.
         /// </summary>
         public static string EMAIL_INVALIDO {

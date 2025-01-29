@@ -30,6 +30,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
                 // Aqui você pode definir o nome da tabela, garantindo que seja 'Usuarios' no banco de dados
                 entity.ToTable("Usuario"); // Especifica o nome da tabela no banco de dados
 
+                // Defina o comprimento para a senha criptografada (SHA512 hash precisa de 128 caracteres)
+                entity.Property(e => e.Senha)
+                      .HasMaxLength(128) // Defina o comprimento para acomodar o hash SHA512
+                      .IsRequired();
+
             });
 
             // Adicione outras entidades conforme necessário

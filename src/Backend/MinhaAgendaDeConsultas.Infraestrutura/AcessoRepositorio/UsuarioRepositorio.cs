@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MinhaAgendaDeConsultas.Application.Services.Criptografia;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 
@@ -37,9 +38,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             return await _contexto.Usuarios.AnyAsync(c => c.Email.Equals(email));
         }
 
-        public void Update(Usuario usuario)
+        public async Task Update(Usuario usuario)
         {
             _contexto.Usuarios.Update(usuario);
+            await _contexto.SaveChangesAsync();  // Não se esqueça de chamar o SaveChangesAsync para persistir a alteração.
         }
 
         async Task IUsuarioWriteOnlyRepositorio.Update(Usuario usuario)
@@ -47,5 +49,16 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             _contexto.Usuarios.Update(usuario);
         }
 
+
+        public async Task<Usuario> RecuperarUsuarioPorEmaileSenha(string email, string senha)
+        {
+            // Criptografa a senha fornecida
+            var senhaCriptografada = new PasswordEncripter().Encrypt(senha);
+
+            // Busca o usuário no banco de dados, comparando a senha criptografada
+            return await _contexto.Usuarios
+                .Where(u => u.Email == email && u.Senha == senhaCriptografada)
+                .FirstOrDefaultAsync();
+        }
     }
 }

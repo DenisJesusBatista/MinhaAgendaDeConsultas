@@ -31,10 +31,21 @@ namespace MinhaAgendaDeConsultas.Api.Filtros
 
         private void TratarErroDeValidacaoException(ExceptionContext context)
         {
-            var erroDeValidacaoException = context.Exception as ErrosDeValidacaoException;
-            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Result = new ObjectResult(new RespostaErroJson(erroDeValidacaoException.MensagensDeErro));
 
+            if (context.Exception is LoginInvalidoException)
+            {
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                context.Result = new UnauthorizedObjectResult(new RespostaErroJson(context.Exception.Message));
+                return;
+            }
+            else if (context.Exception is ErrosDeValidacaoException)
+            {
+                var erroDeValidacaoException = context.Exception as ErrosDeValidacaoException;
+
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.Result = new ObjectResult(new RespostaErroJson(erroDeValidacaoException.MensagensDeErro));
+
+              }
         }
 
         private void LancarErroDesconhecido(ExceptionContext context)

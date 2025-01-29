@@ -4,6 +4,9 @@
     {
         Task<Entidades.Usuario> RecuperarPorEmail(string email);
 
-        void Update(Entidades.Usuario usuario);
+        // Torne o método Update assíncrono
+        Task Update(Entidades.Usuario usuario);  // Atualização para usar Task
+
+
     }
 }
