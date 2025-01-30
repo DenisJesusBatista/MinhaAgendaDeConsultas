@@ -28,7 +28,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
                 entity.Property(e => e.Email).IsRequired();
 
                 // Aqui você pode definir o nome da tabela, garantindo que seja 'Usuarios' no banco de dados
-                entity.ToTable("Usuario"); // Especifica o nome da tabela no banco de dados
+                entity.ToTable("Usuarios"); // Especifica o nome da tabela no banco de dados
 
                 // Defina o comprimento para a senha criptografada (SHA512 hash precisa de 128 caracteres)
                 entity.Property(e => e.Senha)

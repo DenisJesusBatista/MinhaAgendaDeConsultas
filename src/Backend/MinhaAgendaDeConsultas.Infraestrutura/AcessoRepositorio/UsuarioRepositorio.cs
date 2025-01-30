@@ -53,11 +53,13 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
         public async Task<Usuario> RecuperarUsuarioPorEmaileSenha(string email, string senha)
         {
             // Criptografa a senha fornecida
-            var senhaCriptografada = new PasswordEncripter().Encrypt(senha);
+            //var senhaCriptografada = new PasswordEncripter().Encrypt(senha);
+
+            //var senhaCriptografada = new PasswordEncripter().Encrypt(senha);
 
             // Busca o usuário no banco de dados, comparando a senha criptografada
             return await _contexto.Usuarios
-                .Where(u => u.Email == email && u.Senha == senhaCriptografada)
+                .Where(u => u.Email == email && u.Senha == senha)
                 .FirstOrDefaultAsync();
         }
     }

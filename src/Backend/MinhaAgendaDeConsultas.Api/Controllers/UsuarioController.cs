@@ -15,7 +15,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         {
             await useCase.Executar(request);
 
-            return Ok(ResponseMessages.UsuarioCriado);
+            return Ok(request);
         }
     }
 }

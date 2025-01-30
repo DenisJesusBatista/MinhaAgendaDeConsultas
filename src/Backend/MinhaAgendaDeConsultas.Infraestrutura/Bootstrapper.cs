@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using MinhaAgendaDeConsultas.Domain.Extension;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
-//using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio;
 using System.Reflection;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
+using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura
 {
@@ -18,6 +19,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
             AddUnidadeDeTrabalho(services);
             AddRepositorios(services);
             AddContexto(services, configurationManager);
+            AddToken(services, configurationManager);
         }
 
         private static void AddUnidadeDeTrabalho(this IServiceCollection services)
@@ -47,5 +49,20 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
                 .AddScoped<IUsuarioReadOnlyRepositorio, UsuarioRepositorio>()                
              .AddScoped<IUsuarioUpdateOnlyRepositorio, UsuarioRepositorio>();
         }
+
+        private static void AddToken(IServiceCollection services, IConfiguration configurationManager)
+        {
+           var expiracaoMinutos = configurationManager.GetValue<uint>("Settings:Jwt:ExpiracaoMinutos");
+            //var chaveAssinatura = configurationManager.GetValue<string>("Settings:Jwt:ChaveAssinatura"); 
+            var chaveAssinatura = configurationManager.GetValue<string>("Jwt:ChaveAssinatura");
+
+            // Verifique se a chave de assinatura foi configurada corretamente
+            if (string.IsNullOrEmpty(chaveAssinatura))
+            {
+                throw new InvalidOperationException("A chave de assinatura JWT não foi configurada corretamente.");
+            }
+
+            services.AddScoped<IGeradorTokenAcesso>(option => new JwtTokenGerador(expiracaoMinutos, chaveAssinatura!));
+        }   
     }
 }

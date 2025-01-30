@@ -28,14 +28,15 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
 
         private void CriarTabelaUsuario()
         {
-            var tabela = VersaoBase.InserirColunasPadrao(Create.Table("Usuario"));
+            var tabela = VersaoBase.InserirColunasPadrao(Create.Table("Usuarios"));
 
             tabela
-                .WithColumn("Nome").AsString(100).NotNullable()
-                .WithColumn("Email").AsString().NotNullable()
-                .WithColumn("Senha").AsString(14).NotNullable();
+                .WithColumn("Nome").AsString(255).NotNullable()
+                .WithColumn("Email").AsString(255).NotNullable()
+                .WithColumn("Senha").AsString(2000).NotNullable()
+                .WithColumn("Identificador").AsGuid().NotNullable();
 
-            _logger.LogInformation("Tabela 'Usuario' criada com sucesso.");
+            _logger.LogInformation("Tabela 'Usuarios' criada com sucesso.");
         }
     }
 }

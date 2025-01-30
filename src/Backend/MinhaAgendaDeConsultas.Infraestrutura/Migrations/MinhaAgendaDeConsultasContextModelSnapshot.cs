@@ -44,7 +44,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuario", (string)null);
+                    b.ToTable("Usuarios", (string)null);
                 });
 #pragma warning restore 612, 618
         }
