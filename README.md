@@ -46,7 +46,7 @@ Este projeto é uma API implementada em .NET Core que foi construída utilizando
 
 * Os registros da injeção de dependência para os useCase estão sendo feitas na classe `Bootstrapper.cs`, conforme imagem abaixo:
   
-![image](https://github.com/DenisJesusBatista/FIAP_MinhaAgendaDeContatos_FASE1/assets/52789764/2153ec77-f4ea-4912-a712-3043ec918610)
+Imagem pendente
   
 * Registro de injeção de dependência para o banco de dados e repositório.
 
