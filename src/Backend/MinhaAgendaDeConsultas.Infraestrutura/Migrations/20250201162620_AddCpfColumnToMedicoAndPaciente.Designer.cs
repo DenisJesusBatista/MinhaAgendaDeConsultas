@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 {
     [DbContext(typeof(MinhaAgendaDeConsultasContext))]
-    [Migration("20250201021753_AddCpfColumnToMedicoAndPacienteTest33")]
-    partial class AddCpfColumnToMedicoAndPacienteTest33
+    [Migration("20250201162620_AddCpfColumnToMedicoAndPaciente")]
+    partial class AddCpfColumnToMedicoAndPaciente
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,67 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.ToTable("EntidadeBase");
                 });
 
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Crm")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UsuarioMedico", (string)null);
+                });
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Paciente", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UsuarioPaciente", (string)null);
+                });
+
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", b =>
                 {
                     b.Property<long>("Id")
@@ -44,6 +105,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -67,53 +133,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuario", (string)null);
-
-                    b.UseTptMappingStrategy();
-                });
-
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>
-                {
-                    b.HasBaseType("MinhaAgendaDeConsultas.Domain.Entidades.Usuario");
-
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Crm")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.ToTable("UsuarioMedico", (string)null);
-                });
-
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Paciente", b =>
-                {
-                    b.HasBaseType("MinhaAgendaDeConsultas.Domain.Entidades.Usuario");
-
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
-
-                    b.ToTable("UsuarioPaciente", (string)null);
-                });
-
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>
-                {
-                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", null)
-                        .WithOne()
-                        .HasForeignKey("MinhaAgendaDeConsultas.Domain.Entidades.Medico", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Paciente", b =>
-                {
-                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", null)
-                        .WithOne()
-                        .HasForeignKey("MinhaAgendaDeConsultas.Domain.Entidades.Paciente", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
