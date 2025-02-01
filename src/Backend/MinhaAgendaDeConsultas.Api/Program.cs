@@ -1,13 +1,12 @@
 using Microsoft.OpenApi.Models;
 using MinhaAgendaDeConsultas.Api.Filtros;
 using MinhaAgendaDeConsultas.Application;
-using MinhaAgendaDeConsultas.Infraestrutura;
 using MinhaAgendaDeConsultas.Application.Services;
+using MinhaAgendaDeConsultas.Application.Services.Criptografia;
+using MinhaAgendaDeConsultas.Infraestrutura;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Migrations;
 using System.Reflection;
-using MinhaAgendaDeConsultas.Application.Services.Criptografia;
-using MinhaAgendaDeConsultas.Application.Services.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
