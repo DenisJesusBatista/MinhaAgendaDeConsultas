@@ -1,6 +1,6 @@
-﻿using MinhaAgendaDeConsultas.Communication.Resposta;
+﻿using MinhaAgendaDeConsultas.Communication.Resposta.Token;
 
-namespace MinhaAgendaDeConsultas.Communication.Responses
+namespace MinhaAgendaDeConsultas.Communication.Resposta.Usuario
 {
     public class ResponseRegistrarUsuarioJson
     {

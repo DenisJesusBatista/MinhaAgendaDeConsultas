@@ -2,11 +2,12 @@ using Microsoft.OpenApi.Models;
 using MinhaAgendaDeConsultas.Api.Filtros;
 using MinhaAgendaDeConsultas.Application;
 using MinhaAgendaDeConsultas.Infraestrutura;
-using MinhaAgendaDeConsultas.Application.Services.AutoMapper;
+using MinhaAgendaDeConsultas.Application.Services;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Migrations;
 using System.Reflection;
 using MinhaAgendaDeConsultas.Application.Services.Criptografia;
+using MinhaAgendaDeConsultas.Application.Services.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,15 +22,45 @@ builder.Services.AddSingleton<PasswordEncripter>();
 
 // Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(options =>
 {
     string version = "1.0";
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minha agenda de contato", Version = version });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Minha agenda de consultas", Version = version });
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
+    options.IncludeXmlComments(xmlPath);
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"JWT Authorization header using the Bearer scheme. 
+                    \r\n\r\nEnter 'Bearer' [space] and then your token in the text input below.
+                    \r\n\r\nExample: 'Bearer your_token_goes_here'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            },
+            new string[] {}
+        }
+    });
 });
+
 
 // Register Repositories and Application
 builder.Services.AddRepositorio(builder.Configuration);

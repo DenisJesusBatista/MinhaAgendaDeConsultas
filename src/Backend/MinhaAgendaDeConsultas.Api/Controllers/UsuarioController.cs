@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MinhaAgendaDeConsultas.Api.Response;
-using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar;
-using MinhaAgendaDeConsultas.Communication.Request;
-using MinhaAgendaDeConsultas.Communication.Responses;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
-{   
+{
     public class UsuarioController : MinhaAgendaDeConsultasBaseController
     {
         [HttpPost]

@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MinhaAgendaDeConsultas.Application.UseCases.Login.DoLogin;
-using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar;
-using MinhaAgendaDeConsultas.Communication.Request;
-using MinhaAgendaDeConsultas.Communication.Requisicoes;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Communication.Responses;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
-{   
+{
     public class LoginController : MinhaAgendaDeConsultasBaseController
     {
         [HttpPost]

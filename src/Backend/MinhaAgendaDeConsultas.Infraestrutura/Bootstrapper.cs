@@ -1,13 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using FluentMigrator.Runner;
+﻿using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Extension;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
-using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
-using System.Reflection;
+using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
+using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
+using System.Reflection;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura
 {

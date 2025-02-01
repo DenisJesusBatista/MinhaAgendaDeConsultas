@@ -1,6 +1,6 @@
 ﻿using MinhaAgendaDeConsultas.Domain.Entidades;
 
-namespace MinhaAgendaDeConsultas.Domain.Repositorios
+namespace MinhaAgendaDeConsultas.Domain
 {
     public interface IUsuarioReadOnlyRepositorio
     {

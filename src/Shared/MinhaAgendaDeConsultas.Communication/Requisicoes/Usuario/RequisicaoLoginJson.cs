@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MinhaAgendaDeConsultas.Communication.Requisicoes
+namespace MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario
 {
     public class RequisicaoLoginJson
     {

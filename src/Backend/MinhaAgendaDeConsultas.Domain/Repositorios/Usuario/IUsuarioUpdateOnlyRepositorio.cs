@@ -1,4 +1,4 @@
-﻿namespace MinhaAgendaDeConsultas.Domain.Repositorios
+﻿namespace MinhaAgendaDeConsultas.Domain.Repositorios.Usuario
 {
     public interface IUsuarioUpdateOnlyRepositorio
     {

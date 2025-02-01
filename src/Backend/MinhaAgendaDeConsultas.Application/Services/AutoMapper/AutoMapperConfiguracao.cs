@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using MinhaAgendaDeConsultas.Communication.Request;
-using MinhaAgendaDeConsultas.Domain.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static MinhaAgendaDeConsultas.Communication.Resposta.RespostaUsuarioJson;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+
 
 namespace MinhaAgendaDeConsultas.Application.Services.AutoMapper
 {

@@ -1,11 +1,13 @@
 ﻿using MinhaAgendaDeConsultas.Application.Services.Criptografia;
-using MinhaAgendaDeConsultas.Communication.Requisicoes;
-using MinhaAgendaDeConsultas.Communication.Responses;
-using MinhaAgendaDeConsultas.Domain.Repositorios;
+using MinhaAgendaDeConsultas.Application.UseCases.Login.DoLogin;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Token;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
+using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
-namespace MinhaAgendaDeConsultas.Application.UseCases.Login.DoLogin
+namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
 {
     public class FazerLoginUseCase : IFazerLoginUseCase
     {
@@ -36,7 +38,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.DoLogin
             return new ResponseRegistrarUsuarioJson
             {
                 Nome = entidade.Nome,
-                Tokens = new Communication.Resposta.RespostaTokenJson
+                Tokens = new RespostaTokenJson
                 {
                     AcessoToken = _geradorTokenAcesso.Gerar(entidade.Identificador),                    
                 }

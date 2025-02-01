@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\Backend\MinhaAgendaDeConsultas.Domain\MinhaAgendaDeConsultas.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Requisicoes\Login\" />
+  </ItemGroup>
+
 </Project>

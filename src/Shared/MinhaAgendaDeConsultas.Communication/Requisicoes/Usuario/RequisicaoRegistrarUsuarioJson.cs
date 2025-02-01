@@ -1,4 +1,4 @@
-﻿namespace MinhaAgendaDeConsultas.Communication.Request
+﻿namespace MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario
 {
     public class RequisicaoRegistrarUsuarioJson
     {

@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Entidades;
-using MinhaAgendaDeConsultas.Domain.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 
-namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio
+
+namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 {
     public class UsuarioRepositorio : IUsuarioWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio, IUsuarioUpdateOnlyRepositorio
     {
@@ -58,7 +55,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio
             return await _contexto.Usuarios
                 .AsNoTracking()
                 .Include(user => user.Email)
-                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));  
+                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));
         }
     }
 }

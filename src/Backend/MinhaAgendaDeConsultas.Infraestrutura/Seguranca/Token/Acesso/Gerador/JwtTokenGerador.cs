@@ -2,12 +2,10 @@
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
 {
-    public class JwtTokenGerador : IGeradorTokenAcesso
+    public class JwtTokenGerador : JwtTokenHandler, IGeradorTokenAcesso
     {
         //Atributos da classe JwtTokenGerador
         private readonly uint _tempoExpiracaoMinutos;
@@ -44,8 +42,8 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
                 Subject = new ClaimsIdentity(claims),
                 NotBefore = agora,  // Define explicitamente o "NotBefore" como o tempo atual
                 Expires = expires,  // Define "Expires" como a data futura
-                SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha512Signature)
-            };  
+                SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(_chaveAssinatura), SecurityAlgorithms.HmacSha256Signature)
+            };
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -53,26 +51,5 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
 
             return tokenHandler.WriteToken(securityToken);
         }
-
-        // Funcao para conversao da chave de assinatura em um objeto do tipo SymmetricSecurityKey   
-        private SymmetricSecurityKey GetSymmetricSecurityKey()
-        {
-            var bytes = Encoding.UTF8.GetBytes(_chaveAssinatura);
-            return new SymmetricSecurityKey(bytes);
-        }
-        //private SymmetricSecurityKey GetSymmetricSecurityKey()
-        //{
-        //    // Usar uma chave mais longa ou derivar uma chave de 512 bits
-        //    var chaveDerivada = Encoding.UTF8.GetBytes(_chaveAssinatura);
-
-        //    // Se a chave for muito curta, podemos gerar um hash para garantir o tamanho adequado
-        //    if (chaveDerivada.Length < 64)
-        //    {
-        //        // Gerar um hash SHA256 da chave para garantir 64 bytes (512 bits)
-        //        chaveDerivada = SHA256.Create().ComputeHash(chaveDerivada);
-        //    }
-
-        //    return new SymmetricSecurityKey(chaveDerivada);
-        //}
     }
 }

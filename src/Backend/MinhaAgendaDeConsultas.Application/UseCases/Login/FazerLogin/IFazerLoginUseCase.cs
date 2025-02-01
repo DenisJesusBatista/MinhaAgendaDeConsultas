@@ -1,5 +1,5 @@
-﻿using MinhaAgendaDeConsultas.Communication.Requisicoes;
-using MinhaAgendaDeConsultas.Communication.Responses;
+﻿using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Login.DoLogin
 {

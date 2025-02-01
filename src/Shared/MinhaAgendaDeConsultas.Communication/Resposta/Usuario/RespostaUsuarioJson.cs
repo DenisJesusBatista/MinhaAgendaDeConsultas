@@ -1,6 +1,6 @@
 ﻿using MinhaAgendaDeConsultas.Domain.Entidades;
 
-namespace MinhaAgendaDeConsultas.Communication.Resposta
+namespace MinhaAgendaDeConsultas.Communication
 {
     public class RespostaUsuarioJson
     {

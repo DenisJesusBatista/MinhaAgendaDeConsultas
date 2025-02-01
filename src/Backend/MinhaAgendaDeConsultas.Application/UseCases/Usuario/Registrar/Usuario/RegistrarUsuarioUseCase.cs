@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 using MinhaAgendaDeConsultas.Application.Services.Criptografia;
-using MinhaAgendaDeConsultas.Communication.Request;
-using MinhaAgendaDeConsultas.Communication.Responses;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Token;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
+using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
+using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
@@ -56,7 +60,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
             return new ResponseRegistrarUsuarioJson
             {
                 Nome = entidade.Nome,
-                Tokens = new Communication.Resposta.RespostaTokenJson
+                Tokens = new RespostaTokenJson
                 {
                     AcessoToken = _geradorTokenAcesso.Gerar(entidade.Identificador),
                 }
