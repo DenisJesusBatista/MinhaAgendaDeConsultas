@@ -53,15 +53,21 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         public async Task<Usuario> RecuperarUsuarioPorEmaileSenha(string email, string senha)
         {
+            return await _contexto
+                .Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));
+                //.Where(u => u.Email == email && u.Senha == senha)
+                //.FirstOrDefaultAsync() ?? throw new UsuarioNaoEncontradoException();
 
             // Busca o usuário no banco de dados, comparando a senha criptografada
-            var usuario = await _contexto.Usuarios
-                .Where(u => u.Email == email && u.Senha == senha)
-                .FirstOrDefaultAsync();
-                
-           
+            //var usuario = await _contexto.Usuarios
+            //    .Where(u => u.Email == email && u.Senha == senha)
+            //    .FirstOrDefaultAsync();
 
-            return usuario;
+
+
+            //return usuario;
         }
     }
 }

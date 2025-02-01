@@ -37,6 +37,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
                 .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("Cpf").AsString(2000)
                 .WithColumn("Senha").AsString(2000).NotNullable()
+                .WithColumn("Ativo").AsBoolean().NotNullable().WithDefaultValue(true)
                 .WithColumn("Tipo").AsString(20).NotNullable()
                 .WithColumn("Identificador").AsGuid().NotNullable();
 
@@ -51,8 +52,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
                 .WithColumn("Nome").AsString(255).NotNullable()
                 .WithColumn("Email").AsString(255).NotNullable()                
                 .WithColumn("Cpf").AsString(2000)                
-                .WithColumn("Tipo").AsString(20);
-            //.WithColumn("Identificador").AsGuid().NotNullable();
+                .WithColumn("Tipo").AsString(20);            
 
 
             _logger.LogInformation("Tabela 'UsuarioPaciente' criada com sucesso.");
@@ -64,12 +64,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
 
             tabela
                 .WithColumn("Nome").AsString(255).NotNullable()
-                .WithColumn("Email").AsString(255).NotNullable()
-                //.WithColumn("Senha").AsString(2000)
+                .WithColumn("Email").AsString(255).NotNullable()                
                 .WithColumn("Cpf").AsString(2000)
                 .WithColumn("Crm").AsString(20)
-                .WithColumn("Tipo").AsString(20);
-                //.WithColumn("Identificador").AsGuid().NotNullable();
+                .WithColumn("Tipo").AsString(20);                
 
 
             _logger.LogInformation("Tabela 'UsuarioMedico' criada com sucesso.");
