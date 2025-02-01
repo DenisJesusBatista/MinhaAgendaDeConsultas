@@ -54,6 +54,16 @@ Imagem pendente
 
 * Criando a tabela no banco com as colunas e ColunasPadrões, arquivo `Versao0000001` que se encontra em: MinhaAgendaDeContatos.Infraestrutura\Migrations\Versoes
 
+* ![image](https://github.com/user-attachments/assets/c7c82ade-9afc-4a49-8a29-bd4ce1846fba)
+
+* Criando tabelas no banco
+
+* ![image](https://github.com/user-attachments/assets/55a8b967-78a6-48b2-b226-f3db45b4fbc3)
+
+
+* 
+
+
 *  Migrations que faz a chamada UP da criação da tabela acima.
   
   ## Migrações do Banco de Dados
