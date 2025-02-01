@@ -34,26 +34,30 @@ public class MinhaAgendaDeConsultasContext : DbContext
 
 
         // Configuração para Paciente (herda de Usuario)
-        modelBuilder.Entity<Paciente>(entity =>
+        modelBuilder.Entity<Paciente>(entityPaciente =>
         {
+            entityPaciente.Property(e => e.Nome).IsRequired();
+            entityPaciente.Property(e => e.Email).IsRequired();
             // O Cpf é obrigatório para Paciente
-            entity.Property(e => e.Cpf)
+            entityPaciente.Property(e => e.Cpf)
                 .HasMaxLength(11)
                 .IsRequired();  // Cpf obrigatório para Paciente
 
             // Definindo que o Paciente será mapeado para a tabela 'UsuarioPaciente'
-            entity.ToTable("UsuarioPaciente");
+            entityPaciente.ToTable("UsuarioPaciente");
         });
 
         // Configuração para Medico (herda de Usuario)
-        modelBuilder.Entity<Medico>(entity =>
+        modelBuilder.Entity<Medico>(entityMedico =>
         {
+            entityMedico.Property(e => e.Nome).IsRequired();
+            entityMedico.Property(e => e.Email).IsRequired();
             // Configurações específicas de Medico, como o CRM e CPF
-            entity.Property(m => m.Crm).IsRequired();
-            entity.Property(m => m.Cpf).IsRequired();
+            entityMedico.Property(m => m.Crm).IsRequired();
+            entityMedico.Property(m => m.Cpf).IsRequired();
 
             // Definindo que o Medico será mapeado para a tabela 'UsuarioMedico'
-            entity.ToTable("UsuarioMedico");
+            entityMedico.ToTable("UsuarioMedico");
         });
 
         // Configuração da classe base (EntidadeBase)
