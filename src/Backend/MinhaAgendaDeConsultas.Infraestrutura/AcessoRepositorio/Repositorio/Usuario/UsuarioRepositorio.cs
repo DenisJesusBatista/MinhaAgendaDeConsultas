@@ -3,7 +3,6 @@ using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 
-
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 {
     public class UsuarioRepositorio : IUsuarioWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio, IUsuarioUpdateOnlyRepositorio
@@ -42,7 +41,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
         public async Task Update(Usuario usuario)
         {
             _contexto.Usuarios.Update(usuario);
-            await _contexto.SaveChangesAsync();  // Persistindo as alterações no banco
+            await _contexto.SaveChangesAsync();  // Não se esqueça de chamar o SaveChangesAsync para persistir a alteração.
         }
 
         async Task IUsuarioWriteOnlyRepositorio.Update(Usuario usuario)
@@ -50,12 +49,18 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             _contexto.Usuarios.Update(usuario);
         }
 
-        public async Task<Usuario?> RecuperarUsuarioPorEmaileSenha(string email, string senha)
+
+        public async Task<Usuario> RecuperarUsuarioPorEmaileSenha(string email, string senha)
         {
-            return await _contexto.Usuarios
-                .AsNoTracking()
-                .Include(user => user.Email)
-                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));
+
+            // Busca o usuário no banco de dados, comparando a senha criptografada
+            var usuario = await _contexto.Usuarios
+                .Where(u => u.Email == email && u.Senha == senha)
+                .FirstOrDefaultAsync();
+
+            
+
+            return usuario;
         }
     }
 }
