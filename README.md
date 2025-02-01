@@ -53,7 +53,31 @@ Imagem pendente
 ## Criação de tabela
 
 * Criando a tabela no banco com as colunas e ColunasPadrões, arquivo `Versao0000001` que se encontra em: MinhaAgendaDeContatos.Infraestrutura\Migrations\Versoes
+
 *  Migrations que faz a chamada UP da criação da tabela acima.
+  
+  ## Migrações do Banco de Dados
+
+Para adicionar ou alterar tabelas no banco de dados, siga os passos abaixo:
+
+1. **Altere as Entidades**:
+   - Modifique as classes no projeto para refletir as alterações desejadas.
+
+2. **Crie uma Nova Migração**:
+   - Execute o seguinte comando no Package Manager Console:
+     ```bash
+     Add-Migration NomeDaMigracao
+     ```
+   - Substitua `NomeDaMigracao` por um nome descritivo (por exemplo, `AddCpfColumnToMedicoAndPaciente`).
+
+3. **Aplique a Migração**:
+   - Execute o comando abaixo para aplicar as alterações ao banco de dados:
+     ```bash
+     Update-Database
+     ```
+
+4. **Verifique o Banco de Dados**:
+   - Confirme que as alterações foram aplicadas corretamente.
 
   
   
