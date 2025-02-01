@@ -11,3 +11,174 @@ Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
 Log de Execução Information: FluentMigrator.Runner - => 0,0335975s
 Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
 Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuarios' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0255492s
+Log de Execução Information: FluentMigrator.Runner - INSERT INTO "public"."VersionInfo" ("Version","AppliedOn","Description") VALUES (1,'2025-02-01T00:48:32','Cria e popular tabelas');
+Log de Execução Information: FluentMigrator.Runner - Committing Transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
+Log de Execução Information: FluentMigrator.Runner - => 0,0367733s
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuarios' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0248582s
+Log de Execução Information: FluentMigrator.Runner - INSERT INTO "public"."VersionInfo" ("Version","AppliedOn","Description") VALUES (1,'2025-02-01T01:05:38','Cria e popular tabelas');
+Log de Execução Information: FluentMigrator.Runner - Committing Transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
+Log de Execução Information: FluentMigrator.Runner - => 0,0354869s
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioSaude' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0263223s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioSaude
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioSaude" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Crm" varchar(20) NOT NULL, "Tipo" varchar(20) NOT NULL, CONSTRAINT "PK_UsuarioSaude" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0149914s
+Log de Execução Information: FluentMigrator.Runner - INSERT INTO "public"."VersionInfo" ("Version","AppliedOn","Description") VALUES (1,'2025-02-01T01:31:14','Cria e popular tabelas');
+Log de Execução Information: FluentMigrator.Runner - Committing Transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
+Log de Execução Information: FluentMigrator.Runner - => 0,0348728s
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioSaude' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0204899s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioSaude
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioSaude" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Crm" varchar(20) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_UsuarioSaude" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0131178s
+Log de Execução Information: FluentMigrator.Runner - INSERT INTO "public"."VersionInfo" ("Version","AppliedOn","Description") VALUES (1,'2025-02-01T01:34:37','Cria e popular tabelas');
+Log de Execução Information: FluentMigrator.Runner - Committing Transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
+Log de Execução Information: FluentMigrator.Runner - => 0,0337285s
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioSaude' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0174156s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioSaude
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioSaude" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Crm" varchar(20) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_UsuarioSaude" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0139322s
+Log de Execução Information: FluentMigrator.Runner - INSERT INTO "public"."VersionInfo" ("Version","AppliedOn","Description") VALUES (1,'2025-02-01T01:36:49','Cria e popular tabelas');
+Log de Execução Information: FluentMigrator.Runner - Committing Transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
+Log de Execução Information: FluentMigrator.Runner - => 0,0243621s
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioSaude' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0232952s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioSaude
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioSaude" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Medico_Cpf" varchar(2000) NOT NULL, "Crm" varchar(20) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_UsuarioSaude" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0157701s
+Log de Execução Information: FluentMigrator.Runner - INSERT INTO "public"."VersionInfo" ("Version","AppliedOn","Description") VALUES (1,'2025-02-01T02:03:17','Cria e popular tabelas');
+Log de Execução Information: FluentMigrator.Runner - Committing Transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
+Log de Execução Information: FluentMigrator.Runner - => 0,0345788s
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioSaude' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioSaude' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0291181s
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0208s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioPaciente
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioPaciente" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Crm" varchar(20) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_UsuarioPaciente" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0253185s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioMedico
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioMedico" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Senha" varchar(2000) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Crm" varchar(20) NOT NULL, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, CONSTRAINT "PK_UsuarioMedico" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0194873s
+Log de Execução Information: FluentMigrator.Runner - INSERT INTO "public"."VersionInfo" ("Version","AppliedOn","Description") VALUES (1,'2025-02-01T02:20:21','Cria e popular tabelas');
+Log de Execução Information: FluentMigrator.Runner - Committing Transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrated
+Log de Execução Information: FluentMigrator.Runner - => 0,0449346s
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Warning: FluentMigrator.Runner - 1: Versao0000001 (current)
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MinhaAgendaDeConsultas.Application.UseCases.Login.DoLogin;
 using MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;

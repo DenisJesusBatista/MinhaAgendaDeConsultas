@@ -1,58 +1,79 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MinhaAgendaDeConsultas.Domain.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MinhaAgendaDeConsultas.Domain.Enumeradores;
 
-namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
+public class MinhaAgendaDeConsultasContext : DbContext
 {
-    public class MinhaAgendaDeConsultasContext: DbContext
+    public MinhaAgendaDeConsultasContext(DbContextOptions<MinhaAgendaDeConsultasContext> options) : base(options) { }
+
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Paciente> Pacientes { get; set; }
+    public DbSet<Medico> Medicos { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public MinhaAgendaDeConsultasContext(DbContextOptions<MinhaAgendaDeConsultasContext> options) : base(options) { }
+        base.OnModelCreating(modelBuilder);
 
-        //Variavel
-        public DbSet<Usuario> Usuarios { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // Configuração para a entidade Usuario (herda de EntidadeBase)
+        modelBuilder.Entity<Usuario>(entity =>
         {
-            base.OnModelCreating(modelBuilder);
+            entity.HasKey(e => e.Id); // Chave primária
 
-            // Certifique-se de que as entidades sejam mapeadas corretamente.
-            modelBuilder.Entity<Usuario>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Nome).IsRequired();
-                entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Nome).IsRequired();
+            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Senha).HasMaxLength(128).IsRequired();
 
-                // Aqui você pode definir o nome da tabela, garantindo que seja 'Usuarios' no banco de dados
-                entity.ToTable("Usuarios"); // Especifica o nome da tabela no banco de dados
+            // Garanta que Cpf seja tratado como string, mesmo que no banco seja 'character varying'
+            entity.Property(e => e.Cpf).HasMaxLength(11).IsRequired();
 
-                // Defina o comprimento para a senha criptografada (SHA512 hash precisa de 128 caracteres)
-                entity.Property(e => e.Senha)
-                      .HasMaxLength(128) // Defina o comprimento para acomodar o hash SHA512
-                      .IsRequired();
-
-            });
-
-            // Adicione outras entidades conforme necessário
-        }
+            entity.ToTable("Usuario");
+        });
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+
+        // Configuração para Paciente (herda de Usuario)
+        modelBuilder.Entity<Paciente>(entity =>
         {
-            optionsBuilder
-                .UseLoggerFactory(_loggerFactory) // Habilita o log de SQL
-                .EnableSensitiveDataLogging(); // Opcional: inclui parâmetros de consulta na saída do log            
-        }
+            // O Cpf é obrigatório para Paciente
+            entity.Property(e => e.Cpf)
+                .HasMaxLength(11)
+                .IsRequired();  // Cpf obrigatório para Paciente
 
-        private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder =>
+            // Definindo que o Paciente será mapeado para a tabela 'UsuarioPaciente'
+            entity.ToTable("UsuarioPaciente");
+        });
+
+        // Configuração para Medico (herda de Usuario)
+        modelBuilder.Entity<Medico>(entity =>
         {
-            builder.AddFilter((category, level) =>
-                category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
-                .AddConsole();
+            // Configurações específicas de Medico, como o CRM e CPF
+            entity.Property(m => m.Crm).IsRequired();
+            entity.Property(m => m.Cpf).IsRequired();
+
+            // Definindo que o Medico será mapeado para a tabela 'UsuarioMedico'
+            entity.ToTable("UsuarioMedico");
+        });
+
+        // Configuração da classe base (EntidadeBase)
+        modelBuilder.Entity<EntidadeBase>(entity =>
+        {
+            entity.HasKey(e => e.Id); // A chave primária é configurada na classe base
         });
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder
+            .UseLoggerFactory(_loggerFactory) // Habilita o log de SQL
+            .EnableSensitiveDataLogging(); // Opcional: inclui parâmetros de consulta na saída do log            
+    }
+
+    private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder =>
+    {
+        builder.AddFilter((category, level) =>
+            category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
+            .AddConsole();
+    });
 }

@@ -3,6 +3,6 @@ namespace MinhaAgendaDeConsultas.Domain.Seguranca.Token
 {
     public interface IGeradorTokenAcesso
     {
-        public string Gerar(Guid identificadorUsuario);
+        public string Gerar(string identificadorUsuario);
     }
 }
