@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MinhaAgendaDeConsultas.Domain.Entidades
 {
@@ -15,6 +11,8 @@ namespace MinhaAgendaDeConsultas.Domain.Entidades
         // Definindo o tamanho máximo para a senha usando Data Annotations
         [MaxLength(128)] // Defina o tamanho para o hash SHA512
         public string Senha { get; set; } = string.Empty;
+        public string Cpf { get; set; } = string.Empty;
+        public TipoUsuario Tipo { get; set; } // Usando o Enum
         public Guid Identificador { get; set; }
 
     }

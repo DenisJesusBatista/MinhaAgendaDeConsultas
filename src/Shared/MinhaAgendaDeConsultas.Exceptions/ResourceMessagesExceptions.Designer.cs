@@ -61,6 +61,42 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cpf inválido.
+        /// </summary>
+        public static string CPF_INVALIDO {
+            get {
+                return ResourceManager.GetString("CPF_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O cpf informado já está registrado na base de dados..
+        /// </summary>
+        public static string CPF_JA_REGISTRADO {
+            get {
+                return ResourceManager.GetString("CPF_JA_REGISTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O crm informado já está registrado na base de dados..
+        /// </summary>
+        public static string CRM_JA_REGISTRADO {
+            get {
+                return ResourceManager.GetString("CRM_JA_REGISTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O crm não pode estar vazio.
+        /// </summary>
+        public static string CRM_VAZIO {
+            get {
+                return ResourceManager.GetString("CRM_VAZIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail e/ou senha inválida.
         /// </summary>
         public static string EMAIL_E_OU_SENHA_INVALIDA {

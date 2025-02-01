@@ -5,6 +5,7 @@ using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Communication.Resposta.Token;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
+using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
@@ -47,10 +48,16 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 
             var entidade = _mapper.Map<Domain.Entidades.Usuario>(requisicao);
 
+            entidade.Tipo = TipoUsuario.Usuario;
+
+            entidade.Cpf = "00000000000".ToString();
+
             // Criptografa a senha antes de salvar
             entidade.Senha = _passwordEncripter.Encrypt(requisicao.Senha);
 
-            entidade.Identificador = Guid.NewGuid();
+            Guid identificadorGuid = Guid.NewGuid();
+
+            entidade.Identificador = identificadorGuid;
 
             await _usuarioWriteOnlyRepositorio.Adicionar(entidade);
 
@@ -62,7 +69,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
                 Nome = entidade.Nome,
                 Tokens = new RespostaTokenJson
                 {
-                    AcessoToken = _geradorTokenAcesso.Gerar(entidade.Identificador),
+                    AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString()),
                 }
             };
         }

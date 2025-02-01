@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MinhaAgendaDeConsultas.Application.UseCases.Login.DoLogin;
-using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Login;
 using MinhaAgendaDeConsultas.Communication.Responses;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 

@@ -2,6 +2,7 @@
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
+using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 {
@@ -57,8 +58,8 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             var usuario = await _contexto.Usuarios
                 .Where(u => u.Email == email && u.Senha == senha)
                 .FirstOrDefaultAsync();
-
-            
+                
+           
 
             return usuario;
         }

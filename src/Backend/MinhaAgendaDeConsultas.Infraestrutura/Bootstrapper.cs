@@ -2,13 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MinhaAgendaDeConsultas.Application.UseCases;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Paciente;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Extension;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
+using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
+using MinhaAgendaDeConsultas.Domain.Repositorios.Paciente;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
+using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Medico;
+using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Paciente;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
+using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Validar;
 using System.Reflection;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura
@@ -48,13 +55,23 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
         private static void AddRepositorios(IServiceCollection services)
         {
             services.AddScoped<IUsuarioWriteOnlyRepositorio, UsuarioRepositorio>()
-                .AddScoped<IUsuarioReadOnlyRepositorio, UsuarioRepositorio>()                
-             .AddScoped<IUsuarioUpdateOnlyRepositorio, UsuarioRepositorio>();
+                .AddScoped<IUsuarioReadOnlyRepositorio, UsuarioRepositorio>()
+             .AddScoped<IUsuarioUpdateOnlyRepositorio, UsuarioRepositorio>()
+             .AddScoped<IPacienteWriteOnlyRepositorio, PacienteRepositorio>()
+             .AddScoped<IPacienteReadOnlyRepositorio, PacienteRepositorio>()
+             .AddScoped<IPacienteUpdateOnlyRepositorio, PacienteRepositorio>()
+             .AddScoped<IMedicoWriteOnlyRepositorio, MedicoRepositorio>()
+             .AddScoped<IMedicoReadOnlyRepositorio, MedicoRepositorio>()
+             .AddScoped<IMedicoUpdateOnlyRepositorio, MedicoRepositorio>();
+
+
+            // Outros serviços
+            services.AddScoped<IRegistrarPacienteUseCase, RegistrarPacienteUseCase>();
         }
 
         private static void AddToken(IServiceCollection services, IConfiguration configurationManager)
         {
-           var expiracaoMinutos = configurationManager.GetValue<uint>("Settings:Jwt:ExpiracaoMinutos");
+            var expiracaoMinutos = configurationManager.GetValue<uint>("Jwt:ExpiracaoMinutos");
             //var chaveAssinatura = configurationManager.GetValue<string>("Settings:Jwt:ChaveAssinatura"); 
             var chaveAssinatura = configurationManager.GetValue<string>("Jwt:ChaveAssinatura");
 
@@ -65,6 +82,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
             }
 
             services.AddScoped<IGeradorTokenAcesso>(option => new JwtTokenGerador(expiracaoMinutos, chaveAssinatura!));
-        }   
+            services.AddScoped<IValidadorTokenAcesso>(option => new JwtTokenValidador(chaveAssinatura!));
+        }
     }
 }

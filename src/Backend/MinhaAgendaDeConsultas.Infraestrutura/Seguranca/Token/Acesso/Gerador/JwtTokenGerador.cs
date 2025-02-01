@@ -19,11 +19,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
         }
 
         // Funcao para gerar um token de acesso
-        public string Gerar(Guid identificadorUsuario)
+        public string Gerar(string identificadorUsuario)
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, identificadorUsuario.ToString())
+                new Claim(ClaimTypes.NameIdentifier, identificadorUsuario)
             };
 
             // Definir o "NotBefore" como a hora atual, mas garantir que o "Expires" seja posterior

@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CPF_INVALIDO" xml:space="preserve">
+    <value>Cpf inválido</value>
+  </data>
+  <data name="CPF_JA_REGISTRADO" xml:space="preserve">
+    <value>O cpf informado já está registrado na base de dados.</value>
+  </data>
+  <data name="CRM_JA_REGISTRADO" xml:space="preserve">
+    <value>O crm informado já está registrado na base de dados.</value>
+  </data>
+  <data name="CRM_VAZIO" xml:space="preserve">
+    <value>O crm não pode estar vazio</value>
+  </data>
   <data name="EMAIL_E_OU_SENHA_INVALIDA" xml:space="preserve">
     <value>E-mail e/ou senha inválida</value>
   </data>
