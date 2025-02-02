@@ -142,6 +142,15 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro inesperado..
+        /// </summary>
+        public static string ERRO_GENERICO {
+            get {
+                return ResourceManager.GetString("ERRO_GENERICO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O nome não pode estar vazio.
         /// </summary>
         public static string NOME_VAZIO {
@@ -151,11 +160,38 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Token não encotrado.
+        /// </summary>
+        public static string SEM_TOKEN {
+            get {
+                return ResourceManager.GetString("SEM_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Senha deve ter no mínimo 6 caracteres.
         /// </summary>
         public static string SENHA_MINIMA {
             get {
                 return ResourceManager.GetString("SENHA_MINIMA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O token de acesso expirou..
+        /// </summary>
+        public static string TOKEN_EXPIRADO {
+            get {
+                return ResourceManager.GetString("TOKEN_EXPIRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuario não tem permissão para acessar esse recurso.
+        /// </summary>
+        public static string USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO", resourceCulture);
             }
         }
     }

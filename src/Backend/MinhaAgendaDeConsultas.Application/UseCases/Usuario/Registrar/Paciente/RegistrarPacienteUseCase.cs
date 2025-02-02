@@ -33,7 +33,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
 
         public async Task<ResponseRegistrarPacienteJson> Executar(RequisicaoRegistrarPacienteJson requisicao)
         {
-            //await Validar(requisicao);
+            await Validar(requisicao);
 
             //Conversão requisicao para entidade AutoMap
             //-Pluggin: AutoMapper na Application
@@ -50,6 +50,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
 
             //Salvar no banco de dados.
             await _unidadeDeTrabalho.Commit();
+            
 
             return new ResponseRegistrarPacienteJson
             {

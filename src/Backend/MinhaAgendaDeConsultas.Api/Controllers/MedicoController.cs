@@ -7,6 +7,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
     public class MedicoController : MinhaAgendaDeConsultasBaseController
     {
         [HttpPost]
+        [ProducesResponseType(typeof(RequisicaoRegistrarMedicoJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegistrarMedico(
               [FromServices] IRegistrarMedicoUseCase useCase,
               [FromBody] RequisicaoRegistrarMedicoJson request)

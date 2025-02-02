@@ -20,12 +20,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             await _contexto.Usuarios.AddAsync(usuario);
         }
 
-        public async Task<Usuario?> RecuperarPorEmail(string email)
-        {
-            return await _contexto.Usuarios
-                .Include(c => c.Email)
-                .FirstOrDefaultAsync(c => c.Email.Equals(email));
-        }
+       
 
         public async Task<IEnumerable<Usuario>> RecuperarPorId(int id)
         {
@@ -34,10 +29,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
                 .ToListAsync();
         }
 
-        public async Task<bool> ExisteUsuarioComEmail(string email)
-        {
-            return await _contexto.Usuarios.AnyAsync(c => c.Email.Equals(email));
-        }
+
 
         public async Task Update(Usuario usuario)
         {
@@ -50,24 +42,43 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             _contexto.Usuarios.Update(usuario);
         }
 
+        //public async Task<bool>  ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador) => await _contexto.Usuarios.AnyAsync(user => user.Identificador.Equals(usuarioIdentificador) && user.Ativo);
 
-        public async Task<Usuario> RecuperarUsuarioPorEmaileSenha(string email, string senha)
+
+        public async Task<bool> ExisteUsuarioComEmaileSenha(string email, string senha)
+        {
+            return await _contexto.Usuarios.AnyAsync(user => user.Email == email && user.Senha == senha);
+        }
+
+
+        public async Task<Usuario?> RecuperarUsuarioPorIdentificador(Guid usuarioIdentificador)
         {
             return await _contexto
                 .Usuarios
                 .AsNoTracking()
-                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));
-                //.Where(u => u.Email == email && u.Senha == senha)
-                //.FirstOrDefaultAsync() ?? throw new UsuarioNaoEncontradoException();
-
-            // Busca o usuário no banco de dados, comparando a senha criptografada
-            //var usuario = await _contexto.Usuarios
-            //    .Where(u => u.Email == email && u.Senha == senha)
-            //    .FirstOrDefaultAsync();
-
-
-
-            //return usuario;
+                .FirstOrDefaultAsync(user => user.Identificador.Equals(usuarioIdentificador) && user.Ativo == true);
         }
+
+        public async Task<Usuario?> RecuperarPorEmail(string email)
+        {
+            return await _contexto.Usuarios
+                //.Include(c => c.Email)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Email.Equals(email));
+        }
+
+
+        public async Task<Usuario?> RecuperarUsuarioPorEmaileSenha(string email, string senha)
+        {
+            return await _contexto
+                .Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha) && user.Ativo == true);            
+        }
+      
+
+        public async Task<bool> ExisteUsuarioComEmail(string email) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Email.Equals(email));
+        public async Task<bool> ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Identificador.Equals(usuarioIdentificador));
+        
     }
 }

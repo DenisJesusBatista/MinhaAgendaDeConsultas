@@ -11,11 +11,13 @@ using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Paciente;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
+using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Medico;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Paciente;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Validar;
+using MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado;
 using System.Reflection;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura
@@ -29,6 +31,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
             AddRepositorios(services);
             AddContexto(services, configurationManager);
             AddToken(services, configurationManager);
+            AddUsarioLogado(services);
+        }
+
+        private static void AddUsarioLogado(IServiceCollection services)
+        {
+            services.AddScoped<IUsuarioLogado, UsuarioLogado>();
         }
 
         private static void AddUnidadeDeTrabalho(this IServiceCollection services)

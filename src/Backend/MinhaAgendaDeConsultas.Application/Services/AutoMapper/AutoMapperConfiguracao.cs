@@ -2,6 +2,7 @@
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Paciente;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
 
@@ -12,6 +13,7 @@ namespace MinhaAgendaDeConsultas.Application.Services
         public AutoMapperConfiguracao()
         {
             RequestToDomain();
+            DomainToResponse();
         }
 
         private void RequestToDomain()
@@ -39,6 +41,13 @@ namespace MinhaAgendaDeConsultas.Application.Services
                 .ForMember(dest => dest.Crm, opt => opt.MapFrom(src => src.Crm))
                 .ForMember(dest => dest.Tipo, opt => opt.MapFrom(src => TipoUsuario.Medico)); // Assume Tipo como 'Medico'
         }
+
+        private void DomainToResponse()
+        {
+            CreateMap<Domain.Entidades.Usuario, RespostaUsuarioProfileJson>();
+
+        }
+
     }
 
 }

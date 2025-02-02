@@ -144,10 +144,22 @@
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Erro desconhecido.</value>
   </data>
+  <data name="ERRO_GENERICO" xml:space="preserve">
+    <value>Ocorreu um erro inesperado.</value>
+  </data>
   <data name="NOME_VAZIO" xml:space="preserve">
     <value>O nome não pode estar vazio</value>
   </data>
+  <data name="SEM_TOKEN" xml:space="preserve">
+    <value>Token não encotrado</value>
+  </data>
   <data name="SENHA_MINIMA" xml:space="preserve">
     <value>Senha deve ter no mínimo 6 caracteres</value>
+  </data>
+  <data name="TOKEN_EXPIRADO" xml:space="preserve">
+    <value>O token de acesso expirou.</value>
+  </data>
+  <data name="USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO" xml:space="preserve">
+    <value>Usuario não tem permissão para acessar esse recurso</value>
   </data>
 </root>

@@ -18,7 +18,8 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
             _chaveAssinatura = chaveAssinatura;
         }
 
-        // Funcao para gerar um token de acesso
+        #region GerarTokenAntigo
+
         public string Gerar(string identificadorUsuario)
         {
             var claims = new[]
@@ -51,5 +52,42 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
 
             return tokenHandler.WriteToken(securityToken);
         }
+        #endregion
+
+        #region GerarTokenAlterada
+        // Funcao para gerar um token de acesso
+        //public string Gerar(string identificadorUsuario)
+        //{
+        //    var claims = new[]
+        //    {
+        //        new Claim(ClaimTypes.Sid, identificadorUsuario)
+        //    };
+
+        //    //// Definir o "NotBefore" como a hora atual, mas garantir que o "Expires" seja posterior
+        //    //var agora = DateTime.UtcNow;
+        //    //var expires = agora.AddMinutes(_tempoExpiracaoMinutos);
+
+        //    // Definir uma pequena diferença entre NotBefore e Expires, se necessário
+        //    //if (expires <= agora)
+        //    //{
+        //    //    expires = agora.AddSeconds(10);  // Garante que a expiração é após o "NotBefore"
+        //    //}
+
+
+        //    var tokenDescriptor = new SecurityTokenDescriptor
+        //    {
+        //        Subject = new ClaimsIdentity(claims),                
+        //        Expires = DateTime.UtcNow.AddMinutes(_tempoExpiracaoMinutos),  // Define "Expires" como a data futura
+        //        SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(_chaveAssinatura), SecurityAlgorithms.HmacSha256Signature)
+        //    };
+
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+
+        //    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+
+        //    return tokenHandler.WriteToken(securityToken);
+        //}
+        #endregion
+
     }
 }

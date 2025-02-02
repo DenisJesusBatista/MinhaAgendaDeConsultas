@@ -39,7 +39,8 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
                 .WithColumn("Senha").AsString(2000).NotNullable()
                 .WithColumn("Ativo").AsBoolean().NotNullable().WithDefaultValue(true)
                 .WithColumn("Tipo").AsString(20).NotNullable()
-                .WithColumn("Identificador").AsGuid().NotNullable();
+                .WithColumn("Identificador").AsGuid().NotNullable()
+                .WithColumn("IdentificadorString").AsString(2000);
 
             _logger.LogInformation("Tabela 'Usuario' criada com sucesso.");
         }

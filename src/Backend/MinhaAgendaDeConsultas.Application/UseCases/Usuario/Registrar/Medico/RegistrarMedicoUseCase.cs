@@ -30,7 +30,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
 
         public async Task<ResponseRegistrarMedicoJson> Executar(RequisicaoRegistrarMedicoJson requisicao)
         {
-            //await Validar(requisicao);
+            await Validar(requisicao);
 
             //Conversão requisicao para entidade AutoMap
             //-Pluggin: AutoMapper na Application

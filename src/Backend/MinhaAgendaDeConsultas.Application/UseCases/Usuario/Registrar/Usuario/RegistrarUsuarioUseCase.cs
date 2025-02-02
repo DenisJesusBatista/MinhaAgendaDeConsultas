@@ -2,7 +2,6 @@
 using MinhaAgendaDeConsultas.Application.Services.Criptografia;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
-using MinhaAgendaDeConsultas.Communication.Resposta.Token;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
@@ -11,6 +10,7 @@ using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
+using RespostaTokenJson = MinhaAgendaDeConsultas.Communication.Resposta.Usuario.RespostaTokenJson;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 {
@@ -59,18 +59,25 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 
             entidade.Identificador = identificadorGuid;
 
+            entidade.IdentificadorString = identificadorGuid.ToString();    
+
             await _usuarioWriteOnlyRepositorio.Adicionar(entidade);
 
             //Salvar no banco de dados.
             await _unidadeDeTrabalho.Commit();
 
-            return new ResponseRegistrarUsuarioJson
+            var acessoTokens = new RespostaTokenJson
             {
+                AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString()),
+            };
+
+           
+
+            return new ResponseRegistrarUsuarioJson
+            {   
                 Nome = entidade.Nome,
-                Tokens = new RespostaTokenJson
-                {
-                    AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString()),
-                }
+                Email = entidade.Email,
+                Tokens = acessoTokens                
             };
         }
 

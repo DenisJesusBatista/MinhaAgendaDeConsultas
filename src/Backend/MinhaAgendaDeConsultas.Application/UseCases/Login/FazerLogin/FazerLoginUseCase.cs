@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using MinhaAgendaDeConsultas.Application.Services.Criptografia;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Login;
-using MinhaAgendaDeConsultas.Communication.Resposta.Token;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
-using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
+using RespostaTokenJson = MinhaAgendaDeConsultas.Communication.Resposta.Usuario.RespostaTokenJson;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
 {
@@ -51,10 +50,14 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
         public async Task<ResponseRegistrarUsuarioJson> Execute(RequisicaoLoginJson request)
         {
             var encriptedPassword = _passwordEncripter.Encrypt(request.Senha);
-            
+
+            var existeUsuario = await _usuarioReadOnlyRepositorio.ExisteUsuarioComEmaileSenha(request.Email, encriptedPassword);
+
             //var cpf = "00000000000".ToString();            
 
-            var entidade = await _usuarioReadOnlyRepositorio.RecuperarUsuarioPorEmaileSenha(request.Email, encriptedPassword.ToString()) ?? throw new LoginInvalidoException();
+            var entidadeUsuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(request.Email);
+
+            //var entidade = await _usuarioReadOnlyRepositorio.RecuperarUsuarioPorEmaileSenha(request.Email, encriptedPassword); //?? throw new LoginInvalidoException();
 
             Guid identificadorGuid = Guid.NewGuid();
 
@@ -62,10 +65,10 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
 
             return new ResponseRegistrarUsuarioJson
             {
-                Nome = entidade.Nome,
+                Nome = entidadeUsuario!.Nome,
                 Tokens = new RespostaTokenJson
                 {
-                    //AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString()),                    
+                    AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString()),
                 }
             };
         }

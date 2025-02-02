@@ -7,13 +7,16 @@ public class MinhaAgendaDeConsultasContext : DbContext
 {
     public MinhaAgendaDeConsultasContext(DbContextOptions<MinhaAgendaDeConsultasContext> options) : base(options) { }
 
+
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Paciente> Pacientes { get; set; }
     public DbSet<Medico> Medicos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(MinhaAgendaDeConsultasContext).Assembly);
 
         // Configuração para a entidade Usuario (herda de EntidadeBase)
         modelBuilder.Entity<Usuario>(entity =>
@@ -23,6 +26,10 @@ public class MinhaAgendaDeConsultasContext : DbContext
             entity.Property(e => e.Nome).IsRequired();
             entity.Property(e => e.Email).IsRequired();
             entity.Property(e => e.Senha).HasMaxLength(128).IsRequired();
+            entity.Property(u => u.Identificador)
+            .HasColumnType("uuid"); // Força o tipo correto
+            entity.Property(e => e.IdentificadorString);
+
 
             // Garanta que Cpf seja tratado como string, mesmo que no banco seja 'character varying'
             entity.Property(e => e.Cpf).HasMaxLength(11).IsRequired();
@@ -79,5 +86,6 @@ public class MinhaAgendaDeConsultasContext : DbContext
         builder.AddFilter((category, level) =>
             category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
             .AddConsole();
-    });
+    }
+    );
 }
