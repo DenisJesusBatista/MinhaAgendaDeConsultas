@@ -11,19 +11,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9EE3FB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{32C396B1-2F69-4DEC-A249-28F77A53EFB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAgendaDeConsultas.Api", "src\Backend\MinhaAgendaDeConsultas.Api\MinhaAgendaDeConsultas.Api.csproj", "{0438AFA6-E1E8-4C4A-844E-251DA80842F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaAgendaDeConsultas.Api", "src\Backend\MinhaAgendaDeConsultas.Api\MinhaAgendaDeConsultas.Api.csproj", "{0438AFA6-E1E8-4C4A-844E-251DA80842F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAgendaDeConsultas.Application", "src\Backend\MinhaAgendaDeConsultas.Application\MinhaAgendaDeConsultas.Application.csproj", "{F79BC9E3-FF42-419F-AAEC-C80E3A8E277B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaAgendaDeConsultas.Application", "src\Backend\MinhaAgendaDeConsultas.Application\MinhaAgendaDeConsultas.Application.csproj", "{F79BC9E3-FF42-419F-AAEC-C80E3A8E277B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAgendaDeConsultas.Domain", "src\Backend\MinhaAgendaDeConsultas.Domain\MinhaAgendaDeConsultas.Domain.csproj", "{6B6D1174-57E1-4B5A-8023-8BF6686CC56A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaAgendaDeConsultas.Domain", "src\Backend\MinhaAgendaDeConsultas.Domain\MinhaAgendaDeConsultas.Domain.csproj", "{6B6D1174-57E1-4B5A-8023-8BF6686CC56A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAgendaDeConsultas.Infraestrutura", "src\Backend\MinhaAgendaDeConsultas.Infraestrutura\MinhaAgendaDeConsultas.Infraestrutura.csproj", "{0DC7B7C2-880E-4AC1-8994-C2D536D78DC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaAgendaDeConsultas.Infraestrutura", "src\Backend\MinhaAgendaDeConsultas.Infraestrutura\MinhaAgendaDeConsultas.Infraestrutura.csproj", "{0DC7B7C2-880E-4AC1-8994-C2D536D78DC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAgendaDeConsultas.Communication", "src\Shared\MinhaAgendaDeConsultas.Communication\MinhaAgendaDeConsultas.Communication.csproj", "{9543AFE5-D482-44E4-9216-82345C3FF55C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaAgendaDeConsultas.Communication", "src\Shared\MinhaAgendaDeConsultas.Communication\MinhaAgendaDeConsultas.Communication.csproj", "{9543AFE5-D482-44E4-9216-82345C3FF55C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAgendaDeConsultas.Exceptions", "src\Shared\MinhaAgendaDeConsultas.Exceptions\MinhaAgendaDeConsultas.Exceptions.csproj", "{6C13D9A8-D4F2-42EA-BCE3-6705AAA82C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaAgendaDeConsultas.Exceptions", "src\Shared\MinhaAgendaDeConsultas.Exceptions\MinhaAgendaDeConsultas.Exceptions.csproj", "{6C13D9A8-D4F2-42EA-BCE3-6705AAA82C16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAgendaDeConsultas.UnitTest", "tests\MinhaAgendaDeConsultas.UnitTest\MinhaAgendaDeConsultas.UnitTest.csproj", "{9BB3BC9E-47F5-4AD9-9169-BAFFCE8DDA5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaAgendaDeConsultas.UnitTest", "tests\MinhaAgendaDeConsultas.UnitTest\MinhaAgendaDeConsultas.UnitTest.csproj", "{9BB3BC9E-47F5-4AD9-9169-BAFFCE8DDA5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{8010E823-8C21-4D69-BDE7-54B782FC38C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C50EC204-A12D-412B-8BB6-8EDDBAC534EF}"
+	ProjectSection(SolutionItems) = preProject
+		dotnet.yml = dotnet.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +80,7 @@ Global
 		{9543AFE5-D482-44E4-9216-82345C3FF55C} = {9EE3FB98-5879-4E1E-A101-B74643A72DE1}
 		{6C13D9A8-D4F2-42EA-BCE3-6705AAA82C16} = {9EE3FB98-5879-4E1E-A101-B74643A72DE1}
 		{9BB3BC9E-47F5-4AD9-9169-BAFFCE8DDA5A} = {32C396B1-2F69-4DEC-A249-28F77A53EFB6}
+		{C50EC204-A12D-412B-8BB6-8EDDBAC534EF} = {8010E823-8C21-4D69-BDE7-54B782FC38C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {883A3FF2-5F89-49FE-92A2-89B728191030}

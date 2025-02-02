@@ -35,6 +35,3 @@ jobs:
 
     - name: Unit Test
       run: dotnet test --no-build --verbosity normal --filter "FullyQualifiedName!~MinhaAgendaDeContatos.IntegrationTest"
-    
-    - name: Integration Test
-      run: dotnet test --no-build --verbosity normal --filter "FullyQualifiedName!~MinhaAgendaDeContatos.UnitTest"
