@@ -3,7 +3,10 @@ using MinhaAgendaDeConsultas.Api.Atributos;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Responses;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
+using MinhaAgendaDeConsultas.Exceptions;
+using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
 {
@@ -14,7 +17,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 
         public async Task<IActionResult> RegistrarContato(
                 [FromServices] IRegistrarUsuarioUseCase useCase,
-                [FromBody] RequisicaoRegistrarUsuarioJson request)
+                [FromQuery] RequisicaoRegistrarUsuarioJson request)
         {
             var response = await useCase.Executar(request);
             
@@ -24,13 +27,14 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [HttpGet("por-email")]        
         [ProducesResponseType(typeof(RespostaUsuarioProfileJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterUsuarioPorEmail(
-                  [FromQuery] string email,
+                  //[FromQuery] string email,
+                  [FromQuery] RequisicaoObterUsuarioJson request,
                 [FromServices] IObterUsuarioProfileUseCase useCase)
         {
-            var result = await useCase.Executar(email);
+            var result = await useCase.Executar(request);
 
             if (result == null)
-                return NotFound("Usuário não encontrado.");
+                return NotFound(ResourceMessagesExceptions.USUARIO_NAO_ENCONTRADO_EMAIL);           
 
             return Ok(result);
         }

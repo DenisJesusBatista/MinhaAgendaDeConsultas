@@ -15,7 +15,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         //[Authorize]
         public async Task<IActionResult> Login(
             [FromServices] IFazerLoginUseCase useCase,
-                [FromBody] RequisicaoLoginJson request
+                [FromQuery] RequisicaoLoginJson request
             )
         {
             var response = await useCase.Execute(request);

@@ -5,10 +5,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
 {
     public interface IObterUsuarioProfileUseCase
     {
-        //Task<RespostaUsuarioProfileJson> Executar(RequisicaoObterUsuarioJson requisicao);
-        //Task<RespostaUsuarioProfileJson> Executar(RequisicaoObterUsuarioJson requisicao);
-        Task<RespostaUsuarioProfileJson> Executar(string email);
-
+        Task<RespostaUsuarioProfileJson> Executar(RequisicaoObterUsuarioJson requisicao);
 
     }
 }

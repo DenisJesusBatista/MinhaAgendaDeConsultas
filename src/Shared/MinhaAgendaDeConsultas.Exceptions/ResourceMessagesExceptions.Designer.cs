@@ -196,6 +196,15 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Esse e-mail ainda não foi registrado..
+        /// </summary>
+        public static string USUARIO_NAO_ENCONTRADO_EMAIL {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_ENCONTRADO_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuario não tem permissão para acessar esse recurso.
         /// </summary>
         public static string USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO {

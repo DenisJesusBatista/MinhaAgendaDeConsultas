@@ -1,9 +1,17 @@
 ﻿using AutoMapper;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
+using MinhaAgendaDeConsultas.Domain.Enumeradores;
+using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
+using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
+using MinhaAgendaDeConsultas.Exceptions;
+using FluentValidation;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.ObterUsuario;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
 {
@@ -22,18 +30,13 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
 
         }
 
-        //Task<RespostaUsuarioProfileJson> Executar(string email);
-
-        public async Task<RespostaUsuarioProfileJson> Executar(string email)
+        public async Task<RespostaUsuarioProfileJson> Executar(RequisicaoObterUsuarioJson requisicao)
         {
-            // Busca o usuário diretamente pelo e-mail fornecido
-            var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(email);
+            await Validar(requisicao);
 
-            // Garante que o usuário foi encontrado antes de acessar suas propriedades
-            if (usuario == null)
-            {
-                throw new Exception("Usuário não encontrado.");
-            }
+            // Busca o usuário diretamente pelo e-mail fornecido
+            var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(requisicao.Email);
+           
 
             // Cria a resposta com o token correto
             var respostaToken = new RespostaTokenJson
@@ -49,31 +52,23 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
             };
         }
 
+        private async Task Validar(RequisicaoObterUsuarioJson requisicao)
+        {
+            var validator = new ObterUsuarioValidator();
+            var resultado = validator.Validate(requisicao);
 
+            var existeContatoComEmail = await _usuarioReadOnlyRepositorio.ExisteUsuarioComEmail(requisicao.Email);
 
-        //public async Task<RespostaUsuarioProfileJson> Executar(RequisicaoObterUsuarioJson requisicao)
-        //{
-        //    var user = await _usuarioLogado.Usuario();
+            if (!existeContatoComEmail)
+            {
+                resultado.Errors.Add(new FluentValidation.Results.ValidationFailure("email", ResourceMessagesExceptions.USUARIO_NAO_ENCONTRADO_EMAIL));
+            }
 
-        //    var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(user.Email);
-
-        //    user.Token = usuario.Token;
-
-        //    //return _mapper.Map<RespostaUsuarioProfileJson>(user.Email);
-
-        //    // Cria o objeto RespostaTokenJson com o token
-        //    var respostaToken = new RespostaTokenJson
-        //    {
-        //        AcessoToken = user.Token // Ou qualquer outra propriedade que você tenha para o token
-        //    };
-
-
-        //    return new RespostaUsuarioProfileJson
-        //    {
-        //        Nome = user.Nome,
-        //        Email = user.Email, // Certifique-se de incluir o email, se necessário
-        //        Tokens = respostaToken // Atribui o objeto RespostaTokenJson à propriedade Tokens
-        //    };
-        //}
+            if (!resultado.IsValid)
+            {
+                var mensagensDeErro = resultado.Errors.Select(error => error.ErrorMessage).ToList();
+                throw new ErrosDeValidacaoException(mensagensDeErro);
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [ProducesResponseType(typeof(RequisicaoRegistrarMedicoJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegistrarMedico(
               [FromServices] IRegistrarMedicoUseCase useCase,
-              [FromBody] RequisicaoRegistrarMedicoJson request)
+              [FromQuery] RequisicaoRegistrarMedicoJson request)
         {
             await useCase.Executar(request);
 
