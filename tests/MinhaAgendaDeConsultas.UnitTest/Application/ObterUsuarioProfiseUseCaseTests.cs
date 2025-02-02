@@ -10,11 +10,6 @@ using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MinhaAgendaDeConsultas.UnitTest.Application
 {
