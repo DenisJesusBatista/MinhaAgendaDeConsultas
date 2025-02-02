@@ -18,11 +18,10 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         {
             var response = await useCase.Executar(request);
             
-            return CreatedAtAction(nameof(RegistrarContato), new { response.Nome, response.Email });
+            return CreatedAtAction(nameof(RegistrarContato), new { response.Nome, response.Email, response.Tokens.AcessoToken });
         }
 
-        [HttpGet("por-email")]
-        [AtributoAutorizacaoUsuario]
+        [HttpGet("por-email")]        
         [ProducesResponseType(typeof(RespostaUsuarioProfileJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterUsuarioPorEmail(
                   [FromQuery] string email,
