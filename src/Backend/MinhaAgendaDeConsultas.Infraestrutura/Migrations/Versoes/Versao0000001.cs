@@ -1,6 +1,7 @@
 ﻿using FluentMigrator;
 using Microsoft.Extensions.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
+using System.Data;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
 {
@@ -23,7 +24,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
         {
             CustomLogger.Arquivo = true;
 
-            CriarTabelaUsuario();            
+            CriarTabelaUsuario();
             CriarTabelaUsuarioPaciente();
             CriarTabelaUsuarioMedico();
         }
@@ -33,16 +34,18 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
             var tabela = VersaoBase.InserirColunasPadrao(Create.Table("Usuario"));
 
             tabela
-                .WithColumn("Nome").AsString(255).NotNullable()
-                .WithColumn("Email").AsString(255).NotNullable()
-                .WithColumn("Cpf").AsString(2000)
-                .WithColumn("Senha").AsString(2000).NotNullable()
-                .WithColumn("Ativo").AsBoolean().NotNullable().WithDefaultValue(true)
-                .WithColumn("Tipo").AsString(20).NotNullable()
-                .WithColumn("Identificador").AsGuid().NotNullable()
-                .WithColumn("IdentificadorString").AsString(2000);
+                 .WithColumn("Nome").AsString(255).NotNullable()
+                 .WithColumn("Email").AsString(255).NotNullable()
+                 .WithColumn("Cpf").AsString(2000)  // Considerando que CPF tenha um tamanho razoável
+                 .WithColumn("Senha").AsString(2000).NotNullable()  // Tamanho do hash de senha
+                 .WithColumn("Ativo").AsBoolean().NotNullable().WithDefaultValue(true)
+                 .WithColumn("Tipo").AsString(20).NotNullable()  // Tipo de usuário (ex: Medico, Paciente)
+                 .WithColumn("Identificador").AsGuid().NotNullable()  // GUID para identificar o usuário
+                 .WithColumn("IdentificadorString").AsString(36).NotNullable()  // 36 caracteres para GUID em formato string
+                 .WithColumn("Token").AsString(1000).Nullable();  // Adicionando a coluna para armazenar o token gerado
 
             _logger.LogInformation("Tabela 'Usuario' criada com sucesso.");
+
         }
 
         private void CriarTabelaUsuarioPaciente()
@@ -50,10 +53,15 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
             var tabela = VersaoBase.InserirColunasPadrao(Create.Table("UsuarioPaciente"));
 
             tabela
+                .WithColumn("UsuarioId").AsInt64().NotNullable() // Chave estrangeira
                 .WithColumn("Nome").AsString(255).NotNullable()
-                .WithColumn("Email").AsString(255).NotNullable()                
-                .WithColumn("Cpf").AsString(2000)                
-                .WithColumn("Tipo").AsString(20);            
+                .WithColumn("Email").AsString(255).NotNullable()
+                .WithColumn("Cpf").AsString(2000)
+                .WithColumn("Tipo").AsString(20);
+
+            tabela
+                .ForeignKey("FK_UsuarioPaciente_Usuario", "Usuario", "Id")
+                .OnDeleteOrUpdate(Rule.None); // Equivalente ao DeleteBehavior.Restrict
 
 
             _logger.LogInformation("Tabela 'UsuarioPaciente' criada com sucesso.");
@@ -64,11 +72,16 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
             var tabela = VersaoBase.InserirColunasPadrao(Create.Table("UsuarioMedico"));
 
             tabela
+                .WithColumn("UsuarioId").AsInt64().NotNullable() // Chave estrangeira
                 .WithColumn("Nome").AsString(255).NotNullable()
-                .WithColumn("Email").AsString(255).NotNullable()                
+                .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("Cpf").AsString(2000)
                 .WithColumn("Crm").AsString(20)
-                .WithColumn("Tipo").AsString(20);                
+                .WithColumn("Tipo").AsString(20);
+
+            tabela
+                 .ForeignKey("FK_UsuarioMedico_Usuario", "Usuario", "Id")
+                 .OnDeleteOrUpdate(Rule.None); // Equivalente ao DeleteBehavior.Restrict
 
 
             _logger.LogInformation("Tabela 'UsuarioMedico' criada com sucesso.");

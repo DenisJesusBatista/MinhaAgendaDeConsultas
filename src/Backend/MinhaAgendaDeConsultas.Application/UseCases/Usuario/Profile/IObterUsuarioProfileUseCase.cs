@@ -1,9 +1,14 @@
-﻿using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
+﻿using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
 {
     public interface IObterUsuarioProfileUseCase
     {
-        public Task<RespostaUsuarioProfileJson> Executar();
+        //Task<RespostaUsuarioProfileJson> Executar(RequisicaoObterUsuarioJson requisicao);
+        //Task<RespostaUsuarioProfileJson> Executar(RequisicaoObterUsuarioJson requisicao);
+        Task<RespostaUsuarioProfileJson> Executar(string email);
+
+
     }
 }

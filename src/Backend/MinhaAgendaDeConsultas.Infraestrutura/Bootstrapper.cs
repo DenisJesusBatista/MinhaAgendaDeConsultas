@@ -79,8 +79,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
 
         private static void AddToken(IServiceCollection services, IConfiguration configurationManager)
         {
-            var expiracaoMinutos = configurationManager.GetValue<uint>("Jwt:ExpiracaoMinutos");
-            //var chaveAssinatura = configurationManager.GetValue<string>("Settings:Jwt:ChaveAssinatura"); 
+            var expiracaoMinutos = configurationManager.GetValue<uint>("Jwt:ExpiracaoMinutos");            
             var chaveAssinatura = configurationManager.GetValue<string>("Jwt:ChaveAssinatura");
 
             // Verifique se a chave de assinatura foi configurada corretamente

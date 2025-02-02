@@ -10,5 +10,6 @@ namespace MinhaAgendaDeConsultas.Communication.Resposta.Usuario
     {   
         public string Nome { get; set; }
         public string Email { get; set; }       
+        public RespostaTokenJson Tokens { get; set; }   
     }
 }

@@ -1,0 +1,209 @@
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0235103s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioPaciente
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioPaciente" ("Id" bigserial NOT NULL, "UsuarioId" bigint NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, CONSTRAINT "PK_UsuarioPaciente" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0130222s
+Log de Execução Information: FluentMigrator.Runner - CreateForeignKey FK_UsuarioPaciente_Usuario UsuarioPaciente(Tipo) Usuario(Id)
+Log de Execução Information: FluentMigrator.Runner - ALTER TABLE "public"."UsuarioPaciente" ADD CONSTRAINT "FK_UsuarioPaciente_Usuario" FOREIGN KEY ("Tipo") REFERENCES "public"."Usuario" ("Id");
+Log de Execução Error: 0 - An error occurred executing the following sql:
+ALTER TABLE "public"."UsuarioPaciente" ADD CONSTRAINT "FK_UsuarioPaciente_Usuario" FOREIGN KEY ("Tipo") REFERENCES "public"."Usuario" ("Id");
+The error was 42804: foreign key constraint "FK_UsuarioPaciente_Usuario" cannot be implemented
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0178405s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioPaciente
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioPaciente" ("Id" bigserial NOT NULL, "UsuarioId" bigint NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, CONSTRAINT "PK_UsuarioPaciente" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0109582s
+Log de Execução Information: FluentMigrator.Runner - CreateForeignKey FK_UsuarioPaciente_Usuario UsuarioPaciente(Tipo) Usuario(Id)
+Log de Execução Information: FluentMigrator.Runner - ALTER TABLE "public"."UsuarioPaciente" ADD CONSTRAINT "FK_UsuarioPaciente_Usuario" FOREIGN KEY ("Tipo") REFERENCES "public"."Usuario" ("Id");
+Log de Execução Error: 0 - An error occurred executing the following sql:
+ALTER TABLE "public"."UsuarioPaciente" ADD CONSTRAINT "FK_UsuarioPaciente_Usuario" FOREIGN KEY ("Tipo") REFERENCES "public"."Usuario" ("Id");
+The error was 42804: foreign key constraint "FK_UsuarioPaciente_Usuario" cannot be implemented
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0318144s
+Log de Execução Information: FluentMigrator.Runner - CreateTable UsuarioPaciente
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."UsuarioPaciente" ("Id" bigserial NOT NULL, "UsuarioId" bigint NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Tipo" varchar(20) NOT NULL, CONSTRAINT "PK_UsuarioPaciente" PRIMARY KEY ("Id"));
+Log de Execução Information: FluentMigrator.Runner - => 0,0146238s
+Log de Execução Information: FluentMigrator.Runner - CreateForeignKey FK_UsuarioPaciente_Usuario UsuarioPaciente(Tipo) Usuario(Id)
+Log de Execução Information: FluentMigrator.Runner - ALTER TABLE "public"."UsuarioPaciente" ADD CONSTRAINT "FK_UsuarioPaciente_Usuario" FOREIGN KEY ("Tipo") REFERENCES "public"."Usuario" ("Id");
+Log de Execução Error: 0 - An error occurred executing the following sql:
+ALTER TABLE "public"."UsuarioPaciente" ADD CONSTRAINT "FK_UsuarioPaciente_Usuario" FOREIGN KEY ("Tipo") REFERENCES "public"."Usuario" ("Id");
+The error was 42804: foreign key constraint "FK_UsuarioPaciente_Usuario" cannot be implemented
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(2000) NOT NULL, CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 (not applied)
+Log de Execução Information: FluentMigrator.Runner - 1: Versao0000001 migrating
+Log de Execução Information: FluentMigrator.Runner - Beginning Transaction
+Log de Execução Information: 0 - Tabela 'Usuario' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioPaciente' criada com sucesso.
+Log de Execução Information: 0 - Tabela 'UsuarioMedico' criada com sucesso.
+Log de Execução Information: FluentMigrator.Runner - CreateTable Usuario
+Log de Execução Information: FluentMigrator.Runner - CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+Log de Execução Error: 0 - An error occurred executing the following sql:
+CREATE TABLE "public"."Usuario" ("Id" bigserial NOT NULL, "Nome" varchar(255) NOT NULL, "Email" varchar(255) NOT NULL, "Cpf" varchar(2000) NOT NULL, "Senha" varchar(2000) NOT NULL, "Ativo" boolean NOT NULL DEFAULT true, "Tipo" varchar(20) NOT NULL, "Identificador" uuid NOT NULL, "IdentificadorString" varchar(36) NOT NULL, "Token" varchar(1000), CONSTRAINT "PK_Usuario" PRIMARY KEY ("Id"));
+The error was 42P07: relation "Usuario" already exists
+
+Log de Execução Information: FluentMigrator.Runner - Rolling back transaction

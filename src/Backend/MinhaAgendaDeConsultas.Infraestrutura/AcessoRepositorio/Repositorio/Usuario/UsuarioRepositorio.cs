@@ -42,9 +42,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             _contexto.Usuarios.Update(usuario);
         }
 
-        //public async Task<bool>  ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador) => await _contexto.Usuarios.AnyAsync(user => user.Identificador.Equals(usuarioIdentificador) && user.Ativo);
-
-
         public async Task<bool> ExisteUsuarioComEmaileSenha(string email, string senha)
         {
             return await _contexto.Usuarios.AnyAsync(user => user.Email == email && user.Senha == senha);

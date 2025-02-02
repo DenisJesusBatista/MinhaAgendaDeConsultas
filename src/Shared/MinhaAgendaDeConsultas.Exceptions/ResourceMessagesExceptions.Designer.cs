@@ -187,6 +187,15 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário não encontrado. Registre um usuário antes de criar um médico..
+        /// </summary>
+        public static string USUARIO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_ENCONTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuario não tem permissão para acessar esse recurso.
         /// </summary>
         public static string USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO {

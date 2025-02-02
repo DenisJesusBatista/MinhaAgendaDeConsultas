@@ -22,16 +22,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Me
         public async Task<bool> ExisteMedicoComCpf(string cpf) => await _contexto.Medicos.AnyAsync(medico => medico.Cpf.Equals(cpf));
         public async Task<bool> ExisteMedicoComCrm(string crm) => await _contexto.Medicos.AnyAsync(medico => medico.Crm.Equals(crm));
 
-
-        public async Task<bool> ExisteMedicoUsuarioComEmail(string email)
-        {
-            return await _contexto.Usuarios
-                .Where(u => u.Tipo == TipoUsuario.Medico && u.Email == email)
-                .AnyAsync();
-        }
-
-
-   
+        public async Task<bool> ExisteMedicoUsuarioComEmail(string email) => await _contexto.Usuarios.AnyAsync(user => user.Email.Equals(email));
 
 
         public async Task<Domain.Entidades.Medico> RecuperarPorCpf(string cpf)
