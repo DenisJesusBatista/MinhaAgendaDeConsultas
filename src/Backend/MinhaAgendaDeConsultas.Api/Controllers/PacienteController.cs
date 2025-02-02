@@ -8,6 +8,15 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
     {
         [HttpPost]
         [ProducesResponseType(typeof(RequisicaoRegistrarPacienteJson), StatusCodes.Status201Created)]
+
+        /// <summary>
+        /// Cadastra um paciente no sistema.
+        /// </summary>
+        /// <param name="request">Dados do paciente a ser cadastrado.</param>
+        /// <returns></returns>
+        /// <response code="200">Sucesso no cadastro do paciente.</response>
+        /// <response code="400">Corpo da requisição diferente do esperado.</response>
+        /// <response code="409">O paciente informado já está cadastrado.</response>
         public async Task<IActionResult> RegistrarPaciente(
               [FromServices] IRegistrarPacienteUseCase useCase,
               [FromQuery] RequisicaoRegistrarPacienteJson request)

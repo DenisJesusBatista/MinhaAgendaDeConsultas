@@ -2,7 +2,6 @@
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
-using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 {

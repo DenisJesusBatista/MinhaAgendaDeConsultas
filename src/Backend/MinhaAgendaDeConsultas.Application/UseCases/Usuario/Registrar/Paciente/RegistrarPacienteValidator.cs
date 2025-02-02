@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Paciente;
-using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Exceptions;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Paciente

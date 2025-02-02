@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
 
 public class MinhaAgendaDeConsultasContextFactory : IDesignTimeDbContextFactory<MinhaAgendaDeConsultasContext>
 {

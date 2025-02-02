@@ -2,11 +2,9 @@
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Resposta.Medico;
 using MinhaAgendaDeConsultas.Domain;
-using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
-using MinhaAgendaDeConsultas.Domain.Repositorios.Paciente;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 

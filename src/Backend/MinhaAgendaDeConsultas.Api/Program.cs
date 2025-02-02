@@ -8,7 +8,6 @@ using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Infraestrutura;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Migrations;
-using MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

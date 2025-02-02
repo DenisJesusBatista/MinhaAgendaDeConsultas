@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
-using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico;
-using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.ObterUsuario;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
-using MinhaAgendaDeConsultas.Domain.Enumeradores;
-using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
-using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
-using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 using MinhaAgendaDeConsultas.Exceptions;
-using FluentValidation;
-using MinhaAgendaDeConsultas.Application.UseCases.Usuario.ObterUsuario;
+using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
 {

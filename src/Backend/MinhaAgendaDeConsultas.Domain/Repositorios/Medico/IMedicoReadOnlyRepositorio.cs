@@ -1,6 +1,4 @@
-﻿using MinhaAgendaDeConsultas.Domain.Enumeradores;
-
-namespace MinhaAgendaDeConsultas.Domain.Repositorios.Medico
+﻿namespace MinhaAgendaDeConsultas.Domain.Repositorios.Medico
 {
     public interface IMedicoReadOnlyRepositorio
     {

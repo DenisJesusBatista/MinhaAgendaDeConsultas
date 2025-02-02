@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MinhaAgendaDeConsultas.Domain.Entidades;
-using MinhaAgendaDeConsultas.Domain.Enumeradores;
 
 public class MinhaAgendaDeConsultasContext : DbContext
 {
