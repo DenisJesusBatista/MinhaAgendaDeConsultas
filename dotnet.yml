@@ -1,0 +1,40 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+#Definindo quando o WorkFlow será disparado
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+#Definindo os jobs que o workFlow executará
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install docker-compose
+
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build  --no-restore
+
+    - name: Unit Test
+      run: dotnet test --no-build --verbosity normal --filter "FullyQualifiedName!~MinhaAgendaDeContatos.IntegrationTest"
+    
+    - name: Integration Test
+      run: dotnet test --no-build --verbosity normal --filter "FullyQualifiedName!~MinhaAgendaDeContatos.UnitTest"
