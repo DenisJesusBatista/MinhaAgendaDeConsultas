@@ -159,6 +159,9 @@
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
     <value>O token de acesso expirou.</value>
   </data>
+  <data name="USUARIO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Usuário não encontrado. Registre um usuário antes de criar um médico.</value>
+  </data>
   <data name="USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO" xml:space="preserve">
     <value>Usuario não tem permissão para acessar esse recurso</value>
   </data>

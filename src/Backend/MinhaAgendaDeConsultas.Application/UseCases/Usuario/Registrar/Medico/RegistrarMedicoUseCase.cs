@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Resposta.Medico;
+using MinhaAgendaDeConsultas.Domain;
+using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
+using MinhaAgendaDeConsultas.Domain.Repositorios.Paciente;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
@@ -14,18 +17,20 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
         //Variavel readonly só pode ser atribuido valor nela, apenas no construtor da classe ( public RegistrarContatoUseCase(IContatoWriteOnlyRepositorio repositorio) )
         private readonly IMedicoReadOnlyRepositorio _medicoReadOnlyRepositorio;
         private readonly IMedicoWriteOnlyRepositorio _medicoWriteOnlyRepositorio;
+        private readonly IUsuarioReadOnlyRepositorio _usuarioReadOnlyRepositorio;
         private readonly IMapper _mapper;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
 
         //Configurar a injeção de dependência atalho CTOR - Criar 
         //Construtor
         public RegistrarMedicoUseCase(IMedicoReadOnlyRepositorio medicoReadOnlyRepositorio, IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
-              IMedicoWriteOnlyRepositorio medicoWriteOnlyRepositorio)
+              IMedicoWriteOnlyRepositorio medicoWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio)
         {
             _medicoReadOnlyRepositorio = medicoReadOnlyRepositorio;
             _mapper = mapper;
             _unidadeDeTrabalho = unidadeDeTrabalho;
             _medicoWriteOnlyRepositorio = medicoWriteOnlyRepositorio;
+            _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
         }
 
         public async Task<ResponseRegistrarMedicoJson> Executar(RequisicaoRegistrarMedicoJson requisicao)
@@ -36,7 +41,11 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
             //-Pluggin: AutoMapper na Application
             //-Pluggin: AutoMapper.Extensions.Microsoft.DependencyInjection na API para configurar para funcionar como injecao de dependencia
 
+            // Buscar o usuário correspondente pelo e-mail (ou CPF)
+            var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(requisicao.Email);           
+
             var entidade = _mapper.Map<Domain.Entidades.Medico>(requisicao);
+            entidade.UsuarioId = usuario.Id;
 
 
             var descricaoTipo = ConverteEnumerador.ObterDescricaoEnum(typeof(TipoUsuario), TipoUsuario.Medico);
@@ -63,7 +72,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
 
             var existeMedicoComCpf = await _medicoReadOnlyRepositorio.ExisteMedicoComCpf(requisicao.Cpf);
             var existeMedicoComCrm = await _medicoReadOnlyRepositorio.ExisteMedicoComCrm(requisicao.Crm);
-            
+            var usuarioMedico = await _medicoReadOnlyRepositorio.ExisteMedicoUsuarioComEmail(requisicao.Email);
+
 
             if (existeMedicoComCpf)
             {
@@ -74,6 +84,9 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
             {
                 resultado.Errors.Add(new FluentValidation.Results.ValidationFailure("crm", ResourceMessagesExceptions.CRM_JA_REGISTRADO));
             }
+
+            // Agora usamos a classe ValidarAssociadosException
+            ValidarAssociadosException.ValidarUsuarioAssociado(usuarioMedico, TipoUsuario.Medico, resultado.Errors);
 
             if (!resultado.IsValid)
             {

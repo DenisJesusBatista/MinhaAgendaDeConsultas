@@ -29,6 +29,11 @@ public class MinhaAgendaDeConsultasContext : DbContext
             entity.Property(u => u.Identificador)
             .HasColumnType("uuid"); // Força o tipo correto
             entity.Property(e => e.IdentificadorString);
+            
+            // Adicionando a configuração para o Token
+            entity.Property(e => e.Token)
+                .HasMaxLength(512) // Definindo o comprimento máximo para o token
+                .IsRequired(false); // O Token pode ser nulo ou vazio, caso o usuário ainda não tenha um token
 
 
             // Garanta que Cpf seja tratado como string, mesmo que no banco seja 'character varying'
@@ -50,6 +55,15 @@ public class MinhaAgendaDeConsultasContext : DbContext
                 .HasMaxLength(11)
                 .IsRequired();  // Cpf obrigatório para Paciente
 
+            // Configuração do relacionamento com Usuario
+            entityPaciente.HasOne(p => p.Usuario) // Paciente tem um Usuario
+                         .WithMany() // Usuario pode ter muitos Pacientes (se aplicável)
+                         .HasForeignKey(p => p.UsuarioId) // Chave estrangeira
+                         .OnDelete(DeleteBehavior.Restrict); // Comportamento de deleção
+
+
+
+
             // Definindo que o Paciente será mapeado para a tabela 'UsuarioPaciente'
             entityPaciente.ToTable("UsuarioPaciente");
         });
@@ -62,6 +76,12 @@ public class MinhaAgendaDeConsultasContext : DbContext
             // Configurações específicas de Medico, como o CRM e CPF
             entityMedico.Property(m => m.Crm).IsRequired();
             entityMedico.Property(m => m.Cpf).IsRequired();
+
+            // Configuração do relacionamento com Usuario
+            entityMedico.HasOne(m => m.Usuario) // Medico tem um Usuario
+                       .WithMany() // Usuario pode ter muitos Medicos (se aplicável)
+                       .HasForeignKey(m => m.UsuarioId) // Chave estrangeira
+                       .OnDelete(DeleteBehavior.Restrict); // Comportamento de deleção
 
             // Definindo que o Medico será mapeado para a tabela 'UsuarioMedico'
             entityMedico.ToTable("UsuarioMedico");

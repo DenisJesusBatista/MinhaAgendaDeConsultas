@@ -59,19 +59,21 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 
             entidade.Identificador = identificadorGuid;
 
-            entidade.IdentificadorString = identificadorGuid.ToString();    
-
-            await _usuarioWriteOnlyRepositorio.Adicionar(entidade);
-
-            //Salvar no banco de dados.
-            await _unidadeDeTrabalho.Commit();
+            entidade.IdentificadorString = identificadorGuid.ToString();
 
             var acessoTokens = new RespostaTokenJson
             {
                 AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString()),
             };
 
-           
+            entidade.Token = acessoTokens.AcessoToken;
+
+
+            await _usuarioWriteOnlyRepositorio.Adicionar(entidade);
+
+            //Salvar no banco de dados.
+            await _unidadeDeTrabalho.Commit();
+
 
             return new ResponseRegistrarUsuarioJson
             {   

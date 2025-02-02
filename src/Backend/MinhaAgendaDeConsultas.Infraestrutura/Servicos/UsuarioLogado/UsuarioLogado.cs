@@ -37,6 +37,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
 
             var identificador = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
 
+            // Obtém o e-mail do token JWT
+            var email = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+
 
             var usuarioIdentificador = Guid.Parse(identificador);
 
@@ -47,7 +51,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
             return await _context
                 .Usuarios
                 .AsNoTracking() 
-                .FirstAsync(user => user.IdentificadorString == identificadorConvertido);
+                .FirstAsync(user => user.Email == email);
             
         }   
     }

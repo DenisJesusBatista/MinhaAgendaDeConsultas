@@ -64,7 +64,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("integer");
 
+                    b.Property<long>("UsuarioId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuarioMedico", (string)null);
                 });
@@ -93,7 +98,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("integer");
 
+                    b.Property<long>("UsuarioId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuarioPaciente", (string)null);
                 });
@@ -121,6 +131,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<Guid>("Identificador")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("IdentificadorString")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text");
@@ -133,9 +147,35 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Token")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Usuario", (string)null);
+                });
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>
+                {
+                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Paciente", b =>
+                {
+                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

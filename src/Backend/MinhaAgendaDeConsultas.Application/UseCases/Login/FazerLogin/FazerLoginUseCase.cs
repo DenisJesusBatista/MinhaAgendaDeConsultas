@@ -42,8 +42,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
             }
 
             return null;
-
-            //var userId = Convert.ToInt32(tokenService.GetIdentifierFromClaimsPrincipal(user));
+            
 
         }
 
@@ -52,16 +51,11 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
             var encriptedPassword = _passwordEncripter.Encrypt(request.Senha);
 
             var existeUsuario = await _usuarioReadOnlyRepositorio.ExisteUsuarioComEmaileSenha(request.Email, encriptedPassword);
-
-            //var cpf = "00000000000".ToString();            
+                 
 
             var entidadeUsuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(request.Email);
 
-            //var entidade = await _usuarioReadOnlyRepositorio.RecuperarUsuarioPorEmaileSenha(request.Email, encriptedPassword); //?? throw new LoginInvalidoException();
-
             Guid identificadorGuid = Guid.NewGuid();
-
-            //entidade.Identificador = identificadorGuid;
 
             return new ResponseRegistrarUsuarioJson
             {

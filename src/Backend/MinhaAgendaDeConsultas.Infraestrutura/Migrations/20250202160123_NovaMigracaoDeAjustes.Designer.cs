@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 {
     [DbContext(typeof(MinhaAgendaDeConsultasContext))]
-    [Migration("20250201162620_AddCpfColumnToMedicoAndPaciente")]
-    partial class AddCpfColumnToMedicoAndPaciente
+    [Migration("20250202160123_NovaMigracaoDeAjustes")]
+    partial class NovaMigracaoDeAjustes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
@@ -64,7 +67,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("integer");
 
+                    b.Property<long>("UsuarioId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuarioMedico", (string)null);
                 });
@@ -93,7 +101,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("integer");
 
+                    b.Property<long>("UsuarioId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("UsuarioPaciente", (string)null);
                 });
@@ -105,6 +118,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -118,6 +134,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<Guid>("Identificador")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("IdentificadorString")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text");
@@ -130,9 +150,35 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Token")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Usuario", (string)null);
+                });
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>
+                {
+                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Paciente", b =>
+                {
+                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

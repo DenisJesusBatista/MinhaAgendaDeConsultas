@@ -19,52 +19,7 @@ namespace MinhaAgendaDeConsultas.Api.Filtros
             _repository = repository;
         }
 
-
-
-
-        #region OnAuthorizationAsyncAntigo
-
-        //public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
-        //{
-        //    try
-        //    {
-        //        var token = TokenOnRequest(context);
-
-        //        var usuarioIdenficador = _validadorTokenAcesso.ValidarEObterIdentificadorUsario(token);
-
-        //        var exist = await _repository.ExisteUsarioAtivoComIdentificador(usuarioIdenficador);
-
-        //        if (!exist)
-        //        {
-        //            //return new ResourceMessagesExceptions.USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO;
-        //            // Retorna um erro 403 Forbidden com uma mensagem personalizada
-        //            context.Result = new ForbidResult(); // Ou new UnauthorizedResult() para 401
-        //            return;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        context.Result = new UnauthorizedObjectResult(new RespostaErroJson("TokenIsExpired")
-        //        {
-        //            TokenIsExpired = true
-        //        });
-        //    }
-        //}
-
-        //private static string TokenOnRequest(AuthorizationFilterContext context)
-        //{
-        //    var token = context.HttpContext.Request.Headers["Authorization"].ToString();
-        //    if (string.IsNullOrEmpty(token))
-        //    {
-        //        return new MinhaAgendaDeContatosExceptions(ResourceMessagesExceptions.SEM_TOKEN);
-        //    }
-
-        //    return token["Bearer ".Length..].Trim();
-        //}
-
-        #endregion
-
+        
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             try

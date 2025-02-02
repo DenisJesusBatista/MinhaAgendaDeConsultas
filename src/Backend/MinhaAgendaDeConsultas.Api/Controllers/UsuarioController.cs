@@ -9,25 +9,28 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 {
     public class UsuarioController : MinhaAgendaDeConsultasBaseController
     {
-        [HttpPost]        
+        [HttpPost]
         [ProducesResponseType(typeof(RequisicaoRegistrarUsuarioJson), StatusCodes.Status201Created)]
-        
+
         public async Task<IActionResult> RegistrarContato(
                 [FromServices] IRegistrarUsuarioUseCase useCase,
                 [FromBody] RequisicaoRegistrarUsuarioJson request)
         {
-            await useCase.Executar(request);
-
-            return Ok(request);
+            var response = await useCase.Executar(request);
+            
+            return CreatedAtAction(nameof(RegistrarContato), new { response.Nome, response.Email, response.Tokens.AcessoToken });
         }
 
-        [HttpGet]
-        [AtributoAutorizacaoUsuario]
-        [ProducesResponseType(typeof(RespostaUsuarioProfileJson), StatusCodes.Status201Created)]
-        public async Task<IActionResult> ObterUsuarioProfile(
+        [HttpGet("por-email")]        
+        [ProducesResponseType(typeof(RespostaUsuarioProfileJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ObterUsuarioPorEmail(
+                  [FromQuery] string email,
                 [FromServices] IObterUsuarioProfileUseCase useCase)
         {
-           var result = await useCase.Executar();
+            var result = await useCase.Executar(email);
+
+            if (result == null)
+                return NotFound("Usuário não encontrado.");
 
             return Ok(result);
         }

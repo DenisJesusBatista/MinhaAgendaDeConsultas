@@ -15,7 +15,10 @@ namespace MinhaAgendaDeConsultas.Domain.Entidades
         public TipoUsuario Tipo { get; set; } // Usando o Enum
         public Guid Identificador { get; set; }
 
-        public string  IdentificadorString {get; set; } = string.Empty; 
+        public string  IdentificadorString {get; set; } = string.Empty;
+
+        // Adicionando a propriedade para armazenar o token gerado
+        public string Token { get; set; } = string.Empty;
 
     }
 }
