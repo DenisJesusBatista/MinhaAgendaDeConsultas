@@ -9,9 +9,6 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 {
     public class UsuarioController : MinhaAgendaDeConsultasBaseController
     {
-        [HttpPost]
-        [ProducesResponseType(typeof(RequisicaoRegistrarUsuarioJson), StatusCodes.Status201Created)]
-
         /// <summary>
         /// Cadastra um novo usuário no sistema
         /// </summary>
@@ -20,7 +17,9 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <response code="200">Sucesso no cadastro do usuário.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
         /// <response code="409">O login informado não está disponível.</response>
-        [HttpPost("registrar")]
+
+        [HttpPost]
+        [ProducesResponseType(typeof(RequisicaoRegistrarUsuarioJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegistrarContato(
                 [FromServices] IRegistrarUsuarioUseCase useCase,
                 [FromQuery] RequisicaoRegistrarUsuarioJson request)
@@ -39,7 +38,8 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <response code="200">Sucesso no cadastro do usuário.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
         /// <response code="409">O login informado não está disponível.</response>
-        [HttpPost("registrar")]
+        
+        
         [HttpGet("por-email")]        
         [ProducesResponseType(typeof(RespostaUsuarioProfileJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterUsuarioPorEmail(
