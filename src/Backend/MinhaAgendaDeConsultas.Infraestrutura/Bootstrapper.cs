@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MinhaAgendaDeConsultas.Application.UseCases;
+using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar;
+using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Registrar;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Paciente;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Extension;
@@ -32,8 +34,17 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
             AddContexto(services, configurationManager);
             AddToken(services, configurationManager);
             AddUsarioLogado(services);
+            AddAgendamentosConsultasRepositorio(services);
+            
         }
-
+       
+        private static void AddAgendamentosConsultasRepositorio(IServiceCollection services)
+        {
+            services.AddScoped<IAgendamentoConsultasConsultasOnlyRepositorio, ConsultaAgendamentosRepositorio>()
+                .AddScoped<IAgendamentoConsultasWriteOnlyRepositorio, ConsultaAgendamentosRepositorio>()
+                .AddScoped<IAgendamentoConsultasDeleteOnlyRepository, ConsultaAgendamentosRepositorio>()
+                .AddScoped<IAgendamentoConsultasUpdateOnlyRepositorio, ConsultaAgendamentosRepositorio>();
+        }
         private static void AddUsarioLogado(IServiceCollection services)
         {
             services.AddScoped<IUsuarioLogado, UsuarioLogado>();

@@ -97,6 +97,33 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data e hora de início não pode ser menor que a data e hora atual.
+        /// </summary>
+        public static string DATA_HORA_INICIO_MAIOR_DATA_HORA_FIM {
+            get {
+                return ResourceManager.GetString("DATA_HORA_INICIO_MAIOR_DATA_HORA_FIM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data e hora de fim não pode ser menor que a data e hora de início.
+        /// </summary>
+        public static string DATA_HORA_INICIO_MAIOR_DATA_INCLUSAO {
+            get {
+                return ResourceManager.GetString("DATA_HORA_INICIO_MAIOR_DATA_INCLUSAO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A Data ou a Hora não pode ser vazia.
+        /// </summary>
+        public static string DATA_HORA_VAZIO {
+            get {
+                return ResourceManager.GetString("DATA_HORA_VAZIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail e/ou senha inválida.
         /// </summary>
         public static string EMAIL_E_OU_SENHA_INVALIDA {
@@ -151,11 +178,29 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O Médico deve ser informado .
+        /// </summary>
+        public static string MEDICO_NAO_INFORMADO {
+            get {
+                return ResourceManager.GetString("MEDICO_NAO_INFORMADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O nome não pode estar vazio.
         /// </summary>
         public static string NOME_VAZIO {
             get {
                 return ResourceManager.GetString("NOME_VAZIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O Paciente deve ser informado .
+        /// </summary>
+        public static string PACIENTE_DEVE_SER_INFORMADO {
+            get {
+                return ResourceManager.GetString("PACIENTE_DEVE_SER_INFORMADO", resourceCulture);
             }
         }
         

@@ -34,6 +34,25 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.ToTable("EntidadeBase");
                 });
 
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.AgendamentoConsultas", b =>
+            {
+                b.Property<long>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("bigint");
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                b.Property<DateTime>("DataHoraFim")
+                    .HasColumnType("timestamp without time zone");
+                b.Property<DateTime>("DataHoraInicio")
+                    .HasColumnType("timestamp without time zone");
+
+                b.Property<long>("MedicoId")
+                .HasColumnType("bigint");
+                b.Property<long>("PacienteId")
+                .HasColumnType("bigint");
+            });
+
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>
                 {
                     b.Property<long>("Id")

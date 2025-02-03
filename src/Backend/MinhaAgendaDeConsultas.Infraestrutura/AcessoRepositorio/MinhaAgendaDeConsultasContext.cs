@@ -10,7 +10,7 @@ public class MinhaAgendaDeConsultasContext : DbContext
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Paciente> Pacientes { get; set; }
     public DbSet<Medico> Medicos { get; set; }
-
+    public DbSet<AgendamentoConsultas> AgendamentoConsultas { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
@@ -28,7 +28,7 @@ public class MinhaAgendaDeConsultasContext : DbContext
             entity.Property(u => u.Identificador)
             .HasColumnType("uuid"); // Força o tipo correto
             entity.Property(e => e.IdentificadorString);
-            
+
             // Adicionando a configuração para o Token
             entity.Property(e => e.Token)
                 .HasMaxLength(512) // Definindo o comprimento máximo para o token
@@ -84,6 +84,19 @@ public class MinhaAgendaDeConsultasContext : DbContext
 
             // Definindo que o Medico será mapeado para a tabela 'UsuarioMedico'
             entityMedico.ToTable("UsuarioMedico");
+        });
+
+        modelBuilder.Entity<AgendamentoConsultas>(agendamento =>
+        {
+            agendamento.ToTable(nameof(AgendamentoConsultas));
+
+            agendamento.Property(e => e.DataHoraInicio).IsRequired();
+            agendamento.Property(e => e.DataHoraFim).IsRequired();
+            agendamento.Property(e => e.MedicoId).IsRequired();
+            agendamento.Property(e => e.PacienteId).IsRequired();
+            agendamento.Property(e => e.DataInclusao).IsRequired();
+            
+            
         });
 
         // Configuração da classe base (EntidadeBase)

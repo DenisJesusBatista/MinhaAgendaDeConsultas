@@ -1,4 +1,5 @@
-﻿using MinhaAgendaDeConsultas.Domain.Repositorios;
+﻿using Microsoft.EntityFrameworkCore;
+using MinhaAgendaDeConsultas.Domain.Repositorios;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
@@ -16,11 +17,33 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         }
 
+        public async Task BeginTransaction()
+        {
+            await _contexto.Database.BeginTransactionAsync();       
+        }
+
+        public async Task LockTableAsync<T>()
+        {
+            await _contexto.Database.ExecuteSqlRawAsync($"SELECT 1 FROM {nameof(T)} WITH (TABLOCKX)");
+        }
+
         public async Task Commit()
         {
             await _contexto.SaveChangesAsync();
         }
 
+        public async Task CommitTransaction()
+        {
+            try
+            {
+                await _contexto.Database.CommitTransactionAsync();
+            }
+            catch
+            {
+                await _contexto.Database.RollbackTransactionAsync();
+                throw;
+            }
+        }
 
         public void Dispose()
         {

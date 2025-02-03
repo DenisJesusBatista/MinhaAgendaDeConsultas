@@ -129,6 +129,15 @@
   <data name="CRM_VAZIO" xml:space="preserve">
     <value>O crm não pode estar vazio</value>
   </data>
+  <data name="DATA_HORA_INICIO_MAIOR_DATA_HORA_FIM" xml:space="preserve">
+    <value>Data e hora de início não pode ser menor que a data e hora atual</value>
+  </data>
+  <data name="DATA_HORA_INICIO_MAIOR_DATA_INCLUSAO" xml:space="preserve">
+    <value>Data e hora de fim não pode ser menor que a data e hora de início</value>
+  </data>
+  <data name="DATA_HORA_VAZIO" xml:space="preserve">
+    <value>A Data ou a Hora não pode ser vazia</value>
+  </data>
   <data name="EMAIL_E_OU_SENHA_INVALIDA" xml:space="preserve">
     <value>E-mail e/ou senha inválida</value>
   </data>
@@ -147,8 +156,14 @@
   <data name="ERRO_GENERICO" xml:space="preserve">
     <value>Ocorreu um erro inesperado.</value>
   </data>
+  <data name="MEDICO_NAO_INFORMADO" xml:space="preserve">
+    <value>O Médico deve ser informado </value>
+  </data>
   <data name="NOME_VAZIO" xml:space="preserve">
     <value>O nome não pode estar vazio</value>
+  </data>
+  <data name="PACIENTE_DEVE_SER_INFORMADO" xml:space="preserve">
+    <value>O Paciente deve ser informado </value>
   </data>
   <data name="SEM_TOKEN" xml:space="preserve">
     <value>Token não encotrado</value>

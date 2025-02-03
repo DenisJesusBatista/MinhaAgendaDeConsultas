@@ -27,8 +27,20 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
             CriarTabelaUsuario();
             CriarTabelaUsuarioPaciente();
             CriarTabelaUsuarioMedico();
+            CriaTabelaAgendamentoConsulta();
         }
-
+        private void CriaTabelaAgendamentoConsulta()
+        {
+            var tabela = VersaoBase.InserirColunasPadrao(Create.Table("AgendamentoConsultas"));
+            tabela
+                .WithColumn("PacienteId").AsInt32().NotNullable()
+                .WithColumn("MedicoId").AsInt32().NotNullable()
+                .WithColumn("DataInclusao").AsDateTime().NotNullable()
+                .WithColumn("DataHoraInicio").AsDateTime().NotNullable()
+                .WithColumn("DataHoraFim").AsDateTime().NotNullable();
+            _logger.LogInformation("Tabela 'AgendamentoConsultas' criada com sucesso.");
+     
+        }
         private void CriarTabelaUsuario()
         {
             var tabela = VersaoBase.InserirColunasPadrao(Create.Table("Usuario"));
@@ -59,9 +71,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
                 .WithColumn("Cpf").AsString(2000)
                 .WithColumn("Tipo").AsString(20);
 
-            tabela
-                .ForeignKey("FK_UsuarioPaciente_Usuario", "Usuario", "Id")
-                .OnDeleteOrUpdate(Rule.None); // Equivalente ao DeleteBehavior.Restrict
+            //tabela
+            //    .ForeignKey("FK_UsuarioPaciente_Usuario", "Usuario", "Id")
+            //    .OnDeleteOrUpdate(Rule.None); // Equivalente ao DeleteBehavior.Restrict
 
 
             _logger.LogInformation("Tabela 'UsuarioPaciente' criada com sucesso.");
@@ -79,9 +91,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
                 .WithColumn("Crm").AsString(20)
                 .WithColumn("Tipo").AsString(20);
 
-            tabela
-                 .ForeignKey("FK_UsuarioMedico_Usuario", "Usuario", "Id")
-                 .OnDeleteOrUpdate(Rule.None); // Equivalente ao DeleteBehavior.Restrict
+            //tabela
+            //     .ForeignKey("FK_UsuarioMedico_Usuario", "Usuario", "Id")
+            //     .OnDeleteOrUpdate(Rule.None); // Equivalente ao DeleteBehavior.Restrict
 
 
             _logger.LogInformation("Tabela 'UsuarioMedico' criada com sucesso.");
