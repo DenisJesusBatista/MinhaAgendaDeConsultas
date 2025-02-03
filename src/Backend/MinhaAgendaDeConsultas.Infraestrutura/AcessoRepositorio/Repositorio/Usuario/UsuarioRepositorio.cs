@@ -57,10 +57,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         public async Task<Usuario?> RecuperarPorEmail(string email)
         {
-            return await _contexto.Usuarios
+            IQueryable<Usuario> query = _contexto.Usuarios
                 //.Include(c => c.Email)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Email.Equals(email));
+                .AsNoTracking();
+                return await query.FirstOrDefaultAsync(c => c.Email.Equals(email));
         }
 
 

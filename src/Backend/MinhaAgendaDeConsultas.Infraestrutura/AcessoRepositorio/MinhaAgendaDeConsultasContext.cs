@@ -22,8 +22,8 @@ public class MinhaAgendaDeConsultasContext : DbContext
         {
             entity.HasKey(e => e.Id); // Chave primária
 
-            entity.Property(e => e.Nome).IsRequired();
-            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Nome).IsRequired().HasColumnType("character varying");
+            entity.Property(e => e.Email).IsRequired().HasColumnType("character varying");
             entity.Property(e => e.Senha).HasMaxLength(128).IsRequired();
             entity.Property(u => u.Identificador)
             .HasColumnType("uuid"); // Força o tipo correto
@@ -36,7 +36,7 @@ public class MinhaAgendaDeConsultasContext : DbContext
 
 
             // Garanta que Cpf seja tratado como string, mesmo que no banco seja 'character varying'
-            entity.Property(e => e.Cpf).HasMaxLength(11).IsRequired();
+            entity.Property(e => e.Cpf).HasMaxLength(11).IsRequired().HasColumnType("character varying");
 
             entity.ToTable("Usuario");
         });
@@ -89,6 +89,10 @@ public class MinhaAgendaDeConsultasContext : DbContext
         modelBuilder.Entity<AgendamentoConsultas>(agendamento =>
         {
             agendamento.ToTable(nameof(AgendamentoConsultas));
+            agendamento.HasKey(x => x.Id).HasName("Id");
+            agendamento.Property(e=> e.Id).ValueGeneratedOnAdd();
+            agendamento.Property(e => e.Ativo);
+
 
             agendamento.Property(e => e.DataHoraInicio).IsRequired();
             agendamento.Property(e => e.DataHoraFim).IsRequired();

@@ -6,6 +6,6 @@
 
         Task BeginTransaction();
         Task CommitTransaction();
-        Task LockTableAsync<T>();
+        Task LockTableAsync(String tableName);
     }
 }

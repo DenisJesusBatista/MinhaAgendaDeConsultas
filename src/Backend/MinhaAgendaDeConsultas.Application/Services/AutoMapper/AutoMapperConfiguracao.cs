@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MinhaAgendaDeConsultas.Communication.Requisicoes;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Paciente;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
@@ -55,6 +56,14 @@ namespace MinhaAgendaDeConsultas.Application.Services
                     Cpf = src.Cpf,
                     Tipo = TipoUsuario.Medico
                 }));
+
+
+            CreateMap<RequisicaoAgendamentoConsultasJson, AgendamentoConsultas>()
+                .ForMember(dest => dest.DataHoraFim, opt => opt.MapFrom(src => src.DataHoraFim))
+                .ForMember(dest => dest.DataHoraInicio, opt => opt.MapFrom(src => src.DataHoraInicio))
+                .ForMember(dest => dest.MedicoId, opt => opt.MapFrom(src => src.MedicoId))
+                .ForMember(dest => dest.PacienteId, opt => opt.MapFrom(src => src.PacienteId))
+                .ForMember(dest => dest.DataInclusao, opt => opt.MapFrom(src => DateTime.Now));
 
         }
 

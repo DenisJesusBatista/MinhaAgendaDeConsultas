@@ -34,7 +34,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
             await _unidadeDeTrabalho.BeginTransaction();
             try
             {
-                await _unidadeDeTrabalho.LockTableAsync<Domain.Entidades.AgendamentoConsultas>();
+                await _unidadeDeTrabalho.LockTableAsync(nameof(AgendamentoConsultas));
 
                 await _agendamentoConsultasWriteOnlyRepositorio.Add(entidade);
                 await _unidadeDeTrabalho.Commit();

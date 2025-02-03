@@ -39,7 +39,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Exclu
             await _unidadeDeTrabalho.BeginTransaction();
             try
             {
-                await _unidadeDeTrabalho.LockTableAsync<Domain.Entidades.AgendamentoConsultas>();
+                await _unidadeDeTrabalho.LockTableAsync(nameof(AgendamentoConsultas));
 
                 await _agendamentoConsultasDeleteOnlyRepository.Delete(agendamentoID);
                 await _unidadeDeTrabalho.Commit();

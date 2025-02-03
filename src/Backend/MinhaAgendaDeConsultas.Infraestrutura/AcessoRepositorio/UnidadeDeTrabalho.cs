@@ -22,9 +22,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             await _contexto.Database.BeginTransactionAsync();       
         }
 
-        public async Task LockTableAsync<T>()
+        public async Task LockTableAsync(String tableName)
         {
-            await _contexto.Database.ExecuteSqlRawAsync($"SELECT 1 FROM {nameof(T)} WITH (TABLOCKX)");
+            await _contexto.Database.ExecuteSqlRawAsync($"LOCK TABLE public.\"{tableName.Trim()}\" IN EXCLUSIVE MODE;");
         }
 
         public async Task Commit()

@@ -20,7 +20,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize]
+      //  [Authorize]
         public async Task<IActionResult> CriarAgendamento(
            [FromServices] IRegistrarAgendamentoConsultasUseCase useCase,
            [FromBody] RequisicaoAgendamentoConsultasJson agendamento)

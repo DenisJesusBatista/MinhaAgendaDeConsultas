@@ -43,9 +43,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                 NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                 b.Property<DateTime>("DataHoraFim")
-                    .HasColumnType("timestamp without time zone");
+                    .HasColumnType("timestamp");
                 b.Property<DateTime>("DataHoraInicio")
-                    .HasColumnType("timestamp without time zone");
+                    .HasColumnType("timestamp");
 
                 b.Property<long>("MedicoId")
                 .HasColumnType("bigint");
