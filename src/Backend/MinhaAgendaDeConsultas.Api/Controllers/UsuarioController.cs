@@ -37,13 +37,9 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <returns></returns>
         /// <response code="200">Sucesso no cadastro do usuário.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
-<<<<<<< HEAD
-        /// <response code="409">O login informado não está disponível.</response>    
-=======
-        /// <response code="409">O login informado não está disponível.</response>
-        
-        
->>>>>>> b0247459925ac07848d86133cf9306b94afd16c3
+
+        /// <response code="409">O login informado não está disponível.</response
+  
         [HttpGet("por-email")]        
         [ProducesResponseType(typeof(RespostaUsuarioProfileJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterUsuarioPorEmail(

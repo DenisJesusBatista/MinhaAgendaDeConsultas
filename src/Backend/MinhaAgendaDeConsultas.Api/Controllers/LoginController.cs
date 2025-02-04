@@ -10,7 +10,6 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 {
     public class LoginController : MinhaAgendaDeConsultasBaseController
     {
-<<<<<<< HEAD
         private readonly IUsuarioLogado _usuarioLogado;
 
         public LoginController(IUsuarioLogado usuarioLogado)
@@ -24,8 +23,6 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [ProducesResponseType(typeof(ResponseRegistrarUsuarioJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(RespostaErroJson), StatusCodes.Status401Unauthorized)]
         //[Authorize]
-=======
->>>>>>> b0247459925ac07848d86133cf9306b94afd16c3
 
         /// <summary>
         /// Gerar uma token para fazer a autenticação do usuário.
