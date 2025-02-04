@@ -19,15 +19,17 @@ namespace MinhaAgendaDeConsultas.Api.Filtros
             _repository = repository;
         }
 
-        
+
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             try
             {
                 // Obtém o token da requisição
                 var token = TokenOnRequest(context);
+
                 if (string.IsNullOrEmpty(token))
                 {
+                    // Retorna erro caso não tenha token na requisição
                     context.Result = new UnauthorizedObjectResult(new RespostaErroJson(ResourceMessagesExceptions.SEM_TOKEN));
                     return;
                 }
@@ -35,8 +37,7 @@ namespace MinhaAgendaDeConsultas.Api.Filtros
                 // Valida o token e obtém o identificador do usuário
                 var usuarioIdentificador = _validadorTokenAcesso.ValidarEObterIdentificadorUsario(token);
 
-                // Verifica se o usuário tem permissão
-                //var existe = await _repository.ExisteUsuarioAtivoComIdentificador(usuarioIdentificador);
+                // Verifica se o usuário tem permissão (usuário ativo)
                 var existe = await _repository.ExisteUsarioAtivoComIdentificador(usuarioIdentificador);
                 if (!existe)
                 {
@@ -62,6 +63,7 @@ namespace MinhaAgendaDeConsultas.Api.Filtros
                 });
             }
         }
+
 
         private string TokenOnRequest(AuthorizationFilterContext context)
         {

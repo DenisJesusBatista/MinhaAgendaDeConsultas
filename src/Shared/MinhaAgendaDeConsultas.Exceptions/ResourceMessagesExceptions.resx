@@ -157,13 +157,19 @@
     <value>Senha deve ter no mínimo 6 caracteres</value>
   </data>
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
-    <value>O token de acesso expirou.</value>
+    <value>O token de acesso expirou. Por favor, faça login novamente.</value>
+  </data>
+  <data name="TOKEN_NAO_VALIDADO" xml:space="preserve">
+    <value>O token não foi validado, faça login novamente informando a chave token.</value>
   </data>
   <data name="USUARIO_NAO_ENCONTRADO" xml:space="preserve">
     <value>Usuário não encontrado. Registre um usuário antes de criar um médico.</value>
   </data>
   <data name="USUARIO_NAO_ENCONTRADO_EMAIL" xml:space="preserve">
     <value>Esse e-mail ainda não foi registrado.</value>
+  </data>
+  <data name="USUARIO_NAO_LOGADO" xml:space="preserve">
+    <value>Usuário não está logado.</value>
   </data>
   <data name="USUARIO_NAO_TEM_PERMISSAO_ACESSO_RECURSO" xml:space="preserve">
     <value>Usuario não tem permissão para acessar esse recurso</value>

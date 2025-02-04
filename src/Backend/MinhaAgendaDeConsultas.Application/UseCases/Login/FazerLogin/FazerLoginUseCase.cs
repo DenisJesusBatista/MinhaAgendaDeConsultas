@@ -62,7 +62,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
                 Nome = entidadeUsuario!.Nome,
                 Tokens = new RespostaTokenJson
                 {
-                    AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString()),
+                    AcessoToken = _geradorTokenAcesso.Gerar(identificadorGuid.ToString(), entidadeUsuario.Email),
                 }
             };
         }

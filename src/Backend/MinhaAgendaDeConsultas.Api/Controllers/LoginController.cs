@@ -2,8 +2,10 @@
 using MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Login;
 using MinhaAgendaDeConsultas.Communication.Responses;
+using MinhaAgendaDeConsultas.Communication.Resposta;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
+using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
@@ -39,15 +41,31 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         //[Authorize]
 
         public async Task<IActionResult> Login(
-            [FromServices] IFazerLoginUseCase useCase,
-                [FromQuery] RequisicaoLoginJson request
-            )
+    [FromServices] IFazerLoginUseCase useCase,
+    [FromQuery] RequisicaoLoginJson request
+)
         {
-            _usuarioLogado.Usuario();
+            try
+            {
+                // Verificando se o usuário está logado antes de prosseguir com o login
+                var usuarioLogado = await _usuarioLogado.Usuario();
 
+                if (usuarioLogado == null)
+                {
+                    // Retorna uma resposta com o erro caso o usuário não esteja logado
+                    return Unauthorized(new RespostaErroJson(ResourceMessagesExceptions.USUARIO_NAO_LOGADO));
+                }
+              
 
-            var response = await useCase.Execute(request);
-            return Ok(response);
+                var response = await useCase.Execute(request);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                // Caso haja algum erro, retornamos um erro genérico
+                return BadRequest(new RespostaErroJson("Erro ao processar login: " + ex.Message));
+            }
         }
+
     }
 }

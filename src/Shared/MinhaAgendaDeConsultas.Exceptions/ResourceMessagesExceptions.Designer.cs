@@ -178,11 +178,20 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a O token de acesso expirou..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O token de acesso expirou. Por favor, faça login novamente..
         /// </summary>
         public static string TOKEN_EXPIRADO {
             get {
                 return ResourceManager.GetString("TOKEN_EXPIRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O token não foi validado, faça login novamente informando a chave token..
+        /// </summary>
+        public static string TOKEN_NAO_VALIDADO {
+            get {
+                return ResourceManager.GetString("TOKEN_NAO_VALIDADO", resourceCulture);
             }
         }
         
@@ -201,6 +210,15 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         public static string USUARIO_NAO_ENCONTRADO_EMAIL {
             get {
                 return ResourceManager.GetString("USUARIO_NAO_ENCONTRADO_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário não está logado..
+        /// </summary>
+        public static string USUARIO_NAO_LOGADO {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_LOGADO", resourceCulture);
             }
         }
         
