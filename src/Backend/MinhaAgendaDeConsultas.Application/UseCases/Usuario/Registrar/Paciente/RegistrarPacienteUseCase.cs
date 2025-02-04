@@ -47,7 +47,15 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
 
 
             var entidade = _mapper.Map<Domain.Entidades.Paciente>(requisicao);
-            entidade.UsuarioId = usuario.Id;    
+            entidade.UsuarioId = usuario.Id;   
+
+            
+            entidade.Usuario.Identificador = usuario.Identificador;
+            entidade.Usuario.IdentificadorString = usuario.IdentificadorString;
+            entidade.Usuario.Senha = usuario.Senha;
+            entidade.Usuario.Token = usuario.Token;
+
+          
             //entidade.
 
 

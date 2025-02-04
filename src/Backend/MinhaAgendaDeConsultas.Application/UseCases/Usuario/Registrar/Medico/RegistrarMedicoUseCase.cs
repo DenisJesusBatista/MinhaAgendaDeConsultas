@@ -50,6 +50,11 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
 
             entidade.Tipo = TipoUsuario.Medico;
 
+            entidade.Usuario.Identificador = usuario.Identificador;
+            entidade.Usuario.IdentificadorString = usuario.IdentificadorString;
+            entidade.Usuario.Senha = usuario.Senha;
+            entidade.Usuario.Token = usuario.Token;
+
 
 
             await _medicoWriteOnlyRepositorio.Adicionar(entidade);
