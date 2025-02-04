@@ -3,11 +3,22 @@ using MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Login;
 using MinhaAgendaDeConsultas.Communication.Responses;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
+using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
+using MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
 {
     public class LoginController : MinhaAgendaDeConsultasBaseController
     {
+        private readonly IUsuarioLogado _usuarioLogado;
+
+        public LoginController(IUsuarioLogado usuarioLogado)
+        {
+            _usuarioLogado = usuarioLogado;
+
+        }
+
+
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegistrarUsuarioJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(RespostaErroJson), StatusCodes.Status401Unauthorized)]
@@ -26,6 +37,9 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
                 [FromQuery] RequisicaoLoginJson request
             )
         {
+            _usuarioLogado.Usuario();
+
+
             var response = await useCase.Execute(request);
             return Ok(response);
         }
