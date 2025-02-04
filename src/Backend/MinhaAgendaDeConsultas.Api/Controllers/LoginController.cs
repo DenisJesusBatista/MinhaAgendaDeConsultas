@@ -10,6 +10,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 {
     public class LoginController : MinhaAgendaDeConsultasBaseController
     {
+<<<<<<< HEAD
         private readonly IUsuarioLogado _usuarioLogado;
 
         public LoginController(IUsuarioLogado usuarioLogado)
@@ -23,6 +24,8 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [ProducesResponseType(typeof(ResponseRegistrarUsuarioJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(RespostaErroJson), StatusCodes.Status401Unauthorized)]
         //[Authorize]
+=======
+>>>>>>> b0247459925ac07848d86133cf9306b94afd16c3
 
         /// <summary>
         /// Gerar uma token para fazer a autenticação do usuário.
@@ -32,6 +35,12 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <response code="200">Sucesso na geração da token.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
         /// <response code="401">Não foi possível autenticar o usuário com os dados fornecidos.</response>
+
+        [HttpPost]
+        [ProducesResponseType(typeof(ResponseRegistrarUsuarioJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(RespostaErroJson), StatusCodes.Status401Unauthorized)]
+        //[Authorize]
+
         public async Task<IActionResult> Login(
             [FromServices] IFazerLoginUseCase useCase,
                 [FromQuery] RequisicaoLoginJson request

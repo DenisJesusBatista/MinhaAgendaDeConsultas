@@ -6,8 +6,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 {
     public class PacienteController : MinhaAgendaDeConsultasBaseController
     {
-        [HttpPost]
-        [ProducesResponseType(typeof(RequisicaoRegistrarPacienteJson), StatusCodes.Status201Created)]
+
 
         /// <summary>
         /// Cadastra um paciente no sistema.
@@ -17,6 +16,9 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <response code="200">Sucesso no cadastro do paciente.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
         /// <response code="409">O paciente informado já está cadastrado.</response>
+
+        [HttpPost]
+        [ProducesResponseType(typeof(RequisicaoRegistrarPacienteJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegistrarPaciente(
               [FromServices] IRegistrarPacienteUseCase useCase,
               [FromQuery] RequisicaoRegistrarPacienteJson request)
