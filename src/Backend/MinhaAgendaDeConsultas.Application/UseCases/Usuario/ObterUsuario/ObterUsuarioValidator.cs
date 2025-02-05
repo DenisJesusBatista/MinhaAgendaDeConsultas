@@ -15,6 +15,6 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.ObterUsuario
 
 
         }
-      
+
     }
 }

@@ -6,7 +6,7 @@ public class MinhaAgendaDeConsultasContext : DbContext
 {
     public MinhaAgendaDeConsultasContext(DbContextOptions<MinhaAgendaDeConsultasContext> options) : base(options) { }
 
-
+    public DbSet<AgendaMedica> AgendaMedica { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Paciente> Pacientes { get; set; }
     public DbSet<Medico> Medicos { get; set; }
@@ -90,7 +90,7 @@ public class MinhaAgendaDeConsultasContext : DbContext
         {
             agendamento.ToTable(nameof(AgendamentoConsultas));
             agendamento.HasKey(x => x.Id).HasName("Id");
-            agendamento.Property(e=> e.Id).ValueGeneratedOnAdd();
+            agendamento.Property(e => e.Id).ValueGeneratedOnAdd();
             agendamento.Property(e => e.Ativo);
 
 
@@ -99,8 +99,8 @@ public class MinhaAgendaDeConsultasContext : DbContext
             agendamento.Property(e => e.MedicoId).IsRequired();
             agendamento.Property(e => e.PacienteId).IsRequired();
             agendamento.Property(e => e.DataInclusao).IsRequired();
-            
-            
+
+
         });
 
         // Configuração da classe base (EntidadeBase)

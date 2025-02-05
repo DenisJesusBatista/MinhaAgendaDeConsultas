@@ -9,7 +9,7 @@
         Task Adicionar(Entidades.Usuario usuario);
 
         Task Update(Entidades.Usuario usuario);
-       
+
     }
 
 }

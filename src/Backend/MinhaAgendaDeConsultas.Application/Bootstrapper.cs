@@ -1,6 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MinhaAgendaDeConsultas.Application.UseCases;
+using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar;
+using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Consultar;
+using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir;
+using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Registrar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Alterar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Excluir;
@@ -22,7 +26,7 @@ namespace MinhaAgendaDeConsultas.Application
 
         }
 
-        
+
 
         /*Registrar nas configurações de dependência.*/
         private static void AdicionarUseCases(IServiceCollection services)
@@ -36,6 +40,11 @@ namespace MinhaAgendaDeConsultas.Application
             services.AddScoped<IConsultarAgendamentoConsultasUseCase, ConsultarAgendamentoConsultasUseCase>();
             services.AddScoped<IAlterarConsultaAgendamentosUseCase, AlterarConsultaAgendamentoUseCase>();
             services.AddScoped<IExcluirConsultaAgendamentoUseCase, ExcluirConsultaAgendamentoUseCase>();
+
+            services.AddScoped<IAgendaMedicaAlterarUseCase, AgendaMedicaAlterarUseCase>();
+            services.AddScoped<IAgendaMedicaConsultarUseCase, AgendaMedicaConsultarUseCase>();
+            services.AddScoped<IAgendaMedicaExcluirUseCase, AgendaMedicaExcluirUseCase>();
+            services.AddScoped<IAgendaMedicaRegistrarUseCase, AgendaMedicaRegistrarUseCase>();
 
         }
     }

@@ -9,7 +9,7 @@ namespace MinhaAgendaDeConsultas.Api.Token
         public HttpContextTokenValue(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
-        }   
+        }
 
 
         public string Value()

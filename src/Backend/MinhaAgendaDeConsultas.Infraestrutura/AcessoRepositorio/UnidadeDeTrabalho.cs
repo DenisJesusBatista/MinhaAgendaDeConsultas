@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
-using System.Diagnostics.CodeAnalysis;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 {
@@ -19,7 +19,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         public async Task BeginTransaction()
         {
-            await _contexto.Database.BeginTransactionAsync();       
+            await _contexto.Database.BeginTransactionAsync();
         }
 
         public async Task LockTableAsync(String tableName)
@@ -59,6 +59,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             }
             _disposed = true;
 
+        }
+
+        public async Task RollbackTransaction()
+        {
+            await _contexto.Database.RollbackTransactionAsync();
         }
     }
 }

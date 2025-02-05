@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MinhaAgendaDeConsultas.Communication.Resposta.Agendamento;
-using MinhaAgendaDeConsultas.Domain.Entidades;
+﻿using MinhaAgendaDeConsultas.Communication.Resposta.Agendamento;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar
 {

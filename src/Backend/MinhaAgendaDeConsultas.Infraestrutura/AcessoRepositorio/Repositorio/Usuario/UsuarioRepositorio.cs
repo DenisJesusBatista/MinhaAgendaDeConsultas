@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MinhaAgendaDeConsultas.Domain;
-using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 
-namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
+namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Usuario
 {
     public class UsuarioRepositorio : IUsuarioWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio, IUsuarioUpdateOnlyRepositorio
     {
@@ -19,7 +18,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             await _contexto.Usuarios.AddAsync(usuario);
         }
 
-       
+
 
         public async Task<IEnumerable<Usuario>> RecuperarPorId(int id)
         {
@@ -57,10 +56,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         public async Task<Usuario?> RecuperarPorEmail(string email)
         {
-            IQueryable<Usuario> query = _contexto.Usuarios
-                //.Include(c => c.Email)
-                .AsNoTracking();
-                return await query.FirstOrDefaultAsync(c => c.Email.Equals(email));
+            IQueryable<Usuario> query = _contexto.Usuarios.AsNoTracking();
+            query = query.Where(c => c.Email == email);
+
+            return await query.FirstOrDefaultAsync();
         }
 
 
@@ -69,12 +68,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             return await _contexto
                 .Usuarios
                 .AsNoTracking()
-                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha) && user.Ativo == true);            
+                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha) && user.Ativo == true);
         }
-      
+
 
         public async Task<bool> ExisteUsuarioComEmail(string email) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Email.Equals(email));
         public async Task<bool> ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Identificador.Equals(usuarioIdentificador));
-        
+
     }
 }

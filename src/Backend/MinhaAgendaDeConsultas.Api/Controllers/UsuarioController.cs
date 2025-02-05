@@ -16,8 +16,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <returns></returns>
         /// <response code="200">Sucesso no cadastro do usuário.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
-        /// <response code="409">O login informado não está disponível.</response>
-
+        /// <response code="409">O login informado não está disponível.</response>       
         [HttpPost]
         [ProducesResponseType(typeof(RequisicaoRegistrarUsuarioJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegistrarContato(
@@ -25,7 +24,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
                 [FromQuery] RequisicaoRegistrarUsuarioJson request)
         {
             var response = await useCase.Executar(request);
-            
+
             return CreatedAtAction(nameof(RegistrarContato), new { response.Nome, response.Email, response.Tokens.AcessoToken });
         }
 
@@ -38,9 +37,9 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <response code="200">Sucesso no cadastro do usuário.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
         /// <response code="409">O login informado não está disponível.</response>
-        
-        
-        [HttpGet("por-email")]        
+
+
+        [HttpGet("por-email")]
         [ProducesResponseType(typeof(RespostaUsuarioProfileJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterUsuarioPorEmail(
                   //[FromQuery] string email,
@@ -50,7 +49,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
             var result = await useCase.Executar(request);
 
             if (result == null)
-                return NotFound(ResourceMessagesExceptions.USUARIO_NAO_ENCONTRADO_EMAIL);           
+                return NotFound(ResourceMessagesExceptions.USUARIO_NAO_ENCONTRADO_EMAIL);
 
             return Ok(result);
         }

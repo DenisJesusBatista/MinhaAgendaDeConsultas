@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
 {
-    public class UsuarioLogado: IUsuarioLogado  
+    public class UsuarioLogado : IUsuarioLogado
     {
         private readonly MinhaAgendaDeConsultasContext _context;
         private readonly ITokenProvider _tokenProvider;
@@ -21,9 +21,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
         public async Task<Usuario> Usuario()
         {
             var token = _tokenProvider.Value();
-            
+
             var tokenHandler = new JwtSecurityTokenHandler();
-            
+
             var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
 
             //var identificador = jwtSecurityToken.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
@@ -45,9 +45,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
 
             return await _context
                 .Usuarios
-                .AsNoTracking() 
+                .AsNoTracking()
                 .FirstAsync(user => user.Email == email);
-            
-        }   
+
+        }
     }
 }

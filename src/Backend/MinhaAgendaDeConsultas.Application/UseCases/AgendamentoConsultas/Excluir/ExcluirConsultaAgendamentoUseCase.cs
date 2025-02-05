@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using FluentValidation.Results;
-using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Alterar;
-using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Validadores;
-using MinhaAgendaDeConsultas.Communication.Requisicoes;
+﻿using AutoMapper;
 using MinhaAgendaDeConsultas.Communication.Resposta;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
-using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Excluir
 {
@@ -33,8 +23,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Exclu
             _unidadeDeTrabalho = unidadeDeTrabalho;
         }
         public async Task<ResponseExcluirAgendamentoConsultas> Executar(long agendamentoID)
-        {       
-          
+        {
+
 
             await _unidadeDeTrabalho.BeginTransaction();
             try
@@ -58,6 +48,6 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Exclu
             }
         }
 
-       
+
     }
 }

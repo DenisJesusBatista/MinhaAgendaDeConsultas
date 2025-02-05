@@ -40,7 +40,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
             //-Pluggin: AutoMapper.Extensions.Microsoft.DependencyInjection na API para configurar para funcionar como injecao de dependencia
 
             // Buscar o usuário correspondente pelo e-mail (ou CPF)
-            var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(requisicao.Email);           
+            var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(requisicao.Email);
 
             var entidade = _mapper.Map<Domain.Entidades.Medico>(requisicao);
             entidade.UsuarioId = usuario.Id;

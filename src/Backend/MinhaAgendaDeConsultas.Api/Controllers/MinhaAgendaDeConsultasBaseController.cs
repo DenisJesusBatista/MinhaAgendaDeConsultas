@@ -6,6 +6,6 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
     [ApiController]
     public class MinhaAgendaDeConsultasBaseController : Controller
     {
-        
+
     }
 }

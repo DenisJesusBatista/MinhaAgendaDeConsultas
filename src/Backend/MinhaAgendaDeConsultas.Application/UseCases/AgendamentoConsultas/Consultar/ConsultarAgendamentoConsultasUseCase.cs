@@ -15,8 +15,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consu
         }
         public async Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosMedico(int medicoId)
         {
-            var agendamentos  = await _agendamentoConsultas.GetAgendamentosMedico(medicoId);
-            return agendamentos.Select(x=> new ResponseConsultaAgendamentos
+            var agendamentos = await _agendamentoConsultas.GetAgendamentosMedico(medicoId);
+            return agendamentos.Select(x => new ResponseConsultaAgendamentos
             {
                 PacienteId = x.PacienteId,
                 MedicoId = x.MedicoId,
@@ -24,12 +24,12 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consu
                 DataHoraInicio = x.DataHoraInicio,
                 DataHoraFim = x.DataHoraFim
 
-            } ).ToList();
+            }).ToList();
         }
 
         public async Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosPaciente(int pacienteId)
         {
-            var agendamentos = await _agendamentoConsultas.GetAgendamentosMedico(pacienteId);
+            var agendamentos = await _agendamentoConsultas.GetAgendamentosPaciente(pacienteId);
             return agendamentos.Select(x => new ResponseConsultaAgendamentos
             {
                 PacienteId = x.PacienteId,

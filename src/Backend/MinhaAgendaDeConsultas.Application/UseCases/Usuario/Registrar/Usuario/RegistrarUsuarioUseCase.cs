@@ -76,10 +76,10 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
 
 
             return new ResponseRegistrarUsuarioJson
-            {   
+            {
                 Nome = entidade.Nome,
                 Email = entidade.Email,
-                Tokens = acessoTokens                
+                Tokens = acessoTokens
             };
         }
 
