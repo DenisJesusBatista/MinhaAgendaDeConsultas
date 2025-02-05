@@ -26,6 +26,8 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
             return Ok(response);
         }
 
+
+
         /// <summary>
         /// Altera uma agenda médica no sistema
         /// </summary>
@@ -37,7 +39,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AlterarAgendaMedica([FromServices] IAgendaMedicaAlterarUseCase
-            useCase, [FromBody] RequisicaoAgendaMedicaJson agendaMedica)
+            useCase, [FromBody] RequisicaoAlteracaoAgendaMedicaJson agendaMedica)
         {
             var response = await useCase.Executar(agendaMedica);
             return Ok(response);
@@ -49,7 +51,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <param name="useCase"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("/ExcluirAgendaMedica/{id}")]
+        [HttpDelete("/ExcluirAgendaMedica")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -60,13 +60,20 @@ namespace MinhaAgendaDeConsultas.Application.Services
                 }));
 
 
-            CreateMap<RequisicaoAgendaMedicaJson, AgendamentoConsultas>()
-                .ForMember(dest => dest.DataHoraFim, opt => opt.MapFrom(src => src.DataFim))
-                .ForMember(dest => dest.DataHoraInicio, opt => opt.MapFrom(src => src.DataFim))
-                .ForMember(dest => dest.DataInclusao, opt => opt.MapFrom(src => DateTime.Now));
+            CreateMap<RequisicaoAgendamentoConsultasJson, AgendamentoConsultas>()
+                .ForMember(dest => dest.DataHoraFim, opt => opt.MapFrom(src => src.DataHoraInicio))
+                .ForMember(dest => dest.DataHoraInicio, opt => opt.MapFrom(src => src.DataHoraFim))
+                .ForMember(dest => dest.DataInclusao, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dest => dest.Ativo, opt => opt.MapFrom(src => true));
 
 
-            CreateMap<ResponseAgendaMedica, AgendaMedica>()
+            CreateMap<RequisicaoAlteracaoAgendaMedicaJson,AgendaMedica>()
+                .ForMember(dest => dest.DataFim, opt => opt.MapFrom(src => src.DataFimAtual))
+                .ForMember(dest => dest.DataInicio, opt => opt.MapFrom(src => src.DataInicioAtual))
+                .ForMember(dest => dest.IsDisponivel, opt => opt.MapFrom(src => src.IsDisponivel));
+
+
+            CreateMap<RequisicaoAgendaMedicaJson, AgendaMedica>()
                 .ForMember(dest => dest.DataFim, opt => opt.MapFrom(src => src.DataFim))
                 .ForMember(dest => dest.DataInicio, opt => opt.MapFrom(src => src.DataInicio));
         }

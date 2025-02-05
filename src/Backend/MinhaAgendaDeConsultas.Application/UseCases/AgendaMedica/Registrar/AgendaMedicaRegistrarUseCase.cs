@@ -35,7 +35,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Registrar
             await Validate(agendaMedica);
 
             var entidade = _mapper.Map<Domain.Entidades.AgendaMedica>(agendaMedica);
-            var usuário = _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendaMedica.MedicoEmail);
+            var usuário = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendaMedica.MedicoEmail);
 
             await _unidadeDeTrabalho.BeginTransaction();
             try
@@ -73,10 +73,10 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Registrar
             var usuarioMedico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendamento.MedicoEmail);
 
 
-            var ok = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataInicio, agendamento.DataFim);
+            var disponivel = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataInicio, agendamento.DataFim);
 
 
-            if (!ok)
+            if (disponivel)
             {
                 resultado.Errors.Add(new ValidationFailure("DataHoraInicio", "Horário indisponível"));
             }

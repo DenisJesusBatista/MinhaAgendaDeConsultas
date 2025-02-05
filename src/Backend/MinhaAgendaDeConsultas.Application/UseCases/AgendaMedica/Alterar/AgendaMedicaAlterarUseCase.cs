@@ -30,19 +30,34 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
         }
 
-        public async Task<ResponseAgendaMedicaResult> Executar(RequisicaoAgendaMedicaJson agendaMedica)
+        public async Task<ResponseAgendaMedicaResult> Executar(RequisicaoAlteracaoAgendaMedicaJson agendaMedica)
         {
             await Validate(agendaMedica);
 
             var entidade = _mapper.Map<Domain.Entidades.AgendaMedica>(agendaMedica);
-            var usuário = _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendaMedica.MedicoEmail);
+            var medico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendaMedica.MedicoEmail);
+            var agendas = await _agendaMedicaConsultaOnlyRepository.ObterAgendasMedicias(medico.Id, agendaMedica.DataInicioAtual, agendaMedica.DataFimAtual);
+
+            if (agendas.Count() == 0)
+            {
+                return new ResponseAgendaMedicaResult
+                {
+                    Message = "Agendamento não encontrado. Não pode ser alterado.",
+                    Success = false
+                };
+            }
+
+            var agendaAlterada = agendas.FirstOrDefault();
+            agendaAlterada.DataInicio = agendaMedica.DataInicioNova;
+            agendaAlterada.DataFim = agendaMedica.DataInicioNova;
+            agendaAlterada.IsDisponivel = agendaMedica.IsDisponivel;
 
             await _unidadeDeTrabalho.BeginTransaction();
             try
             {
-                entidade.MedicoId = usuário.Id;
+                entidade.MedicoId = medico.Id;
 
-                await _agendaMedicaUpdateOnlyRepository.Update(entidade);
+                await _agendaMedicaUpdateOnlyRepository.Update(agendaAlterada);
 
                 await _unidadeDeTrabalho.Commit();
                 await _unidadeDeTrabalho.CommitTransaction();
@@ -64,18 +79,23 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
             }
         }
 
-        private async Task Validate(RequisicaoAgendaMedicaJson agendamento)
+        private async Task Validate(RequisicaoAlteracaoAgendaMedicaJson agendamento)
         {
             var validador = new AgendaMedicaValidacao();
-            var resultado = validador.Validate(agendamento);
+            var resultado = validador.Validate(new RequisicaoAgendaMedicaJson
+            {
+                DataFim = agendamento.DataFimAtual,
+                DataInicio = agendamento.DataInicioAtual,
+                MedicoEmail = agendamento.MedicoEmail
+            });
 
             var usuarioMedico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendamento.MedicoEmail);
 
 
-            var ok = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataInicio, agendamento.DataFim);
+            var ocupado = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataInicioNova, agendamento.DataFimNova);
 
 
-            if (!ok)
+            if (ocupado)
             {
                 resultado.Errors.Add(new ValidationFailure("DataHoraInicio", "Horário indisponível"));
             }
