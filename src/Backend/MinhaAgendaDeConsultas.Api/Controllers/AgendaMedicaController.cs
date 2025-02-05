@@ -70,7 +70,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ConsultaAgendaMedica([FromServices] IAgendaMedicaConsultarUseCase useCase
+        public async Task<IActionResult> ConsultaAgendaMedica([FromServices] IAgendaMedicaConsultarUseCase useCase,
             [FromBody] RequisicaoAgendaMedicaJson requisicaoAgendaMedicaJson)
         {
             return Ok(await useCase.ObterAgendasMedicias(requisicaoAgendaMedicaJson.DataInicio, requisicaoAgendaMedicaJson.DataFim, requisicaoAgendaMedicaJson.MedicoEmail));
