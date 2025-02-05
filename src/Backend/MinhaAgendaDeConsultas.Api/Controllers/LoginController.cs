@@ -20,11 +20,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 
         }
 
-
-        [HttpPost]
-        [ProducesResponseType(typeof(ResponseRegistrarUsuarioJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(RespostaErroJson), StatusCodes.Status401Unauthorized)]
-        //[Authorize]
+      
 
         /// <summary>
         /// Gerar uma token para fazer a autenticação do usuário.
@@ -41,8 +37,8 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         //[Authorize]
 
         public async Task<IActionResult> Login(
-    [FromServices] IFazerLoginUseCase useCase,
-    [FromQuery] RequisicaoLoginJson request
+                        [FromServices] IFazerLoginUseCase useCase,
+                        [FromQuery] RequisicaoLoginJson request
 )
         {
             try
@@ -55,7 +51,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
                     // Retorna uma resposta com o erro caso o usuário não esteja logado
                     return Unauthorized(new RespostaErroJson(ResourceMessagesExceptions.USUARIO_NAO_LOGADO));
                 }
-              
+
 
                 var response = await useCase.Execute(request);
                 return Ok(response);

@@ -10,11 +10,13 @@ using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Paciente;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Medico;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Paciente;
+using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Validar;
 using MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado;
@@ -31,7 +33,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
             AddRepositorios(services);
             AddContexto(services, configurationManager);
             AddToken(services, configurationManager);
-            AddUsarioLogado(services);
+            AddUsarioLogado(services);         
         }
 
         private static void AddUsarioLogado(IServiceCollection services)
@@ -70,7 +72,8 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
              .AddScoped<IPacienteUpdateOnlyRepositorio, PacienteRepositorio>()
              .AddScoped<IMedicoWriteOnlyRepositorio, MedicoRepositorio>()
              .AddScoped<IMedicoReadOnlyRepositorio, MedicoRepositorio>()
-             .AddScoped<IMedicoUpdateOnlyRepositorio, MedicoRepositorio>();
+             .AddScoped<IMedicoUpdateOnlyRepositorio, MedicoRepositorio>()
+              .AddScoped<IPasswordEncripter, Sha512Encripter>();
 
 
             // Outros serviços
@@ -91,5 +94,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
             services.AddScoped<IGeradorTokenAcesso>(option => new JwtTokenGerador(expiracaoMinutos, chaveAssinatura!));
             services.AddScoped<IValidadorTokenAcesso>(option => new JwtTokenValidador(chaveAssinatura!));
         }
+       
     }
 }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MinhaAgendaDeConsultas.Application.Services.Criptografia;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
@@ -7,6 +6,7 @@ using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
@@ -21,13 +21,13 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
         private readonly IUsuarioWriteOnlyRepositorio _usuarioWriteOnlyRepositorio;
         private readonly IMapper _mapper;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
-        private readonly PasswordEncripter _passwordEncripter;
+        private readonly IPasswordEncripter _passwordEncripter;
         private readonly IGeradorTokenAcesso _geradorTokenAcesso;
 
         //Configurar a injeção de dependência atalho CTOR - Criar 
         //Construtor
         public RegistrarUsuarioUseCase(IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio, IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
-              IUsuarioWriteOnlyRepositorio usuarioWriteOnlyRepositorio, PasswordEncripter passwordEncripter, IGeradorTokenAcesso geradorTokenAcesso)
+              IUsuarioWriteOnlyRepositorio usuarioWriteOnlyRepositorio, IPasswordEncripter passwordEncripter, IGeradorTokenAcesso geradorTokenAcesso)
         {
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
             _mapper = mapper;
