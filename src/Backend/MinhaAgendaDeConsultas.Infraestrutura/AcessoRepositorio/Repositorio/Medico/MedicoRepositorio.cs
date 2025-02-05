@@ -63,5 +63,24 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Me
             _contexto.Medicos.Update(medico);
             await _contexto.SaveChangesAsync();  // Persistindo as alterações no banco
         }
+
+        public async Task AdicionarHorarios(Domain.Entidades.HorarioDisponivel horario)
+        {
+            //await _contexto.HorarioDisponivel.AddAsync(horario);
+        }
+
+        public async Task UpdateHorarioDisponivel(Domain.Entidades.HorarioDisponivel horario)
+        {
+            //_contexto.HorarioDisponivel.Update(horario);
+            //await _contexto.SaveChangesAsync();  
+        }
+
+        public async Task<IEnumerable<Domain.Entidades.Medico>> RecuperarHorarios()
+        {
+            //return await _contexto.HorarioDisponivel
+            //    .OfType< IEnumerable<Domain.Entidades.HorarioDisponivel>>().ToList();
+
+            return null; //remover
+        }
     }
 }
