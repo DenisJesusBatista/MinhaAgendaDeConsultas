@@ -16,5 +16,7 @@ namespace MinhaAgendaDeConsultas.Domain.Entidades
 
         // Propriedade de navegação para o Usuario
         public Usuario Usuario { get; set; }
+
+        public IEnumerable<HorarioDisponivel> HorariosDisponiveis { get; set; }
     }
 }
