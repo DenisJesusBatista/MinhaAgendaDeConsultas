@@ -7,7 +7,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Ag
     public class ConsultaAgendamentosRepositorio : IAgendamentoConsultasConsultasOnlyRepositorio,
         IAgendamentoConsultasWriteOnlyRepositorio,
         IAgendamentoConsultasDeleteOnlyRepository,
-        IAgendamentoConsultasUpdateOnlyRepositorio,
+        IAgendamentoConsultasUpdateOnlyRepositorio
 
     {
         private readonly MinhaAgendaDeConsultasContext _contexto;

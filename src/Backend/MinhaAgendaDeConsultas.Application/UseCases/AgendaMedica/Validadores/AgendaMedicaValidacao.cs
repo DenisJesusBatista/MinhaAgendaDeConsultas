@@ -8,8 +8,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Validadores
         public AgendaMedicaValidacao()
         {
             RuleFor(x => x.MedicoEmail).NotEmpty().WithMessage("O email do médico é obrigatório.");
-            RuleFor(x => x.DataPretendidaInicio).NotEmpty().WithMessage("A data de início é obrigatória.");
-            RuleFor(x => x.DataPretendidaFim).NotEmpty().WithMessage("A data de fim é obrigatória.");
+            RuleFor(x => x.DataInicio).NotEmpty().WithMessage("A data de início é obrigatória.");
+            RuleFor(x => x.DataFim).NotEmpty().WithMessage("A data de fim é obrigatória.");
         }
     }
 }

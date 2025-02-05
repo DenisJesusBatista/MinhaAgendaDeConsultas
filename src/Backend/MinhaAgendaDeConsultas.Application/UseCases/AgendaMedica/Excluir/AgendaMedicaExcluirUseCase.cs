@@ -25,13 +25,13 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
         }
 
-        public async Task<ResponseAgendaMedica> Executar(long id)
+        public async Task<ResponseAgendaMedicaResult> Executar(long id)
         {
             try
             {
                 await _agendaMedicaDeleteOnlyRepository.Delete(id);
 
-                return new ResponseAgendaMedica
+                return new ResponseAgendaMedicaResult
                 {
                     Message = "Agendamento excluído com sucesso",
                     Success = true
@@ -40,7 +40,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir
             catch (Exception e)
             {
                 await _unidadeDeTrabalho.RollbackTransaction();
-                return new ResponseAgendaMedica
+                return new ResponseAgendaMedicaResult
                 {
                     Message = "Erro: " + e.Message,
                     Success = false

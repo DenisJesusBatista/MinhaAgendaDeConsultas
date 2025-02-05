@@ -4,6 +4,7 @@ using MinhaAgendaDeConsultas.Communication.Requisicoes.Agendamento;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Paciente;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Agendamento;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
@@ -60,10 +61,14 @@ namespace MinhaAgendaDeConsultas.Application.Services
 
 
             CreateMap<RequisicaoAgendaMedicaJson, AgendamentoConsultas>()
-                .ForMember(dest => dest.DataHoraFim, opt => opt.MapFrom(src => src.DataPretendidaFim))
-                .ForMember(dest => dest.DataHoraInicio, opt => opt.MapFrom(src => src.DataPretendidaFim))
+                .ForMember(dest => dest.DataHoraFim, opt => opt.MapFrom(src => src.DataFim))
+                .ForMember(dest => dest.DataHoraInicio, opt => opt.MapFrom(src => src.DataFim))
                 .ForMember(dest => dest.DataInclusao, opt => opt.MapFrom(src => DateTime.Now));
 
+
+            CreateMap<ResponseAgendaMedica, AgendaMedica>()
+                .ForMember(dest => dest.DataFim, opt => opt.MapFrom(src => src.DataFim))
+                .ForMember(dest => dest.DataInicio, opt => opt.MapFrom(src => src.DataInicio));
         }
 
         private void DomainToResponse()

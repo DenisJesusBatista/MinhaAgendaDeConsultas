@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
-using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Validadores;
-using MinhaAgendaDeConsultas.Communication.Requisicoes;
+using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Validadores;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Agendamento;
 using MinhaAgendaDeConsultas.Communication.Resposta.Agendamento;
-using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Agendamento;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
-using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Validadores;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
 {
@@ -33,7 +30,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
         }
 
-        public async Task<ResponseAgendaMedica> Executar(RequisicaoAgendaMedicaJson agendaMedica)
+        public async Task<ResponseAgendaMedicaResult> Executar(RequisicaoAgendaMedicaJson agendaMedica)
         {
             await Validate(agendaMedica);
 
@@ -50,7 +47,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
                 await _unidadeDeTrabalho.Commit();
                 await _unidadeDeTrabalho.CommitTransaction();
 
-                return new ResponseAgendaMedica
+                return new ResponseAgendaMedicaResult
                 {
                     Message = "Agendamento alterado com sucesso",
                     Success = true
@@ -59,7 +56,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
             catch (Exception e)
             {
                 await _unidadeDeTrabalho.RollbackTransaction();
-                return new ResponseAgendaMedica
+                return new ResponseAgendaMedicaResult
                 {
                     Message = "Erro: " + e.Message,
                     Success = false
@@ -75,7 +72,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
             var usuarioMedico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendamento.MedicoEmail);
 
 
-            var ok = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataPretendidaInicio, agendamento.DataPretendidaFim)
+            var ok = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataInicio, agendamento.DataFim);
 
 
             if (!ok)

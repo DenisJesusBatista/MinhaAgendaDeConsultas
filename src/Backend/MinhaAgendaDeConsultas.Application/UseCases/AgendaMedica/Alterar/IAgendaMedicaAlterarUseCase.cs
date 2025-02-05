@@ -10,6 +10,6 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
 {
     public interface IAgendaMedicaAlterarUseCase
     {
-        public Task<ResponseAgendaMedica> Executar(RequisicaoAgendaMedicaJson agendaMedica);
+        public Task<ResponseAgendaMedicaResult> Executar(RequisicaoAgendaMedicaJson agendaMedica);
     }
 }

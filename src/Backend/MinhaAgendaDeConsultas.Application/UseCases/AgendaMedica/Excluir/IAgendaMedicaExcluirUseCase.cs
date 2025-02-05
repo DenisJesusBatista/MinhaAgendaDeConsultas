@@ -10,7 +10,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir
 {
     public interface IAgendaMedicaExcluirUseCase
     {
-        public Task<ResponseAgendaMedica> Executar(long Id);
+        public Task<ResponseAgendaMedicaResult> Executar(long Id);
     }
 }
 

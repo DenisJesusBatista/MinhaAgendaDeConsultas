@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MinhaAgendaDeConsultas.Communication.Resposta.Agendamento;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Agendamento;
@@ -27,6 +28,20 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Consultar
             var medico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(medicoEmail);
 
             return await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(medico.Id,DataInicio, DataFim);
+        }
+
+        public async Task<IList<ResponseAgendaMedica>> ObterAgendasMedicias(DateTime DataInicio, DateTime DataFim, string medicoEmail)
+        {
+            var medico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(medicoEmail);
+
+            var result = await _agendaMedicaConsultaOnlyRepository.ObterAgendasMedicias(medico.Id, DataInicio, DataFim);
+
+            return result.Select(x=> new ResponseAgendaMedica
+            {
+                DataFim = x.DataFim,
+                DataInicio = x.DataInicio,
+                IsDisponivel = x.IsDisponivel
+            } ).ToList();
         }
     }
 }
