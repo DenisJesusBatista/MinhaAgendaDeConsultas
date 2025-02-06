@@ -20,6 +20,7 @@ using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Agenda
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Medico;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Paciente;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Token;
+using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Usuario;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Validar;
