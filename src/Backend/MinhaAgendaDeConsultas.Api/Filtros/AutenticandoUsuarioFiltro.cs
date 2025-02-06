@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MinhaAgendaDeConsultas.Communication.Responses;
-using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Domain;
-using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Exceptions;
+using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Api.Filtros
 {
-    public class AutenticandoUsuarioFiltro: IAsyncAuthorizationFilter
+    public class AutenticandoUsuarioFiltro : IAsyncAuthorizationFilter
     {
         private readonly IValidadorTokenAcesso _validadorTokenAcesso;
         private readonly IUsuarioReadOnlyRepositorio _repository;

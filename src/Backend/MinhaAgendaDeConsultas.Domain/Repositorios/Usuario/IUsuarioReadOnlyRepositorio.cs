@@ -8,7 +8,7 @@ namespace MinhaAgendaDeConsultas.Domain
         Task<IEnumerable<Usuario>> RecuperarPorId(int id);
         Task<Entidades.Usuario?> RecuperarPorEmail(string email);
         Task<Entidades.Usuario?> RecuperarUsuarioPorEmaileSenha(string email, string senha);
-        
+
         Task<bool> ExisteUsuarioComEmaileSenha(string email, string senha);
 
         Task<bool> ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador);

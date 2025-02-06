@@ -15,9 +15,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Pa
 
         public async Task Adicionar(Domain.Entidades.Paciente paciente)
         {
-            await _contexto.Pacientes.AddAsync(paciente);        }
+            await _contexto.Pacientes.AddAsync(paciente);
+        }
 
-      
+
         public async Task<bool> ExistePacienteUsuarioComEmail(string email) => await _contexto.Usuarios.AnyAsync(user => user.Email.Equals(email));
         public async Task<bool> ExistePacienteComCpf(string cpf) => await _contexto.Pacientes.AnyAsync(paciente => paciente.Cpf.Equals(cpf));
 

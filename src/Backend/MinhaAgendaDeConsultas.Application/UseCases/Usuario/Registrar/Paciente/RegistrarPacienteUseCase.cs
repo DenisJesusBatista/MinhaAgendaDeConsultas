@@ -32,7 +32,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
             _mapper = mapper;
             _unidadeDeTrabalho = unidadeDeTrabalho;
             _pacienteWriteOnlyRepositorio = pacienteWriteOnlyRepositorio;
-            _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;   
+            _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
         }
 
         public async Task<ResponseRegistrarPacienteJson> Executar(RequisicaoRegistrarPacienteJson requisicao)
@@ -67,7 +67,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
 
             //Salvar no banco de dados.
             await _unidadeDeTrabalho.Commit();
-            
+
 
             return new ResponseRegistrarPacienteJson
             {

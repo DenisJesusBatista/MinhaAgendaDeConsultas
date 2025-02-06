@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MinhaAgendaDeConsultas.Domain;
-using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 
-namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
+
+namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Usuario
 {
     public class UsuarioRepositorio : IUsuarioWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio, IUsuarioUpdateOnlyRepositorio
     {
@@ -14,14 +14,14 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             _contexto = contexto;
         }
 
-        public async Task Adicionar(Usuario usuario)
+        public async Task Adicionar(Domain.Entidades.Usuario usuario)
         {
             await _contexto.Usuarios.AddAsync(usuario);
         }
 
-       
 
-        public async Task<IEnumerable<Usuario>> RecuperarPorId(int id)
+
+        public async Task<IEnumerable<Domain.Entidades.Usuario>> RecuperarPorId(int id)
         {
             return await _contexto.Usuarios
                 .Where(x => x.Id == id)
@@ -30,13 +30,13 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
 
 
-        public async Task Update(Usuario usuario)
+        public async Task Update(Domain.Entidades.Usuario usuario)
         {
             _contexto.Usuarios.Update(usuario);
             await _contexto.SaveChangesAsync();  // Não se esqueça de chamar o SaveChangesAsync para persistir a alteração.
         }
 
-        async Task IUsuarioWriteOnlyRepositorio.Update(Usuario usuario)
+        async Task IUsuarioWriteOnlyRepositorio.Update(Domain.Entidades.Usuario usuario)
         {
             _contexto.Usuarios.Update(usuario);
         }
@@ -47,7 +47,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
         }
 
 
-        public async Task<Usuario?> RecuperarUsuarioPorIdentificador(Guid usuarioIdentificador)
+        public async Task<Domain.Entidades.Usuario?> RecuperarUsuarioPorIdentificador(Guid usuarioIdentificador)
         {
             return await _contexto
                 .Usuarios
@@ -55,26 +55,26 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
                 .FirstOrDefaultAsync(user => user.Identificador.Equals(usuarioIdentificador) && user.Ativo == true);
         }
 
-        public async Task<Usuario?> RecuperarPorEmail(string email)
+        public async Task<Domain.Entidades.Usuario?> RecuperarPorEmail(string email)
         {
-            return await _contexto.Usuarios
-                //.Include(c => c.Email)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Email.Equals(email));
+            IQueryable<Domain.Entidades.Usuario> query = _contexto.Usuarios.AsNoTracking();
+            query = query.Where(c => c.Email == email);
+
+            return await query.FirstOrDefaultAsync();
         }
 
 
-        public async Task<Usuario?> RecuperarUsuarioPorEmaileSenha(string email, string senha)
+        public async Task<Domain.Entidades.Usuario?> RecuperarUsuarioPorEmaileSenha(string email, string senha)
         {
             return await _contexto
                 .Usuarios
                 .AsNoTracking()
-                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha) && user.Ativo == true);            
+                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha) && user.Ativo == true);
         }
-      
+
 
         public async Task<bool> ExisteUsuarioComEmail(string email) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Email.Equals(email));
         public async Task<bool> ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Identificador.Equals(usuarioIdentificador));
-        
+
     }
 }

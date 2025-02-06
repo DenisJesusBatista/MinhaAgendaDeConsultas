@@ -17,7 +17,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Me
         {
             await _contexto.Medicos.AddAsync(medico);
         }
-   
+
 
         public async Task<bool> ExisteMedicoComCpf(string cpf) => await _contexto.Medicos.AnyAsync(medico => medico.Cpf.Equals(cpf));
         public async Task<bool> ExisteMedicoComCrm(string crm) => await _contexto.Medicos.AnyAsync(medico => medico.Crm.Equals(crm));

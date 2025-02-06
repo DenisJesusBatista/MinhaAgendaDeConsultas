@@ -1,7 +1,7 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
 {

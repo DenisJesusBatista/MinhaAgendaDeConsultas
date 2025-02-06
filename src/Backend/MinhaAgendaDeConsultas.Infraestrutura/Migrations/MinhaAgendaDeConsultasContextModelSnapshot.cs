@@ -21,6 +21,70 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.AgendaMedica", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("DataFim")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDisponivel")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("MedicoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id")
+                        .HasName("Id");
+
+                    b.ToTable("AgendaMedica", (string)null);
+                });
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.AgendamentoConsultas", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Aceite")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("DataHoraFim")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataHoraInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("MedicoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PacienteId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id")
+                        .HasName("Id");
+
+                    b.ToTable("AgendamentoConsultas", (string)null);
+                });
+
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.EntidadeBase", b =>
                 {
                     b.Property<long>("Id")
@@ -163,11 +227,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("character varying");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying");
 
                     b.Property<Guid>("Identificador")
                         .HasColumnType("uuid");
@@ -178,7 +242,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying");
 
                     b.Property<string>("Senha")
                         .IsRequired()

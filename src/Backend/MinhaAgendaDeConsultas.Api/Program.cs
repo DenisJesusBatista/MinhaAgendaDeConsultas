@@ -1,15 +1,13 @@
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 using MinhaAgendaDeConsultas.Api.Filtros;
 using MinhaAgendaDeConsultas.Api.Token;
 using MinhaAgendaDeConsultas.Application;
 using MinhaAgendaDeConsultas.Application.Services;
-using MinhaAgendaDeConsultas.Domain.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Infraestrutura;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Migrations;
-using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Criptografia;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,14 +69,14 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddRepositorio(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
-  // Register services  
-  builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
-    //builder.Services.AddScoped<AutenticandoUsuarioFiltro>();
-    //builder.Services.AddScoped<UsuarioLogado>();
+// Register services  
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+//builder.Services.AddScoped<AutenticandoUsuarioFiltro>();
+//builder.Services.AddScoped<UsuarioLogado>();
 
 
-builder.Services.AddHttpContextAccessor();  
-    
+builder.Services.AddHttpContextAccessor();
+
 // Register global exception filter
 builder.Services.AddMvc(options => options.Filters.Add(typeof(FiltroDasExceptions)))
     .AddJsonOptions(options => options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull);
