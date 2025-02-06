@@ -91,6 +91,7 @@ public class MinhaAgendaDeConsultasContext : DbContext
             entityMedico.Property(e => e.Email).IsRequired();
             // Configurações específicas de Medico, como o CRM e CPF
             entityMedico.Property(m => m.Crm).IsRequired();
+            entityMedico.Property(m => m.Especialidade).IsRequired();
             entityMedico.Property(m => m.Cpf).IsRequired();
 
             // Configuração do relacionamento com Usuario

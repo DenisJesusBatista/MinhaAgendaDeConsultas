@@ -91,6 +91,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
                 .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("Cpf").AsString(2000)
                 .WithColumn("Crm").AsString(20)
+                .WithColumn("Especialidade").AsString(200).NotNullable()
                 .WithColumn("Tipo").AsString(20);
 
             tabela

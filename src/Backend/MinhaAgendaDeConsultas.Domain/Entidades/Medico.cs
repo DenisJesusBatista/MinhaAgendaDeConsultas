@@ -9,6 +9,7 @@ namespace MinhaAgendaDeConsultas.Domain.Entidades
         public string Crm { get; set; } = string.Empty;
         public string? Nome { get; set; }
         public string Email { get; set; } = string.Empty;
+        public string Especialidade { get; set; } = string.Empty;   
         public TipoUsuario Tipo { get; set; } // Usando o Enum
 
         // Chave estrangeira para o Usuario
