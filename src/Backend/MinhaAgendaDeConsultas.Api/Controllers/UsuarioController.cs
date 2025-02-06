@@ -33,9 +33,9 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <summary>
         /// Recuperar usuário por e-mail.
         /// </summary>
-        /// <param name="request">Dados para cadastrar um usuário.</param>
+        /// <param name="request">Dados para recuperar um usuário por e-mail.</param>
         /// <returns></returns>
-        /// <response code="200">Sucesso no cadastro do usuário.</response>
+        /// <response code="200">Sucesso na recuperaçao do usuário por e-mail.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
 
         /// <response code="409">O login informado não está disponível.</response
