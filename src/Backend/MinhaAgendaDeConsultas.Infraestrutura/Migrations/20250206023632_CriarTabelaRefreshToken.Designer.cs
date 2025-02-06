@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 {
     [DbContext(typeof(MinhaAgendaDeConsultasContext))]
-    partial class MinhaAgendaDeConsultasContextModelSnapshot : ModelSnapshot
+    [Migration("20250206023632_CriarTabelaRefreshToken")]
+    partial class CriarTabelaRefreshToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,70 +23,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.AgendaMedica", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("DataFim")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDisponivel")
-                        .HasColumnType("boolean");
-
-                    b.Property<long>("MedicoId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id")
-                        .HasName("Id");
-
-                    b.ToTable("AgendaMedica", (string)null);
-                });
-
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.AgendamentoConsultas", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Aceite")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("DataHoraFim")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DataHoraInicio")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("MedicoId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("PacienteId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id")
-                        .HasName("Id");
-
-                    b.ToTable("AgendamentoConsultas", (string)null);
-                });
 
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.EntidadeBase", b =>
                 {
@@ -227,11 +166,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("character varying");
+                        .HasColumnType("character varying(11)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("character varying");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("Identificador")
                         .HasColumnType("uuid");
@@ -242,7 +181,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("character varying");
+                        .HasColumnType("text");
 
                     b.Property<string>("Senha")
                         .IsRequired()

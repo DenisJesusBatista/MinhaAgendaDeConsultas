@@ -10,6 +10,8 @@ public class MinhaAgendaDeConsultasContext : DbContext
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Paciente> Pacientes { get; set; }
     public DbSet<Medico> Medicos { get; set; }
+    public DbSet<RefreshToken> RefreshToken { get; set; }
+
     public DbSet<AgendamentoConsultas> AgendamentoConsultas { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -41,6 +43,22 @@ public class MinhaAgendaDeConsultasContext : DbContext
             entity.ToTable("Usuario");
         });
 
+
+        // Configuração para a tabela RefreshToken
+        modelBuilder.Entity<RefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.Id); // Chave primária
+            entity.Property(e => e.Value).HasMaxLength(255).IsRequired(); // Definindo a propriedade Value
+            entity.Property(e => e.UsuarioId).IsRequired(); // Definindo a chave estrangeira
+
+            // Relacionamento com a tabela Usuario
+            entity.HasOne(r => r.Usuario)
+                .WithMany() // Usuario pode ter muitos RefreshTokens
+                .HasForeignKey(r => r.UsuarioId)
+                .OnDelete(DeleteBehavior.Cascade); // Comportamento de deleção (cascata)
+
+            entity.ToTable("RefreshToken"); // Nome da tabela
+        });
 
 
 

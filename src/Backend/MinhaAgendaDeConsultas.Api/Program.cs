@@ -4,11 +4,13 @@ using MinhaAgendaDeConsultas.Api.Filtros;
 using MinhaAgendaDeConsultas.Api.Token;
 using MinhaAgendaDeConsultas.Application;
 using MinhaAgendaDeConsultas.Application.Services;
-using MinhaAgendaDeConsultas.Application.Services.Criptografia;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Infraestrutura;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Migrations;
+using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Criptografia;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,10 @@ builder.Services.AddRouting(option => option.LowercaseUrls = true);
 
 builder.Services.AddControllers();
 
-builder.Services.AddSingleton<PasswordEncripter>();
+//builder.Services.AddScoped<IPasswordEncripter, Sha512Encripter>();
+
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 
 
 // Swagger configuration

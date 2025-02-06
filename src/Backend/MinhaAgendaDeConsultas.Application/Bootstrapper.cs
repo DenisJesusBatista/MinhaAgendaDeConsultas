@@ -10,6 +10,7 @@ using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Excluir;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Registrar;
 using MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin;
+using MinhaAgendaDeConsultas.Application.UseCases.RefreshToken;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico;
@@ -36,6 +37,7 @@ namespace MinhaAgendaDeConsultas.Application
             services.AddScoped<IRegistrarPacienteUseCase, RegistrarPacienteUseCase>();
             services.AddScoped<IRegistrarMedicoUseCase, RegistrarMedicoUseCase>();
             services.AddScoped<IObterUsuarioProfileUseCase, ObterUsuarioProfileUseCase>();
+            services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
             services.AddScoped<IRegistrarAgendamentoConsultasUseCase, RegistrarAgendamentoConsultasUseCase>();
             services.AddScoped<IConsultarAgendamentoConsultasUseCase, ConsultarAgendamentoConsultasUseCase>();
             services.AddScoped<IAlterarConsultaAgendamentosUseCase, AlterarConsultaAgendamentoUseCase>();

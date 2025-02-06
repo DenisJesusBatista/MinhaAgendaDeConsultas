@@ -1,9 +1,12 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MinhaAgendaDeConsultas.Communication.Responses;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
+using MinhaAgendaDeConsultas.Exceptions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
 {
@@ -20,34 +23,54 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
 
         public async Task<Usuario> Usuario()
         {
-            var token = _tokenProvider.Value();
+            try
+            {
+                var token = _tokenProvider.Value();  // Obtendo o token              
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+                var tokenHandler = new JwtSecurityTokenHandler();
 
-            var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
+                // Lendo o token JWT
+                var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
 
-            //var identificador = jwtSecurityToken.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
-
-            //var identificador = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid);
-
-            var identificador = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
-
-            // Obtém o e-mail do token JWT
-            var email = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                // Obtendo o identificador do usuário (caso precise)
+                //var identificador = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
 
+                var identificador = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
 
-            var usuarioIdentificador = Guid.Parse(identificador);
+                // Obtendo o e-mail do token JWT
+                var email = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
 
-            var identificadorConvertido = usuarioIdentificador.ToString();
-            //var usuarioIdentificador = Guid.Parse(identificador.Value);
+                if (string.IsNullOrEmpty(email))
+                {
+                    throw new UnauthorizedAccessException("E-mail não encontrado no token.");
+                }
 
+                // Verifica se o identificador foi obtido corretamente
+                if (string.IsNullOrEmpty(identificador))
+                {
+                    throw new UnauthorizedAccessException("Identificador do usuário não encontrado no token.");
+                }
 
-            return await _context
-                .Usuarios
-                .AsNoTracking()
-                .FirstAsync(user => user.Email == email);
+                // Convertendo o identificador para Guid
+                var usuarioIdentificador = Guid.Parse(identificador);
 
+                // Buscando o usuário no banco de dados com base no e-mail
+                return await _context
+                    .Usuarios
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(user => user.Email == email && user.Ativo); // Verifica se o e-mail e o usuário estão ativos
+            }
+            catch (Exception ex)
+            {
+
+                throw new UnauthorizedAccessException(ResourceMessagesExceptions.TOKEN_NAO_VALIDADO);
+            
+            }
+       
+
+      
         }
+
     }
 }

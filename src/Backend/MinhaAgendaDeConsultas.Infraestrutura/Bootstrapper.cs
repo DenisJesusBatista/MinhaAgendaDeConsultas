@@ -12,15 +12,18 @@ using MinhaAgendaDeConsultas.Domain.Repositorios.Agendamento;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Paciente;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Agendamentos;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Medico;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Paciente;
-using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Usuario;
+using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Token;
+using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Validar;
+using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.RefreshToken;
 using MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura
@@ -89,7 +92,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
              .AddScoped<IPacienteUpdateOnlyRepositorio, PacienteRepositorio>()
              .AddScoped<IMedicoWriteOnlyRepositorio, MedicoRepositorio>()
              .AddScoped<IMedicoReadOnlyRepositorio, MedicoRepositorio>()
-             .AddScoped<IMedicoUpdateOnlyRepositorio, MedicoRepositorio>();
+             .AddScoped<IMedicoUpdateOnlyRepositorio, MedicoRepositorio>()
+              .AddScoped<IPasswordEncripter, Sha512Encripter>()
+            .AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>()
+            .AddScoped<ITokenRepository, TokenRepository>();
+
+
 
 
             // Outros serviços
@@ -110,5 +118,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
             services.AddScoped<IGeradorTokenAcesso>(option => new JwtTokenGerador(expiracaoMinutos, chaveAssinatura!));
             services.AddScoped<IValidadorTokenAcesso>(option => new JwtTokenValidador(chaveAssinatura!));
         }
+       
     }
 }
