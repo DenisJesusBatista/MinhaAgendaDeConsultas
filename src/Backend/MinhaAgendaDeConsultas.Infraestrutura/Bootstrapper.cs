@@ -16,9 +16,11 @@ using MinhaAgendaDeConsultas.Domain.Servicos.UsuarioLogado;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Medico;
 using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Paciente;
+using MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Token;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Criptografia;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador;
 using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Validar;
+using MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.RefreshToken;
 using MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado;
 using System.Reflection;
 
@@ -73,7 +75,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura
              .AddScoped<IMedicoWriteOnlyRepositorio, MedicoRepositorio>()
              .AddScoped<IMedicoReadOnlyRepositorio, MedicoRepositorio>()
              .AddScoped<IMedicoUpdateOnlyRepositorio, MedicoRepositorio>()
-              .AddScoped<IPasswordEncripter, Sha512Encripter>();
+              .AddScoped<IPasswordEncripter, Sha512Encripter>()
+            .AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>()
+            .AddScoped<ITokenRepository, TokenRepository>();
+
+
 
 
             // Outros serviços

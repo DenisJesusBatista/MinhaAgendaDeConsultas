@@ -27,6 +27,20 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
             CriarTabelaUsuario();
             CriarTabelaUsuarioPaciente();
             CriarTabelaUsuarioMedico();
+            CriarTabelaRefreshToken();
+        }
+
+        private void CriarTabelaRefreshToken()
+        {
+            var tabela = VersaoBase.InserirColunasPadrao(Create.Table("RefreshToken"));
+
+            tabela
+               .WithColumn("Value").AsString(255).NotNullable()
+               .WithColumn("UuarioId").AsInt64().NotNullable()
+               .ForeignKey("FK_RefreshTokens_Usuario_Id", "Usuario", "Id");
+
+
+            _logger.LogInformation("Tabela 'RefreshToken' criada com sucesso.");
         }
 
         private void CriarTabelaUsuario()

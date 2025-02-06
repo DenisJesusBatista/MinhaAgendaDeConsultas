@@ -178,7 +178,7 @@ namespace MinhaAgendaDeConsultas.Exceptions {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a O token de acesso expirou. Por favor, faça login novamente..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Sessão expirada. Por favor, utilize o Refresh Token para renovar seu acesso..
         /// </summary>
         public static string TOKEN_EXPIRADO {
             get {
