@@ -29,6 +29,7 @@ public class MinhaAgendaDeConsultasContext : DbContext
             entity.Property(u => u.Identificador)
             .HasColumnType("uuid"); // Força o tipo correto
             entity.Property(e => e.IdentificadorString);
+            entity.Property(e => e.CodigoPerfil);
             
             // Adicionando a configuração para o Token
             entity.Property(e => e.Token)

@@ -30,19 +30,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
             CriarTabelaRefreshToken();
         }
 
-        private void CriarTabelaRefreshToken()
-        {
-            var tabela = VersaoBase.InserirColunasPadrao(Create.Table("RefreshToken"));
-
-            tabela
-               .WithColumn("Value").AsString(255).NotNullable()
-               .WithColumn("UuarioId").AsInt64().NotNullable()
-               .ForeignKey("FK_RefreshTokens_Usuario_Id", "Usuario", "Id");
-
-
-            _logger.LogInformation("Tabela 'RefreshToken' criada com sucesso.");
-        }
-
         private void CriarTabelaUsuario()
         {
             var tabela = VersaoBase.InserirColunasPadrao(Create.Table("Usuario"));
@@ -56,7 +43,8 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
                  .WithColumn("Tipo").AsString(20).NotNullable()  // Tipo de usuário (ex: Medico, Paciente)
                  .WithColumn("Identificador").AsGuid().NotNullable()  // GUID para identificar o usuário
                  .WithColumn("IdentificadorString").AsString(36).NotNullable()  // 36 caracteres para GUID em formato string
-                 .WithColumn("Token").AsString(1000).Nullable();  // Adicionando a coluna para armazenar o token gerado
+                 .WithColumn("Token").AsString(1000).Nullable()  // Adicionando a coluna para armazenar o token gerado
+                 .WithColumn("CodigoPerfil").AsString(20).NotNullable();
 
             _logger.LogInformation("Tabela 'Usuario' criada com sucesso.");
 
@@ -99,6 +87,19 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
 
 
             _logger.LogInformation("Tabela 'UsuarioMedico' criada com sucesso.");
+        }
+
+        private void CriarTabelaRefreshToken()
+        {
+            var tabela = VersaoBase.InserirColunasPadrao(Create.Table("RefreshToken"));
+
+            tabela
+               .WithColumn("Value").AsString(255).NotNullable()
+               .WithColumn("UuarioId").AsInt64().NotNullable()
+               .ForeignKey("FK_RefreshTokens_Usuario_Id", "Usuario", "Id");
+
+
+            _logger.LogInformation("Tabela 'RefreshToken' criada com sucesso.");
         }
     }
 }
