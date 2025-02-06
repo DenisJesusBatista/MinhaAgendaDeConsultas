@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MinhaAgendaDeConsultas.Application.UseCases;
 using MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin;
+using MinhaAgendaDeConsultas.Application.UseCases.RefreshToken;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico;
@@ -26,7 +27,7 @@ namespace MinhaAgendaDeConsultas.Application
             services.AddScoped<IRegistrarPacienteUseCase, RegistrarPacienteUseCase>();
             services.AddScoped<IRegistrarMedicoUseCase, RegistrarMedicoUseCase>();
             services.AddScoped<IObterUsuarioProfileUseCase, ObterUsuarioProfileUseCase>();
-            
+            services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
 
         }
     }

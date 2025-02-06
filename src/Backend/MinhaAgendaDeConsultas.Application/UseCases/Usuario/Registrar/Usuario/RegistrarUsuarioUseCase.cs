@@ -23,11 +23,14 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IPasswordEncripter _passwordEncripter;
         private readonly IGeradorTokenAcesso _geradorTokenAcesso;
+        private readonly IRefreshTokenGenerator _refreshTokenGenerator;
+        private readonly ITokenRepository _tokenRepository;
 
         //Configurar a injeção de dependência atalho CTOR - Criar 
         //Construtor
         public RegistrarUsuarioUseCase(IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio, IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
-              IUsuarioWriteOnlyRepositorio usuarioWriteOnlyRepositorio, IPasswordEncripter passwordEncripter, IGeradorTokenAcesso geradorTokenAcesso)
+              IUsuarioWriteOnlyRepositorio usuarioWriteOnlyRepositorio, IPasswordEncripter passwordEncripter, IGeradorTokenAcesso geradorTokenAcesso
+            , IRefreshTokenGenerator refreshTokenGenerato,ITokenRepository tokenRepository)
         {
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
             _mapper = mapper;
@@ -35,6 +38,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
             _usuarioWriteOnlyRepositorio = usuarioWriteOnlyRepositorio;
             _passwordEncripter = passwordEncripter;
             _geradorTokenAcesso = geradorTokenAcesso;
+            _refreshTokenGenerator = refreshTokenGenerato;
+            _tokenRepository = tokenRepository;
         }
 
 
@@ -74,14 +79,36 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar
             //Salvar no banco de dados.
             await _unidadeDeTrabalho.Commit();
 
+            var refreshToken = await CriarESalvarRefreshToken(entidade);
+
 
             return new ResponseRegistrarUsuarioJson
             {   
-                Nome = entidade.Nome,
-                Email = entidade.Email,
-                Tokens = acessoTokens                
+                Nome = entidade.Nome,            
+                Tokens = new RespostaTokenJson
+                {
+                    AcessoToken = _geradorTokenAcesso.Gerar(entidade.Identificador.ToString(), entidade.Email),
+                    RefreshToken = refreshToken
+                }
             };
         }
+
+        public async Task<string> CriarESalvarRefreshToken(Domain.Entidades.Usuario usuario)
+        {
+            var refreshToken = new Domain.Entidades.RefreshToken
+            {
+                UsuarioId = usuario.Id, // Define o usuário associado ao refresh token
+                Value = _refreshTokenGenerator.GerarToken(), // Gera o valor do refresh token
+                CriadoEm = DateTime.UtcNow, // Define a data de criação do refresh token
+                DataExpiracao = DateTime.UtcNow.AddMonths(6) // Define a data de expiração do refresh token
+            };
+
+            await _tokenRepository.SalvarNovoRefreshToken(refreshToken);
+            await _unidadeDeTrabalho.Commit();
+
+            return refreshToken.Value; // Retorna o valor gerado para o refresh token
+        }
+
 
         private async Task Validar(RequisicaoRegistrarUsuarioJson requisicao)
         {

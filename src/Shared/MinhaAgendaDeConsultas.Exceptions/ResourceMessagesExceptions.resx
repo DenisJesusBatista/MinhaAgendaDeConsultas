@@ -157,7 +157,7 @@
     <value>Senha deve ter no mínimo 6 caracteres</value>
   </data>
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
-    <value>O token de acesso expirou. Por favor, faça login novamente.</value>
+    <value>Sessão expirada. Por favor, utilize o Refresh Token para renovar seu acesso.</value>
   </data>
   <data name="TOKEN_NAO_VALIDADO" xml:space="preserve">
     <value>O token não foi validado, faça login novamente informando a chave token.</value>
