@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Paciente;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Paciente;
+using MinhaAgendaDeConsultas.Domain.Enumeradores;
+
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
 {
@@ -18,6 +21,8 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <response code="409">O paciente informado já está cadastrado.</response>
 
         [HttpPost]
+        [Authorize(Roles = nameof(PerfilUsuario.Paciente))]
+
         [ProducesResponseType(typeof(RequisicaoRegistrarPacienteJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegistrarPaciente(
               [FromServices] IRegistrarPacienteUseCase useCase,

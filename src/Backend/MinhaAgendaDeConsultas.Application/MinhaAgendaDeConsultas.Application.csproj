@@ -21,4 +21,8 @@
     <ProjectReference Include="..\MinhaAgendaDeConsultas.Domain\MinhaAgendaDeConsultas.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Usuario\ValidarPerfilUsuario\" />
+  </ItemGroup>
+
 </Project>

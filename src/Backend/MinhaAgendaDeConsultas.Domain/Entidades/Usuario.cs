@@ -14,6 +14,7 @@ namespace MinhaAgendaDeConsultas.Domain.Entidades
         public string Cpf { get; set; } = string.Empty;
         public TipoUsuario Tipo { get; set; } // Usando o Enum
         public Guid Identificador { get; set; }
+        public int CodigoPerfil { get; set; }
 
         public string  IdentificadorString {get; set; } = string.Empty;
 

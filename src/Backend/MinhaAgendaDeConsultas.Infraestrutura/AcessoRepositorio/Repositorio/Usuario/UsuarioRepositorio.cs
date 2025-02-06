@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Entidades;
+using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Usuario;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
@@ -75,6 +76,55 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         public async Task<bool> ExisteUsuarioComEmail(string email) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Email.Equals(email));
         public async Task<bool> ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Identificador.Equals(usuarioIdentificador));
-        
+
+
+
+        //public async Task AddToRoleAsync(Usuario usuario, string roleName)
+        //{
+        //    await Task.Run(() => {
+        //        using (UnitOfWork.Initialize())
+        //        {
+        //            int intCast;
+        //            if (int.TryParse(roleName, out intCast))
+        //            {
+        //                usuario.CodigoPerfil = intCast;
+        //                usuario.Salvar();
+        //            }
+        //        }
+        //    });
+        //}
+
+        //public async Task<IList<string>> GetRolesAsync(Usuario usuario)
+        //{
+        //    return await Task.Run(() => {
+        //        using (UnitOfWork.Initialize())
+        //            return new List<string>() { usuario.CodigoPerfil.ToString() };
+        //    });
+        //}
+
+        //public async Task<bool> IsInRoleAsync(Usuario usuario, string roleName)
+        //{
+        //    return await Task.Run(() => {
+        //        using (UnitOfWork.Initialize())
+        //        {
+        //            int intCast;
+        //            if (int.TryParse(roleName, out intCast))
+        //                return usuario.CodigoPerfil == intCast;
+        //            return false;
+        //        }
+        //    });
+        //}
+
+        //public async Task RemoveFromRoleAsync(Usuario usuario, string roleName)
+        //{
+        //    await Task.Run(() => {
+        //        using (UnitOfWork.Initialize())
+        //        {
+        //            usuario.CodigoPerfil = PerfilUsuario.Usuario.ToInt();
+        //            usuario.Salvar();
+        //        }
+        //    });
+        //}
+
     }
 }
