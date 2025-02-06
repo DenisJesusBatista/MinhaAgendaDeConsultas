@@ -2,7 +2,7 @@
 
 namespace MinhaAgendaDeConsultas.Domain.Entidades
 {
-    public class Paciente 
+    public class Paciente
     {
         public long Id { get; set; }
         public string? Cpf { get; set; }

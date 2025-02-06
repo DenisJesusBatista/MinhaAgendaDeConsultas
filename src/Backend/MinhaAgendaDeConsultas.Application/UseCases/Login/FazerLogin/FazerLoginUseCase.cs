@@ -43,14 +43,14 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
         public async Task<ResponseRegistrarUsuarioJson> ObterUsarioLogado()
         {
             var user = httpContextAccessor.HttpContext.User;
-            
+
             if (user.Identity is { IsAuthenticated: false })
             {
                 return null;
             }
 
             return null;
-            
+
 
         }
 
@@ -59,7 +59,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin
             var encriptedPassword = _passwordEncripter.Encrypt(request.Senha);
 
             var existeUsuario = await _usuarioReadOnlyRepositorio.ExisteUsuarioComEmaileSenha(request.Email, encriptedPassword);
-                 
+
 
             var entidadeUsuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(request.Email);
 

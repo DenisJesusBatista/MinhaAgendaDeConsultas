@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
+using Microsoft.AspNetCore.Mvc.Filters;
 using MinhaAgendaDeConsultas.Communication.Responses;
 using MinhaAgendaDeConsultas.Exceptions;
+using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
 namespace MinhaAgendaDeConsultas.Api.Filtros
 {
@@ -45,7 +45,7 @@ namespace MinhaAgendaDeConsultas.Api.Filtros
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.Result = new ObjectResult(new RespostaErroJson(erroDeValidacaoException.MensagensDeErro));
 
-              }
+            }
         }
 
         private void LancarErroDesconhecido(ExceptionContext context)

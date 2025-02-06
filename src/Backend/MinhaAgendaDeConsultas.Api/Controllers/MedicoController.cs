@@ -16,7 +16,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <response code="200">Sucesso no cadastro do medico.</response>
         /// <response code="400">Corpo da requisição diferente do esperado.</response>
         /// <response code="409">O medico informado já está cadastrado.</response>
-        
+
         [HttpPost]
         [ProducesResponseType(typeof(RequisicaoRegistrarMedicoJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegistrarMedico(

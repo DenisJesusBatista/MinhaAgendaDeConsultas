@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.Servicos.UsuarioLogado
 {
-    public class UsuarioLogado: IUsuarioLogado  
+    public class UsuarioLogado : IUsuarioLogado
     {
         private readonly MinhaAgendaDeConsultasContext _context;
         private readonly ITokenProvider _tokenProvider;

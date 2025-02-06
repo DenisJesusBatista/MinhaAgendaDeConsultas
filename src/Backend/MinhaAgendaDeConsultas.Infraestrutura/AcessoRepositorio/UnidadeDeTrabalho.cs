@@ -1,5 +1,6 @@
-﻿using MinhaAgendaDeConsultas.Domain.Repositorios;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
+using MinhaAgendaDeConsultas.Domain.Repositorios;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 {
@@ -16,11 +17,33 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 
         }
 
+        public async Task BeginTransaction()
+        {
+            await _contexto.Database.BeginTransactionAsync();
+        }
+
+        public async Task LockTableAsync(String tableName)
+        {
+            await _contexto.Database.ExecuteSqlRawAsync($"LOCK TABLE public.\"{tableName.Trim()}\" IN EXCLUSIVE MODE;");
+        }
+
         public async Task Commit()
         {
             await _contexto.SaveChangesAsync();
         }
 
+        public async Task CommitTransaction()
+        {
+            try
+            {
+                await _contexto.Database.CommitTransactionAsync();
+            }
+            catch
+            {
+                await _contexto.Database.RollbackTransactionAsync();
+                throw;
+            }
+        }
 
         public void Dispose()
         {
@@ -36,6 +59,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
             }
             _disposed = true;
 
+        }
+
+        public async Task RollbackTransaction()
+        {
+            await _contexto.Database.RollbackTransactionAsync();
         }
     }
 }

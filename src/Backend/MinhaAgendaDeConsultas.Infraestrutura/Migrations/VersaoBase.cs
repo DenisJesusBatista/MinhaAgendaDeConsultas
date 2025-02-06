@@ -8,7 +8,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
         {
             return tabela
                 .WithColumn("Id").AsInt64().PrimaryKey().Identity();
-                //.WithColumn("DataCriacao").AsDateTime().NotNullable();
+            //.WithColumn("DataCriacao").AsDateTime().NotNullable();
 
         }
     }

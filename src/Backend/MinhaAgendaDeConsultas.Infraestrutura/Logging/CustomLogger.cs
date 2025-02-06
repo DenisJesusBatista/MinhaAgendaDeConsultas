@@ -2,7 +2,7 @@
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.Logging
 {
-    public class CustomLogger: ILogger  
+    public class CustomLogger : ILogger
     {
         private readonly string loggerName;
         private readonly CustomLoggerProviderConfiguration loggerConfig;

@@ -12,7 +12,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
     public class ObterUsuarioProfileUseCase : IObterUsuarioProfileUseCase
     {
         private readonly IUsuarioLogado _usuarioLogado;
-        private readonly IMapper _mapper;        
+        private readonly IMapper _mapper;
         private readonly IUsuarioReadOnlyRepositorio _usuarioReadOnlyRepositorio;
 
         public ObterUsuarioProfileUseCase(IUsuarioLogado usuarioLogado, IMapper mapper, IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio)
@@ -30,7 +30,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
 
             // Busca o usuário diretamente pelo e-mail fornecido
             var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(requisicao.Email);
-           
+
 
             // Cria a resposta com o token correto
             var respostaToken = new RespostaTokenJson
