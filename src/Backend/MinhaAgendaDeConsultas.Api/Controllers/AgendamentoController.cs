@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar;
-using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir;
-using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Registrar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Alterar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Excluir;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Registrar;
 using MinhaAgendaDeConsultas.Communication.Requisicoes;
-using MinhaAgendaDeConsultas.Communication.Requisicoes.Agendamento;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
 {

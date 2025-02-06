@@ -34,6 +34,11 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Consultar
         {
             var medico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(medicoEmail);
 
+            if (medico == null)
+            {
+                throw new Exception("Médico não encontrado");
+            }
+
             var result = await _agendaMedicaConsultaOnlyRepository.ObterAgendasMedicias(medico.Id, DataInicio, DataFim);
 
             return result.Select(x=> new ResponseAgendaMedica

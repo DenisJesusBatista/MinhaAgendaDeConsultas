@@ -40,10 +40,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Ag
 
         public async Task<IList<AgendaMedica>> ObterAgendasMedicias(long? MedicoId, DateTime DataInicio, DateTime DataFim)
         {
+
             var query = _contexto.AgendaMedica
                 .Where(x => x.MedicoId == MedicoId);
             var agendas = await query.ToListAsync();
-            agendas = agendas.Where(x => x.DataInicio >= DataInicio && x.DataFim <= DataFim).ToList();
+            agendas = agendas.Where(x => x.DataInicio >= DataInicio.ToUniversalTime() && x.DataFim <= DataFim.ToUniversalTime()).ToList();
             return agendas;
         }
 
