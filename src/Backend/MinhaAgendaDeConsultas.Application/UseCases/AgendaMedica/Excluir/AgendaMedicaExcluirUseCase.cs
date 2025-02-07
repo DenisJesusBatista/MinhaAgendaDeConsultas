@@ -27,6 +27,10 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir
 
         public async Task<ResponseAgendaMedicaResult> Executar(long id)
         {
+            while (await _unidadeDeTrabalho.TableIsLocked("AgendaMedica"))
+            {
+                await Task.Delay(1000);
+            }
             await _unidadeDeTrabalho.BeginTransaction();
             try
             {

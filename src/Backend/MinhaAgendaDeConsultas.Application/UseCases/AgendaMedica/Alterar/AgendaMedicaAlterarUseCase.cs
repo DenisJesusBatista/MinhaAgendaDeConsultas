@@ -32,6 +32,10 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
 
         public async Task<ResponseAgendaMedicaResult> Executar(RequisicaoAlteracaoAgendaMedicaJson agendaMedica)
         {
+            while (await _unidadeDeTrabalho.TableIsLocked("AgendaMedica"))
+            {
+                await Task.Delay(1000);
+            }
             await Validate(agendaMedica);
 
             var entidade = _mapper.Map<Domain.Entidades.AgendaMedica>(agendaMedica);

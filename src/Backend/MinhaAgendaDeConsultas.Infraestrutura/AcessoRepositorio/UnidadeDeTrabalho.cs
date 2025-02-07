@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using MinhaAgendaDeConsultas.Communication.Resposta;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
+using Npgsql;
 
 namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
 {
@@ -64,6 +66,24 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio
         public async Task RollbackTransaction()
         {
             await _contexto.Database.RollbackTransactionAsync();
+        }
+
+        public async Task<bool> TableIsLocked(string tableName)
+        {
+            var sql = @"
+                            SELECT                                
+                                pg_locks.granted
+                            FROM 
+                                pg_locks
+                            JOIN 
+                                pg_class ON pg_locks.relation = pg_class.oid
+                            WHERE 
+                                pg_class.relname = @tableName and pg_locks.granted = false;";
+
+            var parameters = new[] { new NpgsqlParameter("@tableName", tableName) };
+            var locks = await _contexto.Database.ExecuteSqlRawAsync(sql, parameters);
+
+            return locks > 1;
         }
     }
 }
