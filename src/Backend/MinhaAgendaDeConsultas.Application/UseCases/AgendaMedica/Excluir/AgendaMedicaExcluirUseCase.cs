@@ -27,10 +27,13 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir
 
         public async Task<ResponseAgendaMedicaResult> Executar(long id)
         {
+            await _unidadeDeTrabalho.BeginTransaction();
             try
             {
+                await _unidadeDeTrabalho.LockTableAsync(nameof(Domain.Entidades.AgendaMedica));
                 await _agendaMedicaDeleteOnlyRepository.Delete(id);
-
+                await _unidadeDeTrabalho.Commit();
+                await _unidadeDeTrabalho.CommitTransaction();
                 return new ResponseAgendaMedicaResult
                 {
                     Message = "Agendamento excluído com sucesso",

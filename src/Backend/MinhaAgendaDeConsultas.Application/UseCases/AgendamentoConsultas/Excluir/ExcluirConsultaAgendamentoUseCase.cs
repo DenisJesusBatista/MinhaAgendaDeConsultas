@@ -43,8 +43,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Exclu
             }
             catch (Exception e)
             {
-
-                throw;
+                await _unidadeDeTrabalho.RollbackTransaction();
+                throw e;
             }
         }
 

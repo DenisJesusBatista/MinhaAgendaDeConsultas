@@ -56,7 +56,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
             try
             {
                 entidade.MedicoId = medico.Id;
-
+                await _unidadeDeTrabalho.LockTableAsync(nameof(Domain.Entidades.AgendaMedica));
                 await _agendaMedicaUpdateOnlyRepository.Update(agendaAlterada);
 
                 await _unidadeDeTrabalho.Commit();

@@ -41,6 +41,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Registrar
             try
             {
                 entidade.MedicoId = usuário.Id;
+                await _unidadeDeTrabalho.LockTableAsync(nameof(Domain.Entidades.AgendaMedica));
+
 
                 await _agendaMedicaWriteOnlyRepository.Add(entidade);
 
