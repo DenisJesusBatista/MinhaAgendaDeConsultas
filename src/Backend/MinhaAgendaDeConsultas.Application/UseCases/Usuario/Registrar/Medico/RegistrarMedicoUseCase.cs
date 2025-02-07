@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Resposta.Medico;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Medico;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
@@ -18,17 +20,20 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
         private readonly IUsuarioReadOnlyRepositorio _usuarioReadOnlyRepositorio;
         private readonly IMapper _mapper;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
+        private readonly IGeradorTokenAcesso _geradorTokenAcesso;
 
         //Configurar a injeção de dependência atalho CTOR - Criar 
         //Construtor
         public RegistrarMedicoUseCase(IMedicoReadOnlyRepositorio medicoReadOnlyRepositorio, IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
-              IMedicoWriteOnlyRepositorio medicoWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio)
+              IMedicoWriteOnlyRepositorio medicoWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio,
+              IGeradorTokenAcesso geradorTokenAcesso)
         {
             _medicoReadOnlyRepositorio = medicoReadOnlyRepositorio;
             _mapper = mapper;
             _unidadeDeTrabalho = unidadeDeTrabalho;
             _medicoWriteOnlyRepositorio = medicoWriteOnlyRepositorio;
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
+            _geradorTokenAcesso = geradorTokenAcesso;
         }
 
         public async Task<ResponseRegistrarMedicoJson> Executar(RequisicaoRegistrarMedicoJson requisicao)
@@ -62,9 +67,18 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico
             //Salvar no banco de dados.
             await _unidadeDeTrabalho.Commit();
 
+            var token = _geradorTokenAcesso.Gerar(entidade.Usuario.Identificador.ToString(),
+                                                                         entidade.Email, "MEDICO");
+
+
             return new ResponseRegistrarMedicoJson
             {
                 Nome = entidade.Nome,
+                Tokens = new RespostaTokenJson
+                {
+                    AcessoToken = token
+
+                }
             };
         }
 

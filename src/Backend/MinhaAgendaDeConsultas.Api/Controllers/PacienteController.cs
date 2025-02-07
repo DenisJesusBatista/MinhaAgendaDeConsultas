@@ -23,9 +23,9 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
               [FromServices] IRegistrarPacienteUseCase useCase,
               [FromQuery] RequisicaoRegistrarPacienteJson request)
         {
-            await useCase.Executar(request);
+           var result =  await useCase.Executar(request);
 
-            return Ok(request);
+            return Ok(result);
         }
     }
 }

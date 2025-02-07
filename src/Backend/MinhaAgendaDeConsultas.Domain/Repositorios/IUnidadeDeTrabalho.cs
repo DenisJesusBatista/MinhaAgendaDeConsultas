@@ -8,5 +8,6 @@
         Task CommitTransaction();
         Task RollbackTransaction();
         Task LockTableAsync(String tableName);
+        Task<bool> TableIsLocked(String tableName);
     }
 }

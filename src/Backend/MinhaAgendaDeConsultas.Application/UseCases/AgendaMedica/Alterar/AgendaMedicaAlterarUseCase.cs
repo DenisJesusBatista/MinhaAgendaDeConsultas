@@ -32,6 +32,10 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
 
         public async Task<ResponseAgendaMedicaResult> Executar(RequisicaoAlteracaoAgendaMedicaJson agendaMedica)
         {
+            while (await _unidadeDeTrabalho.TableIsLocked("AgendaMedica"))
+            {
+                await Task.Delay(1000);
+            }
             await Validate(agendaMedica);
 
             var entidade = _mapper.Map<Domain.Entidades.AgendaMedica>(agendaMedica);
@@ -56,7 +60,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
             try
             {
                 entidade.MedicoId = medico.Id;
-
+                await _unidadeDeTrabalho.LockTableAsync(nameof(Domain.Entidades.AgendaMedica));
                 await _agendaMedicaUpdateOnlyRepository.Update(agendaAlterada);
 
                 await _unidadeDeTrabalho.Commit();

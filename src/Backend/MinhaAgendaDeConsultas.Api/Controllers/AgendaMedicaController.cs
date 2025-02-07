@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Consultar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Excluir;
@@ -19,6 +20,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "MEDICO")]
         public async Task<IActionResult> CriarAgendaMedica([FromServices] IAgendaMedicaRegistrarUseCase
             useCase, [FromBody] RequisicaoAgendaMedicaJson agendaMedica)
         {
@@ -38,6 +40,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "MEDICO")]
         public async Task<IActionResult> AlterarAgendaMedica([FromServices] IAgendaMedicaAlterarUseCase
             useCase, [FromBody] RequisicaoAlteracaoAgendaMedicaJson agendaMedica)
         {
@@ -55,6 +58,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "MEDICO")]
         public async Task<IActionResult> ExcluirAgendaMedica([FromServices] IAgendaMedicaExcluirUseCase
          useCase, [FromQuery] long id)
         {
@@ -72,6 +76,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "MEDICO")]
         public async Task<IActionResult> ConsultaAgendaMedica([FromServices] IAgendaMedicaConsultarUseCase useCase,
             [FromBody] RequisicaoAgendaMedicaJson requisicaoAgendaMedicaJson)
         {

@@ -3,10 +3,12 @@ using FluentValidation.Results;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Paciente;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Paciente;
 using MinhaAgendaDeConsultas.Communication.Resposta.Paciente;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Enumeradores;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 using MinhaAgendaDeConsultas.Domain.Repositorios.Paciente;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Exceptions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
 
@@ -21,18 +23,20 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
         private readonly IUsuarioReadOnlyRepositorio _usuarioReadOnlyRepositorio;
         private readonly IMapper _mapper;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
-
+        private readonly IGeradorTokenAcesso _geradorTokenAcesso;
 
         //Configurar a injeção de dependência atalho CTOR - Criar 
         //Construtor
         public RegistrarPacienteUseCase(IPacienteReadOnlyRepositorio pacienteReadOnlyRepositorio, IMapper mapper, IUnidadeDeTrabalho unidadeDeTrabalho,
-              IPacienteWriteOnlyRepositorio pacienteWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio)
+              IPacienteWriteOnlyRepositorio pacienteWriteOnlyRepositorio, IUsuarioReadOnlyRepositorio usuarioReadOnlyRepositorio,
+              IGeradorTokenAcesso geradorTokenAcesso)
         {
             _pacienteReadOnlyRepositorio = pacienteReadOnlyRepositorio;
             _mapper = mapper;
             _unidadeDeTrabalho = unidadeDeTrabalho;
             _pacienteWriteOnlyRepositorio = pacienteWriteOnlyRepositorio;
             _usuarioReadOnlyRepositorio = usuarioReadOnlyRepositorio;
+            _geradorTokenAcesso = geradorTokenAcesso;
         }
 
         public async Task<ResponseRegistrarPacienteJson> Executar(RequisicaoRegistrarPacienteJson requisicao)
@@ -47,15 +51,15 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
 
 
             var entidade = _mapper.Map<Domain.Entidades.Paciente>(requisicao);
-            entidade.UsuarioId = usuario.Id;   
+            entidade.UsuarioId = usuario.Id;
 
-            
+
             entidade.Usuario.Identificador = usuario.Identificador;
             entidade.Usuario.IdentificadorString = usuario.IdentificadorString;
             entidade.Usuario.Senha = usuario.Senha;
             entidade.Usuario.Token = usuario.Token;
 
-          
+
             //entidade.
 
 
@@ -68,10 +72,17 @@ namespace MinhaAgendaDeConsultas.Application.UseCases
             //Salvar no banco de dados.
             await _unidadeDeTrabalho.Commit();
 
+            var token = _geradorTokenAcesso.Gerar(entidade.Usuario.Identificador.ToString(),
+                                                                           entidade.Email, "PACIENTE");
 
             return new ResponseRegistrarPacienteJson
             {
                 Nome = entidade.Nome,
+                Tokens = new RespostaTokenJson
+                {
+                    AcessoToken = token
+                   
+                }
             };
         }
 

@@ -1,4 +1,7 @@
 using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MinhaAgendaDeConsultas.Api.Filtros;
 using MinhaAgendaDeConsultas.Api.Token;
@@ -8,6 +11,8 @@ using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 using MinhaAgendaDeConsultas.Infraestrutura;
 using MinhaAgendaDeConsultas.Infraestrutura.Logging;
 using MinhaAgendaDeConsultas.Infraestrutura.Migrations;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,6 +94,48 @@ builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderCon
 {
     LogLevel = LogLevel.Information
 }));
+
+
+var Secret = builder.Configuration.GetSection("Jwt").GetValue<string>("ChaveAssinatura");
+
+var key = Encoding.ASCII.GetBytes(Secret);
+
+
+// Adiciona a autenticação JWT
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = true;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,            //Valida se o Issuer é válido 
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,                  //Indica que se deve validar a origem do token
+        ValidateAudience = true,              //indica se vai validar uma url específica
+        ValidAudience="*",
+        ValidIssuer= "MinhaAgendaDeConsultas.Api"
+
+    };
+});
+
+//Adiciona as Polices de segurança 
+builder.Services.AddAuthorization();
+
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("TipoUsuarioPolicy", policy =>
+//    {
+//        policy.RequireClaim("TipoUsuario", "Medico", "Paciente");
+        
+//    });   
+//});
+
+
 
 var app = builder.Build();
 

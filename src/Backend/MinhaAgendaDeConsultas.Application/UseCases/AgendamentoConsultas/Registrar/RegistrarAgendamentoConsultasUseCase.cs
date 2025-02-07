@@ -35,6 +35,11 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
         }
         public async Task<ResponseRegistrarAgendamentoConsultas> Executar(RequisicaoAgendamentoConsultasJson agendamento)
         {
+            while (await _unidadeDeTrabalho.TableIsLocked("AgendamentoConsultas"))
+            {
+                await Task.Delay(1000);
+            }
+
             await Validate(agendamento);
             var entidade = _mapper.Map<Domain.Entidades.AgendamentoConsultas>(agendamento);
 
@@ -45,9 +50,6 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
                 var medicoUsuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendamento.MedicoEmail);
                 var pacienteUsuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendamento.PacienteEmail);
 
-                entidade.DataInclusao = entidade.DataInclusao.ToUniversalTime();
-                entidade.DataHoraInicio = entidade.DataHoraInicio.ToUniversalTime();
-                entidade.DataHoraFim = entidade.DataHoraFim.ToUniversalTime();
                 entidade.MedicoId = medicoUsuario.Id;
                 entidade.PacienteId = pacienteUsuario.Id;
 
@@ -68,7 +70,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
             }
             catch (Exception e)
             {
-
+                await _unidadeDeTrabalho.RollbackTransaction();
                 throw e;
             }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MinhaAgendaDeConsultas.Application.UseCases.RefreshToken;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;
@@ -24,6 +25,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
 
         [HttpPost("refresh-token")]
         [ProducesResponseType(typeof(RespostaTokenJson), StatusCodes.Status201Created)]
+        [AllowAnonymous]
         public async Task<IActionResult> RefreshToken(
                 [FromServices] IUseRefreshTokenUseCase useCase,
                 [FromQuery] RequisicaoNovoTokenJson request)
