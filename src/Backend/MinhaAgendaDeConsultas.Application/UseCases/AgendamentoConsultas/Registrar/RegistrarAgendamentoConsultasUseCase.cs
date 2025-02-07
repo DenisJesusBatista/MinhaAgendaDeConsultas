@@ -69,7 +69,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
             catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
 
 

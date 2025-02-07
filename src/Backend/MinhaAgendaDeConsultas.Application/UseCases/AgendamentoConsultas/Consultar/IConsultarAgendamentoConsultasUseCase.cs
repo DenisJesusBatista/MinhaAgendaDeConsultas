@@ -4,7 +4,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consu
 {
     public interface IConsultarAgendamentoConsultasUseCase
     {
-        public Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosPaciente(int pacienteId);
-        public Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosMedico(int medicoId);
+        public Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosPaciente(string pacienteEmail);
+        public Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosMedico(string medicoEmail);
     }
 }

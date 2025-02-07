@@ -12,7 +12,7 @@ namespace MinhaAgendaDeConsultas.Domain.Repositorios
         /// <param name="medicoId"></param>
         /// <returns>Retorna uma lista de Agendamentos Disponíveis</returns>
         public Task<bool> GetDisponibilides(DateTime DataDeInicio, DateTime DataFim, long? medicoId = null);
-        public Task<IList<AgendamentoConsultas>> GetAgendamentosMedico(int medicoId);
-        public Task<IList<AgendamentoConsultas>> GetAgendamentosPaciente(int pacienteId);
+        public Task<IList<AgendamentoConsultas>> GetAgendamentosMedico(long medicoId);
+        public Task<IList<AgendamentoConsultas>> GetAgendamentosPaciente(long pacienteId);
     }
 }

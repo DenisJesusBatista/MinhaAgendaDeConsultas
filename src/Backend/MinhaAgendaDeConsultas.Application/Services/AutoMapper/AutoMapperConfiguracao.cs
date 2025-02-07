@@ -61,21 +61,21 @@ namespace MinhaAgendaDeConsultas.Application.Services
 
 
             CreateMap<RequisicaoAgendamentoConsultasJson, AgendamentoConsultas>()
-                .ForMember(dest => dest.DataHoraFim, opt => opt.MapFrom(src => src.DataHoraInicio))
-                .ForMember(dest => dest.DataHoraInicio, opt => opt.MapFrom(src => src.DataHoraFim))
-                .ForMember(dest => dest.DataInclusao, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dest => dest.DataHoraFim, opt => opt.MapFrom(src => src.DataHoraInicio.ToUniversalTime()))
+                .ForMember(dest => dest.DataHoraInicio, opt => opt.MapFrom(src => src.DataHoraFim.ToUniversalTime()))
+                .ForMember(dest => dest.DataInclusao, opt => opt.MapFrom(src => DateTime.Now.ToUniversalTime()))
                 .ForMember(dest => dest.Ativo, opt => opt.MapFrom(src => true));
 
 
             CreateMap<RequisicaoAlteracaoAgendaMedicaJson,AgendaMedica>()
-                .ForMember(dest => dest.DataFim, opt => opt.MapFrom(src => src.DataFimAtual))
-                .ForMember(dest => dest.DataInicio, opt => opt.MapFrom(src => src.DataInicioAtual))
+                .ForMember(dest => dest.DataFim, opt => opt.MapFrom(src => src.DataFimAtual.ToUniversalTime()))
+                .ForMember(dest => dest.DataInicio, opt => opt.MapFrom(src => src.DataInicioAtual.ToUniversalTime()))
                 .ForMember(dest => dest.IsDisponivel, opt => opt.MapFrom(src => src.IsDisponivel));
 
 
             CreateMap<RequisicaoAgendaMedicaJson, AgendaMedica>()
-                .ForMember(dest => dest.DataFim, opt => opt.MapFrom(src => src.DataFim))
-                .ForMember(dest => dest.DataInicio, opt => opt.MapFrom(src => src.DataInicio));
+                .ForMember(dest => dest.DataFim, opt => opt.MapFrom(src => src.DataFim.ToUniversalTime()))
+                .ForMember(dest => dest.DataInicio, opt => opt.MapFrom(src => src.DataInicio.ToUniversalTime()));
         }
 
         private void DomainToResponse()

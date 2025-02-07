@@ -76,7 +76,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Alter
 
          
             //Verifica se há horário livre com o médico 
-            var ok = await _agendamentoConsultas.GetDisponibilides(agendamento.DataHoraInicio, agendamento.DataHoraFim, usuarioMedico.Id);
+            var disponivel = await _agendamentoConsultas.GetDisponibilides(agendamento.DataHoraInicio, agendamento.DataHoraFim, usuarioMedico.Id);
             if (usuarioMedico == null)
             {
                 resultado.Errors.Add(new ValidationFailure("MedicoEmail", "Médico não encontrado ou não cadastrado"));
@@ -86,7 +86,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Alter
                 resultado.Errors.Add(new ValidationFailure("DataHoraInicio", "Agenda do médico não está aberta para o dia da consulta"));
             }
 
-            if (!ok)
+            if (!disponivel)
             {
                 resultado.Errors.Add(new ValidationFailure("DataHoraInicio", "Horário indisponível para esse médico"));
             }

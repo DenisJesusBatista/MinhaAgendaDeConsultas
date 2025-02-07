@@ -72,16 +72,18 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <param name="useCase"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("/ConsultarAgendamentoMedico/{id}")]
+        [HttpGet("/ConsultarAgendamentoMedico")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //  [Authorize]
         public async Task<IActionResult> ConsultarAgendamentoMedico(
             [FromServices] IConsultarAgendamentoConsultasUseCase useCase,
-            [FromQuery] int id)
+            [FromQuery] string emailMedico)
         {
-            var result = await useCase.GetAgendamentosMedico(id);
+            
+
+            var result = await useCase.GetAgendamentosMedico(emailMedico);
             return Ok(result);
         }
 
@@ -91,16 +93,16 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         /// <param name="useCase"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("/ConsultaAgendamentoPaciente/{id}")]
+        [HttpGet("/ConsultaAgendamentoPaciente")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         // [Authorize]
         public async Task<IActionResult> ConsultaAgendamentoPaciente(
             [FromServices] IConsultarAgendamentoConsultasUseCase useCase,
-            [FromQuery] int id)
+            [FromQuery] string emailPaciente)
         {
-            var result = await useCase.GetAgendamentosPaciente(id);
+            var result = await useCase.GetAgendamentosPaciente(emailPaciente);
             return Ok(result);
         }
 

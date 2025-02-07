@@ -1,4 +1,6 @@
-﻿using MinhaAgendaDeConsultas.Communication.Resposta.Agendamento;
+﻿using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Agendamento;
+using MinhaAgendaDeConsultas.Domain;
 using MinhaAgendaDeConsultas.Domain.Repositorios;
 
 namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar
@@ -6,16 +8,21 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consu
     public class ConsultarAgendamentoConsultasUseCase : IConsultarAgendamentoConsultasUseCase
     {
         private readonly IAgendamentoConsultasConsultasOnlyRepositorio _agendamentoConsultas;
+        private readonly IUsuarioReadOnlyRepositorio _usuarioRepository;
 
         public ConsultarAgendamentoConsultasUseCase(IAgendamentoConsultasConsultasOnlyRepositorio agendamentoConsultas,
-            IAgendamentoConsultasWriteOnlyRepositorio agendamentoConsultasWriteOnlyRepositorio)
+            IAgendamentoConsultasWriteOnlyRepositorio agendamentoConsultasWriteOnlyRepositorio,
+            IUsuarioReadOnlyRepositorio usuarioRepository)
         {
             this._agendamentoConsultas = agendamentoConsultas;
+            this._usuarioRepository = usuarioRepository;
 
         }
-        public async Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosMedico(int medicoId)
+        public async Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosMedico(string medicoEmail)
         {
-            var agendamentos = await _agendamentoConsultas.GetAgendamentosMedico(medicoId);
+            var medico =await _usuarioRepository.RecuperarPorEmail(medicoEmail);
+
+            var agendamentos = await _agendamentoConsultas.GetAgendamentosMedico(medico.Id);
             return agendamentos.Select(x => new ResponseConsultaAgendamentos
             {
                 PacienteId = x.PacienteId,
@@ -27,9 +34,13 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consu
             }).ToList();
         }
 
-        public async Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosPaciente(int pacienteId)
+        public async Task<IList<ResponseConsultaAgendamentos>> GetAgendamentosPaciente(string pacienteEmail)
         {
-            var agendamentos = await _agendamentoConsultas.GetAgendamentosPaciente(pacienteId);
+
+
+            var paciente = await _usuarioRepository.RecuperarPorEmail(pacienteEmail);
+
+            var agendamentos = await _agendamentoConsultas.GetAgendamentosPaciente(paciente.Id);
             return agendamentos.Select(x => new ResponseConsultaAgendamentos
             {
                 PacienteId = x.PacienteId,
