@@ -156,6 +156,9 @@
   <data name="ERRO_GENERICO" xml:space="preserve">
     <value>Ocorreu um erro inesperado.</value>
   </data>
+  <data name="MEDICO_NAO_ENCONTRADO_ESPECIALIDADE" xml:space="preserve">
+    <value>Médico não encontrado.</value>
+  </data>
   <data name="MEDICO_NAO_INFORMADO" xml:space="preserve">
     <value>O Médico deve ser informado </value>
   </data>
