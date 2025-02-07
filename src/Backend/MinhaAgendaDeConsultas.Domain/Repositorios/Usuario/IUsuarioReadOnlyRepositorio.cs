@@ -15,5 +15,7 @@ namespace MinhaAgendaDeConsultas.Domain
 
         Task<Usuario> RecuperarUsuarioPorIdentificador(Guid usuarioIdentificador);
 
+        Task<IEnumerable<Entidades.Medico?>> RecuperarPorEspecialidade(string especialidade);
+
     }
 }

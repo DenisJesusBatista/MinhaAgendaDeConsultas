@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.ObterUsuario;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
@@ -44,6 +45,21 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
                 Email = usuario.Email,
                 Tokens = respostaToken
             };
+        }
+
+        public async Task<IEnumerable<RequisicaoRegistrarMedicoJson>> Executar(RequisicaoMedicoPorEspecialidadeJson requisicao)
+        {
+            var lstReturn = new List<RequisicaoRegistrarMedicoJson>();
+
+            // Busca o usuário diretamente pelo especialidade fornecida
+            var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEspecialidade(requisicao.Especialidade);
+
+            foreach (var item in usuario)
+            {
+                lstReturn.Add(new RequisicaoRegistrarMedicoJson { Nome = item.Nome, Email = item.Email });                
+            }
+
+            return lstReturn;
         }
 
         private async Task Validar(RequisicaoObterUsuarioJson requisicao)

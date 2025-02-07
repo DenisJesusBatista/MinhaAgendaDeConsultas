@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
+using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
+using MinhaAgendaDeConsultas.Exceptions;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
 {
@@ -24,6 +28,18 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
               [FromQuery] RequisicaoRegistrarMedicoJson request)
         {
            var result =  await useCase.Executar(request);
+
+            return Ok(result);
+        }
+
+        [HttpGet("por-especialidade")]
+        [ProducesResponseType(typeof(RequisicaoRegistrarMedicoJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ObterMedicoPorEspecialidade([FromQuery] RequisicaoMedicoPorEspecialidadeJson request,[FromServices] IObterUsuarioProfileUseCase useCase)
+        {
+            var result = await useCase.Executar(request);
+
+            if (result == null)
+                return NotFound(ResourceMessagesExceptions.MEDICO_NAO_ENCONTRADO_ESPECIALIDADE);
 
             return Ok(result);
         }
