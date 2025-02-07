@@ -14,6 +14,7 @@ using AutoBogus;
 using MinhaAgendaDeConsultas.Domain.Entidades;
 using FluentAssertions;
 using MinhaAgendaDeConsultas.Exceptions.ExceptionsBase;
+using MinhaAgendaDeConsultas.Domain.Seguranca.Token;
 
 namespace MinhaAgendaDeConsultas.UnitTest.Application
 {
@@ -24,6 +25,7 @@ namespace MinhaAgendaDeConsultas.UnitTest.Application
         private readonly Mock<IUsuarioReadOnlyRepositorio> _usuarioReadOnlyRepositorio;
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<IUnidadeDeTrabalho> _unidadeDeTrabalho;
+        private readonly Mock<IGeradorTokenAcesso> _geradorTokenAcesso;
         private readonly RegistrarMedicoUseCase _registrarMedicoUseCase;
 
         public RegistrarMedicoUseCaseTests()
@@ -33,7 +35,8 @@ namespace MinhaAgendaDeConsultas.UnitTest.Application
             _usuarioReadOnlyRepositorio = new();
             _mapper = new();
             _unidadeDeTrabalho = new();
-            _registrarMedicoUseCase = new(_medicoReadOnlyRepositorio.Object, _mapper.Object, _unidadeDeTrabalho.Object, _medicoWriteOnlyRepositorio.Object, _usuarioReadOnlyRepositorio.Object);
+            _geradorTokenAcesso = new Mock<IGeradorTokenAcesso>();
+            _registrarMedicoUseCase = new(_medicoReadOnlyRepositorio.Object, _mapper.Object, _unidadeDeTrabalho.Object, _medicoWriteOnlyRepositorio.Object, _usuarioReadOnlyRepositorio.Object, _geradorTokenAcesso.Object);
         }
 
         [Fact]
