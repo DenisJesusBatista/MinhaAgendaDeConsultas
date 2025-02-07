@@ -76,5 +76,12 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Us
         public async Task<bool> ExisteUsuarioComEmail(string email) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Email.Equals(email));
         public async Task<bool> ExisteUsarioAtivoComIdentificador(Guid usuarioIdentificador) => await _contexto.Usuarios.AnyAsync(usuario => usuario.Identificador.Equals(usuarioIdentificador));
 
+        public async Task<IEnumerable<Domain.Entidades.Medico?>> RecuperarPorEspecialidade(string especialidade)
+        {
+            IQueryable<Domain.Entidades.Medico> query = _contexto.Medicos.AsNoTracking();
+            query = query.Where(c => c.Especialidade == especialidade);
+
+            return await query.ToListAsync();
+        }
     }
 }

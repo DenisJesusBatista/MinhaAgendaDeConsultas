@@ -47,9 +47,19 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
             };
         }
 
-        public Task<RequisicaoRegistrarMedicoJson> Executar(RequisicaoMedicoPorEspecialidadeJson requisicao)
+        public async Task<IEnumerable<RequisicaoRegistrarMedicoJson>> Executar(RequisicaoMedicoPorEspecialidadeJson requisicao)
         {
-            throw new NotImplementedException(); ///TODO: Implementar repositorio
+            var lstReturn = new List<RequisicaoRegistrarMedicoJson>();
+
+            // Busca o usuário diretamente pelo especialidade fornecida
+            var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEspecialidade(requisicao.Especialidade);
+
+            foreach (var item in usuario)
+            {
+                lstReturn.Add(new RequisicaoRegistrarMedicoJson { Nome = item.Nome, Email = item.Email });                
+            }
+
+            return lstReturn;
         }
 
         private async Task Validar(RequisicaoObterUsuarioJson requisicao)
