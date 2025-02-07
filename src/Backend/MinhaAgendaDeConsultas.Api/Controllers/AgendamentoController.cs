@@ -9,6 +9,7 @@ using MinhaAgendaDeConsultas.Communication.Requisicoes;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers
 {
+
     public class AgendamentoController : MinhaAgendaDeConsultasBaseController
     {
        

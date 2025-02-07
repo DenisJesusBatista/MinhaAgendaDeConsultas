@@ -27,7 +27,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
             {
                 new Claim(ClaimTypes.NameIdentifier, identificadorUsuario),  // Identificador do usuário
                 new Claim(ClaimTypes.Email, email) , // Adicionando o e-mail do usuário
-                //new Claim( "TipoUsuario",tipoUsuario??"")
                 new Claim( ClaimTypes.Role,tipoUsuario??"")
             };
 
