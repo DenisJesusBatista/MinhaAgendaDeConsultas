@@ -42,8 +42,8 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Ag
 
 
             //Verifica se o horário está ocupado para o médico desejado
-            query = query.Where(h => DataDeInicio >= h.DataHoraInicio && DataDeInicio <= h.DataHoraFim);
-            query = query.Where(h => DataFim >= h.DataHoraInicio && DataFim <= h.DataHoraFim);
+            query = query.Where(h => DataDeInicio.ToUniversalTime() >= h.DataHoraInicio && DataDeInicio.ToUniversalTime() <= h.DataHoraFim);
+            query = query.Where(h => DataFim.ToUniversalTime() >= h.DataHoraInicio && DataFim.ToUniversalTime() <= h.DataHoraFim);
             query = query.Where(h => h.MedicoId == medicoId);
 
 
@@ -52,14 +52,14 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Ag
             return !existe;
         }
 
-        public async Task<IList<AgendamentoConsultas>> GetAgendamentosMedico(int medicoId)
+        public async Task<IList<AgendamentoConsultas>> GetAgendamentosMedico(long medicoId)
         {
             IQueryable<AgendamentoConsultas> query = _contexto.AgendamentoConsultas;
             query = query.Where(h => h.MedicoId == medicoId);
             return await query.ToListAsync();
         }
 
-        public async Task<IList<AgendamentoConsultas>> GetAgendamentosPaciente(int pacienteId)
+        public async Task<IList<AgendamentoConsultas>> GetAgendamentosPaciente(long pacienteId)
         {
             IQueryable<AgendamentoConsultas> query = _contexto.AgendamentoConsultas;
             query = query.Where(h => h.PacienteId == pacienteId);

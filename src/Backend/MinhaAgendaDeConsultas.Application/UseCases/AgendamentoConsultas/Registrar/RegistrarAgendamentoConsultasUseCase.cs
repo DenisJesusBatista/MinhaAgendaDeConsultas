@@ -69,7 +69,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
             catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
 
 
@@ -83,11 +83,19 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
             var usuarioMedico = await _usuarioReadOnlyRepositorio.RecuperarPorEmail(agendamento.MedicoEmail);
             List<string>? mensagensDeErro = new List<string>();
             
-            var ok = await _agendamentoConsultas.GetDisponibilides(agendamento.DataHoraInicio, agendamento.DataHoraFim, usuarioMedico.Id);
+            if(usuarioMedico == null)
+            {
+                resultado.Errors.Add(new ValidationFailure("MedicoEmail", "Médico não encontrado ou não cadastrado"));
+                mensagensDeErro = resultado.Errors.Select(error => error.ErrorMessage).ToList();
+                throw new ErrosDeValidacaoException(mensagensDeErro);
+            }
+
+
+            var disponibilidade = await _agendamentoConsultas.GetDisponibilides(agendamento.DataHoraInicio, agendamento.DataHoraFim, usuarioMedico.Id);
 
 
             //verifica se a agenda dele está aberta para o dia da consulta
-            var agendaAberta = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataHoraFim, agendamento.DataHoraFim);
+            var agendaAberta = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataHoraInicio, agendamento.DataHoraFim);
             
             if (usuarioMedico == null)
             {
@@ -98,7 +106,7 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Regis
                 resultado.Errors.Add(new ValidationFailure("DataHoraInicio", "Agenda do médico não está aberta para o dia da consulta"));
             }
 
-            if (!ok)
+            if (!disponibilidade)
             {
                 resultado.Errors.Add(new ValidationFailure("DataHoraInicio", "Horário indisponível"));
             }

@@ -94,8 +94,8 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendaMedica.Alterar
 
             var ocupado = await _agendaMedicaConsultaOnlyRepository.VerificarDisponibilidade(usuarioMedico.Id, agendamento.DataInicioNova, agendamento.DataFimNova);
 
-
-            if (ocupado)
+            //Se for mesmos horarios mas está com estatus de ativação não dá erro de conflito de horário 
+            if (ocupado && !agendamento.IsDisponivel)
             {
                 resultado.Errors.Add(new ValidationFailure("DataHoraInicio", "Horário indisponível"));
             }
