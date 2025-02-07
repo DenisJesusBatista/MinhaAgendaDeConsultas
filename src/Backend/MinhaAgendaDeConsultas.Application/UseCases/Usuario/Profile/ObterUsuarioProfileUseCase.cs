@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.ObterUsuario;
+using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
 using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Domain;
@@ -44,6 +45,11 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile
                 Email = usuario.Email,
                 Tokens = respostaToken
             };
+        }
+
+        public Task<RequisicaoRegistrarMedicoJson> Executar(RequisicaoMedicoPorEspecialidadeJson requisicao)
+        {
+            throw new NotImplementedException(); ///TODO: Implementar repositorio
         }
 
         private async Task Validar(RequisicaoObterUsuarioJson requisicao)
