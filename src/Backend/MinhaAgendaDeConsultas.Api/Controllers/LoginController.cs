@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MinhaAgendaDeConsultas.Application.UseCases.Login.FazerLogin;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Login;
 using MinhaAgendaDeConsultas.Communication.Responses;
@@ -34,7 +35,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegistrarUsuarioJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(RespostaErroJson), StatusCodes.Status401Unauthorized)]
-        //[Authorize]
+        [AllowAnonymous]
 
         public async Task<IActionResult> Login(
                         [FromServices] IFazerLoginUseCase useCase,

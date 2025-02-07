@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MinhaAgendaDeConsultas.Api.Atributos;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Alterar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Excluir;
@@ -20,7 +22,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //  [Authorize]
+        [Authorize(Roles = "PACIENTE")]        
         public async Task<IActionResult> CriarAgendamento(
            [FromServices] IRegistrarAgendamentoConsultasUseCase useCase,
            [FromBody] RequisicaoAgendamentoConsultasJson agendamento)
@@ -39,7 +41,8 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //    [Authorize]
+        [Authorize(Roles = "PACIENTE")]
+        [Authorize(Roles = "MEDICO")]
         public async Task<IActionResult> AlterarAgendamento(
            [FromServices] IAlterarConsultaAgendamentosUseCase useCase,
            [FromBody] RequisicaoAgendamentoConsultasJson agendamento)
@@ -57,7 +60,8 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //    [Authorize]
+        [Authorize(Roles = "PACIENTE")]
+        [Authorize(Roles = "MEDICO")]
         public async Task<IActionResult> ExcluiAgendamento(
             [FromServices] IExcluirConsultaAgendamentoUseCase useCase,
             [FromQuery] long id)
@@ -76,7 +80,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //  [Authorize]
+        [Authorize(Roles = "MEDICO")]
         public async Task<IActionResult> ConsultarAgendamentoMedico(
             [FromServices] IConsultarAgendamentoConsultasUseCase useCase,
             [FromQuery] string emailMedico)
@@ -97,7 +101,7 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // [Authorize]
+        [Authorize(Roles = "PACIENTE")] 
         public async Task<IActionResult> ConsultaAgendamentoPaciente(
             [FromServices] IConsultarAgendamentoConsultasUseCase useCase,
             [FromQuery] string emailPaciente)

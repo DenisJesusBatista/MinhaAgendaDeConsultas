@@ -20,13 +20,15 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
 
         #region GerarTokenAntigo
 
-        public string Gerar(string identificadorUsuario, string email)
+        public string Gerar(string identificadorUsuario, string email, string? tipoUsuario = null)
         {
             // Definindo os claims que serão incluídos no token
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, identificadorUsuario),  // Identificador do usuário
-                new Claim(ClaimTypes.Email, email)  // Adicionando o e-mail do usuário
+                new Claim(ClaimTypes.Email, email) , // Adicionando o e-mail do usuário
+                //new Claim( "TipoUsuario",tipoUsuario??"")
+                new Claim( ClaimTypes.Role,tipoUsuario??"")
             };
 
             // Obtendo o tempo atual (em UTC)
@@ -49,7 +51,9 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Seguranca.Token.Acesso.Gerador
                 Expires = expires,  // O token expirará após o tempo definido
                 SigningCredentials = new SigningCredentials(
                     GetSymmetricSecurityKey(_chaveAssinatura),  // Definindo a chave de assinatura
-                    SecurityAlgorithms.HmacSha256Signature)  // Algoritmo de assinatura
+                    SecurityAlgorithms.HmacSha256Signature),// Algoritmo de assinatura
+                Issuer = "MinhaAgendaDeConsultas.Api",// Emissor do token
+                Audience = "*"
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
