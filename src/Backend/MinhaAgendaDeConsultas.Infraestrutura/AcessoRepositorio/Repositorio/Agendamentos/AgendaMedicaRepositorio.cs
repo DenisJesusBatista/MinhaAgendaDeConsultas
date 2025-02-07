@@ -34,7 +34,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.AcessoRepositorio.Repositorio.Ag
         {
             return await _contexto.AgendaMedica
                 .Where(x => x.MedicoId == MedicoId)
-                .Where(x => DataInicio >= x.DataInicio && DataFim <= x.DataFim)
+                .Where(x => DataInicio.ToUniversalTime() >= x.DataInicio && DataFim.ToUniversalTime() <= x.DataFim)
                 .AnyAsync();
         }
 
