@@ -5,7 +5,25 @@ Este projeto é uma API implementada em .NET Core que foi construída utilizando
 # Features
 
 - Registrar usuarios;
+- Registrar Medico
+- Registrar Paciente
+- 
 - Fazer login por e-mail e senha;
+
+- Gerar Refresh Token
+- Obter medico por especialidade
+
+- Criar agenda medica
+- Alterar agenda medica
+- Excluir agenda medica
+- Consultar agenda medica
+
+- Criar agendamento
+- Altera agendamento
+- Excluir agendamento
+- Cosultar agendamentos medico
+- Consultar agendamentos paciente
+  
 
 # Requisitos
   
