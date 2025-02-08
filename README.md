@@ -118,6 +118,11 @@ Para adicionar ou alterar tabelas no banco de dados, siga os passos abaixo:
 
 ![image](https://github.com/user-attachments/assets/fb355b4a-4285-44e5-8f93-daa016ed215a)
 
+## Configuração da API
+
+![image](https://github.com/user-attachments/assets/31bd6557-7105-45d4-a86d-eb95910bd750)
+
+
 ## Configuração do Swagger na API
 
   - O Swagger foi configurado no projeto para documentar e testar os endpoints de forma interativa. A configuração foi feita no `Program.cs` usando AddSwaggerGen, e inclui suporte para autenticação via JWT.
