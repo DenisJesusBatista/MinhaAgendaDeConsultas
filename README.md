@@ -60,7 +60,7 @@ Este projeto é uma API implementada em .NET Core que foi construída utilizando
 ## Configuração de Injeção de Dependência
 * Configuração feita na `Program.cs`
 
-* * ![image](https://github.com/user-attachments/assets/28cb8cc9-6c87-47ec-a77d-fc2b251b8e68)
+*  ![image](https://github.com/user-attachments/assets/28cb8cc9-6c87-47ec-a77d-fc2b251b8e68)
 
 
 * Os registros da injeção de dependência para os useCase estão sendo feitas na classe `Bootstrapper.cs`, conforme imagem abaixo:
