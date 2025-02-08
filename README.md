@@ -111,6 +111,8 @@ Para adicionar ou alterar tabelas no banco de dados, siga os passos abaixo:
 
 4. **Verifique o Banco de Dados**:
    - Confirme que as alterações foram aplicadas corretamente.
+  
+## Criado no projeto MinhaAgendaDeContatos.Domain a pasta repositorio onde consta os arquivo que serão responsavéis em deletar, alterar, inserir e excluir.
 
   
   
