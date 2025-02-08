@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 {
     [DbContext(typeof(MinhaAgendaDeConsultasContext))]
-    [Migration("20250206004945_MigracaoRefresh")]
-    partial class MigracaoRefresh
+    [Migration("20250208002410_Teste")]
+    partial class Teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,41 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.AgendamentoConsultas", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Aceite")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("DataHoraFim")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataHoraInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("MedicoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PacienteId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id")
+                        .HasName("Id");
+
+                    b.ToTable("AgendamentoConsultas", (string)null);
+                });
 
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.EntidadeBase", b =>
                 {
@@ -66,6 +101,10 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Especialidade")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -120,6 +159,38 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.ToTable("UsuarioPaciente", (string)null);
                 });
 
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.RefreshToken", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataExpiracao")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("UsuarioId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("RefreshToken", (string)null);
+                });
+
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", b =>
                 {
                     b.Property<long>("Id")
@@ -134,11 +205,11 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("character varying");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying");
 
                     b.Property<Guid>("Identificador")
                         .HasColumnType("uuid");
@@ -149,7 +220,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -168,6 +239,25 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.ToTable("Usuario", (string)null);
                 });
 
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.AgendaMedica", b =>
+                {
+                    b.HasBaseType("MinhaAgendaDeConsultas.Domain.Entidades.EntidadeBase");
+
+                    b.Property<DateTime>("DataFim")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDisponivel")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("MedicoId")
+                        .HasColumnType("bigint");
+
+                    b.HasDiscriminator().HasValue("AgendaMedica");
+                });
+
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.HorarioDisponivel", b =>
                 {
                     b.HasBaseType("MinhaAgendaDeConsultas.Domain.Entidades.EntidadeBase");
@@ -183,29 +273,13 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
 
                     b.HasIndex("MedicoId");
 
+                    b.ToTable("EntidadeBase", t =>
+                        {
+                            t.Property("MedicoId")
+                                .HasColumnName("HorarioDisponivel_MedicoId");
+                        });
+
                     b.HasDiscriminator().HasValue("HorarioDisponivel");
-                });
-
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.RefreshToken", b =>
-                {
-                    b.HasBaseType("MinhaAgendaDeConsultas.Domain.Entidades.EntidadeBase");
-
-                    b.Property<DateTime>("CriadoEm")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DataExpiracao")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("UsuarioId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.HasDiscriminator().HasValue("RefreshToken");
                 });
 
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>
@@ -230,13 +304,6 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.HorarioDisponivel", b =>
-                {
-                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Medico", null)
-                        .WithMany("HorariosDisponiveis")
-                        .HasForeignKey("MedicoId");
-                });
-
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.RefreshToken", b =>
                 {
                     b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Usuario", "Usuario")
@@ -246,6 +313,13 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations
                         .IsRequired();
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.HorarioDisponivel", b =>
+                {
+                    b.HasOne("MinhaAgendaDeConsultas.Domain.Entidades.Medico", null)
+                        .WithMany("HorariosDisponiveis")
+                        .HasForeignKey("MedicoId");
                 });
 
             modelBuilder.Entity("MinhaAgendaDeConsultas.Domain.Entidades.Medico", b =>

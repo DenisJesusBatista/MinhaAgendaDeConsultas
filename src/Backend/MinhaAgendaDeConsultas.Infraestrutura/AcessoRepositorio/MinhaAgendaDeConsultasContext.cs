@@ -125,14 +125,14 @@ public class MinhaAgendaDeConsultasContext : DbContext
         modelBuilder.Entity<AgendaMedica>(agendaMedica =>
         {
             agendaMedica.ToTable(nameof(AgendaMedica));
-            agendaMedica.HasKey(x => x.Id).HasName("Id");
+            //agendaMedica.HasKey(x => x.Id).HasName("Id");
             agendaMedica.Property(e => e.Id).ValueGeneratedOnAdd();
             agendaMedica.Property(e => e.MedicoId).IsRequired();
             agendaMedica.Property(e => e.DataInicio).IsRequired();
             agendaMedica.Property(e => e.DataFim).IsRequired();
             agendaMedica.Property(e => e.IsDisponivel).IsRequired();
         });
-        
+
 
         // Configuração da classe base (EntidadeBase)
         modelBuilder.Entity<EntidadeBase>(entity =>
