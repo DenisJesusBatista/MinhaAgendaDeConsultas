@@ -7,7 +7,7 @@ Este projeto é uma API implementada em .NET Core que foi construída utilizando
 - Registrar usuarios;
 - Registrar Medico
 - Registrar Paciente
-- 
+  
 - Fazer login por e-mail e senha;
 
 - Gerar Refresh Token
