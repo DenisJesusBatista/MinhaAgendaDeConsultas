@@ -2,8 +2,6 @@
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Profile;
 using MinhaAgendaDeConsultas.Application.UseCases.Usuario.Registrar.Medico;
 using MinhaAgendaDeConsultas.Communication.Requisicoes.Medico;
-using MinhaAgendaDeConsultas.Communication.Requisicoes.Usuario;
-using MinhaAgendaDeConsultas.Communication.Resposta.Usuario;
 using MinhaAgendaDeConsultas.Exceptions;
 
 namespace MinhaAgendaDeConsultas.Api.Controllers

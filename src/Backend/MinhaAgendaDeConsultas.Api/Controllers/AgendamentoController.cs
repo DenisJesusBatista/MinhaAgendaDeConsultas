@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MinhaAgendaDeConsultas.Api.Atributos;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Alterar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consultar;
 using MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Excluir;

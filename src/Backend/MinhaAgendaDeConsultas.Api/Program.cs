@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MinhaAgendaDeConsultas.Api.Filtros;
@@ -119,6 +120,30 @@ builder.Services.AddAuthentication(x =>
         ValidAudience="*",
         ValidIssuer= "MinhaAgendaDeConsultas.Api"
 
+    };
+
+    // Eventos para personalizar erros de autenticação/autorização
+    x.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = async context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            context.Response.ContentType = "application/json";
+            await context.Response.WriteAsync("{\"error\": \"Falha na autenticação. Token inválido ou expirado.\"}");
+        },
+        OnChallenge = async context =>
+        {
+            context.HandleResponse();
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            context.Response.ContentType = "application/json";
+            await context.Response.WriteAsync("{\"error\": \"Acesso negado. Token ausente ou inválido.\"}");
+        },
+        OnForbidden = async context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            context.Response.ContentType = "application/json";
+            await context.Response.WriteAsync("{\"error\": \"Sem permissão para acessar este recurso.\"}");
+        }
     };
 });
 
