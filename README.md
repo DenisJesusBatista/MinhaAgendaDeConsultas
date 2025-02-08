@@ -135,6 +135,23 @@ Para adicionar ou alterar tabelas no banco de dados, siga os passos abaixo:
  
 ![image](https://github.com/user-attachments/assets/b2c58aa8-d056-4784-9a53-c40d5a7c947b)
 
+## Testes Unitários
+
+O projeto utiliza xUnit para a criação de testes unitários, garantindo a validação das regras de negócio de forma isolada. Além disso, utilizamos Moq para a criação de mocks e Bogus/AutoBogus para geração de dados fictícios nos testes.
+
+#  Ferramentas Utilizadas
+
+- xUnit → Framework de testes unitários para .NET.
+- Moq → Biblioteca para mockar dependências.
+- Bogus → Geração de dados aleatórios e realistas para os testes.
+- FluentAssertions → Facilita a escrita de asserções mais legíveis e expressivas.
+
+  Exemplo:
+
+  ![image](https://github.com/user-attachments/assets/2e4f5c4c-b92e-4b86-b5f2-a421dc4f393b)
+
+
+
 
 
   
