@@ -11,7 +11,6 @@ namespace MinhaAgendaDeConsultas.Application.UseCases.AgendamentoConsultas.Consu
         private readonly IUsuarioReadOnlyRepositorio _usuarioRepository;
 
         public ConsultarAgendamentoConsultasUseCase(IAgendamentoConsultasConsultasOnlyRepositorio agendamentoConsultas,
-            IAgendamentoConsultasWriteOnlyRepositorio agendamentoConsultasWriteOnlyRepositorio,
             IUsuarioReadOnlyRepositorio usuarioRepository)
         {
             this._agendamentoConsultas = agendamentoConsultas;
