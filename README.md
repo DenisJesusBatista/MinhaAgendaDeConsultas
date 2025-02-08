@@ -54,7 +54,8 @@ Imagem pendente
 
 * Criando a tabela no banco com as colunas e ColunasPadrões, arquivo `Versao0000001` que se encontra em: MinhaAgendaDeContatos.Infraestrutura\Migrations\Versoes
 
-* ![image](https://github.com/user-attachments/assets/c7c82ade-9afc-4a49-8a29-bd4ce1846fba)
+* ![image](https://github.com/user-attachments/assets/bd4155e3-c84f-40e1-aa19-005ef395a3a3)
+
 
 * Criando tabelas no banco
 
