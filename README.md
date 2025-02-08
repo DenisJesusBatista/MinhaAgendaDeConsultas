@@ -111,6 +111,12 @@ Para adicionar ou alterar tabelas no banco de dados, siga os passos abaixo:
 
 4. **Verifique o Banco de Dados**:
    - Confirme que as alterações foram aplicadas corretamente.
+## Regra de negocio
+
+- No projeto MinhaAgendaDeConsultas.Application e na pasta UseCases consta toda a regra de negócio separadas por responsabilidade.
+
+![image](https://github.com/user-attachments/assets/6985279d-fb51-4d56-9ccc-f3f260026803)
+
 
 ## Persistência dos dados
 
