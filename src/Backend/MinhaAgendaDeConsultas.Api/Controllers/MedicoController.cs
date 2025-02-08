@@ -32,6 +32,14 @@ namespace MinhaAgendaDeConsultas.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Recupera médicos com base na especialidade informada.
+        /// </summary>
+        /// <param name="request">Dados para buscar médicos por especialidade.</param>
+        /// <returns>Lista de médicos encontrados com a especialidade informada.</returns>
+        /// <response code="200">Lista de médicos retornada com sucesso.</response>
+        /// <response code="400">Requisição inválida.</response>
+        /// <response code="404">Nenhum médico encontrado para a especialidade informada.</response>
         [HttpGet("por-especialidade")]
         [ProducesResponseType(typeof(RequisicaoRegistrarMedicoJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterMedicoPorEspecialidade([FromQuery] RequisicaoMedicoPorEspecialidadeJson request,[FromServices] IObterUsuarioProfileUseCase useCase)
