@@ -60,24 +60,24 @@ Este projeto é uma API implementada em .NET Core que foi construída utilizando
 ## Configuração de Injeção de Dependência
 * Configuração feita na `Program.cs`
 
-  ![image](https://github.com/user-attachments/assets/28cb8cc9-6c87-47ec-a77d-fc2b251b8e68)
+![image](https://github.com/user-attachments/assets/28cb8cc9-6c87-47ec-a77d-fc2b251b8e68)
 
 
 * Os registros da injeção de dependência para os useCase estão sendo feitas na classe `Bootstrapper.cs`, conforme imagem abaixo:
 
-  ![image](https://github.com/user-attachments/assets/cd57cde2-5b90-4139-af70-4021d51e1ba2)
+![image](https://github.com/user-attachments/assets/cd57cde2-5b90-4139-af70-4021d51e1ba2)
 
  
 * Registro de injeção de dependência para o banco de dados e repositório.
 
-  ![image](https://github.com/user-attachments/assets/bd247f27-ca5a-487b-993d-47dabbfd4afc)
+![image](https://github.com/user-attachments/assets/bd247f27-ca5a-487b-993d-47dabbfd4afc)
 
 
 ## Criação de tabela
 
 * Criando a tabela no banco com as colunas e ColunasPadrões, arquivo `Versao0000001` que se encontra em: MinhaAgendaDeContatos.Infraestrutura\Migrations\Versoes
 
-* ![image](https://github.com/user-attachments/assets/bd4155e3-c84f-40e1-aa19-005ef395a3a3)
+![image](https://github.com/user-attachments/assets/bd4155e3-c84f-40e1-aa19-005ef395a3a3)
 
 
 * Criando tabelas no banco
@@ -116,13 +116,13 @@ Para adicionar ou alterar tabelas no banco de dados, siga os passos abaixo:
 
 - Criado no projeto MinhaAgendaDeConsultas.Domain a pasta repositorio onde consta os arquivo que serão responsavéis em deletar, alterar, inserir e excluir.
 
-  ![image](https://github.com/user-attachments/assets/fb355b4a-4285-44e5-8f93-daa016ed215a)
+![image](https://github.com/user-attachments/assets/fb355b4a-4285-44e5-8f93-daa016ed215a)
 
-  ##Configuração do Swagger na API
+## Configuração do Swagger na API
 
   - O Swagger foi configurado no projeto para documentar e testar os endpoints de forma interativa. A configuração foi feita no `Program.cs` usando AddSwaggerGen, e inclui suporte para autenticação via JWT.
  
-    ![image](https://github.com/user-attachments/assets/b2c58aa8-d056-4784-9a53-c40d5a7c947b)
+![image](https://github.com/user-attachments/assets/b2c58aa8-d056-4784-9a53-c40d5a7c947b)
 
 
 
