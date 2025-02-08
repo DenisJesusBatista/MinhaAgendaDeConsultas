@@ -50,6 +50,9 @@ Imagem pendente
   
 * Registro de injeção de dependência para o banco de dados e repositório.
 
+* ![image](https://github.com/user-attachments/assets/28cb8cc9-6c87-47ec-a77d-fc2b251b8e68)
+
+
 ## Criação de tabela
 
 * Criando a tabela no banco com as colunas e ColunasPadrões, arquivo `Versao0000001` que se encontra em: MinhaAgendaDeContatos.Infraestrutura\Migrations\Versoes
@@ -61,10 +64,7 @@ Imagem pendente
 
 * ![image](https://github.com/user-attachments/assets/55a8b967-78a6-48b2-b226-f3db45b4fbc3)
 * ![image](https://github.com/user-attachments/assets/8dad3bd6-7c4b-41de-82b7-74d3689b4cbd)
-
-
-
-* 
+  
 
 
 *  Migrations que faz a chamada UP da criação da tabela acima.
