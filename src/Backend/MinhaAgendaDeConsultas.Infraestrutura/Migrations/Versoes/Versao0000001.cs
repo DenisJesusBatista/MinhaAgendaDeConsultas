@@ -27,6 +27,7 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
             CriarTabelaUsuarioPaciente();
             CriarTabelaUsuarioMedico();
             CriaTabelaAgendamentoConsulta();
+            CriaTabelaAgendaMedica();
             CriarTabelaRefreshToken();
         }
 
@@ -42,6 +43,20 @@ namespace MinhaAgendaDeConsultas.Infraestrutura.Migrations.Versoes
 
             _logger.LogInformation("Tabela 'RefreshToken' criada com sucesso.");
         }
+
+        private void CriaTabelaAgendaMedica()
+        {
+            var tabela = VersaoBase.InserirColunasPadrao(Create.Table("AgendaMedica"));
+            tabela
+                .WithColumn("Id").AsInt32().PrimaryKey().Identity() // Chave primária autoincrementável
+                .WithColumn("MedicoId").AsInt32().NotNullable() // ID do médico
+                .WithColumn("DataInicio").AsDateTime().NotNullable() // Data de início da agenda médica
+                .WithColumn("DataFim").AsDateTime().NotNullable() // Data de fim da agenda médica
+                .WithColumn("IsDisponivel").AsBoolean().NotNullable(); // Indica se está disponível
+
+            _logger.LogInformation("Tabela 'AgendaMedica' criada com sucesso.");
+        }
+
         private void CriaTabelaAgendamentoConsulta()
         {
             var tabela = VersaoBase.InserirColunasPadrao(Create.Table("AgendamentoConsultas"));
