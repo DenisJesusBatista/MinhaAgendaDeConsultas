@@ -60,6 +60,8 @@ Imagem pendente
 * Criando tabelas no banco
 
 * ![image](https://github.com/user-attachments/assets/55a8b967-78a6-48b2-b226-f3db45b4fbc3)
+* ![image](https://github.com/user-attachments/assets/8dad3bd6-7c4b-41de-82b7-74d3689b4cbd)
+
 
 
 * 
